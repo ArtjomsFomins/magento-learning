@@ -1,0 +1,13 @@
+<?php
+    use Magento\Framework\View\Element\Template;
+    /** @var Template $block */
+
+    $productData = $block->getData('view_model');
+
+    ?>
+
+<h3><?= $productData->getProductBySku('sku'); ?></h3>
+<h1><?= $escaper->escapeHtml(__('My First Template')) ?></h1>
+<p><?= $escaper->escapeHTML(__('With Layout support')) ?></p>
+<p><?= $escaper->escapeHtml($block->getData('custom_parameter')); ?></p>
+

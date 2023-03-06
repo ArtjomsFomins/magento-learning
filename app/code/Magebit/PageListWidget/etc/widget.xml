@@ -1,0 +1,29 @@
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget class="Magebit\PageListWidget\Block\Widget\PageList" id="orange_test_widget">
+        <label>My New Page List Widget</label>
+        <description>This is a Page List Widget!!!</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="false" visible="true" >
+                <label>Title</label>
+            </parameter>
+            <parameter name="display" xsi:type="select" required="true" visible="true">
+                <label>Display mode</label>
+                <options>
+                    <option name="all" value="all">
+                        <label>All pages</label>
+                    </option>
+                    <option name="spec" value="spec">
+                        <label>Specific pages</label>
+                    </option>
+                </options>
+            </parameter>
+           <parameter name="page_id" xsi:type="multiselect" visible="true" required="true" sort_order="10" source_model="Magebit\PageListWidget\Block\Widget\CmsPages" >
+                <label translate="true">Specific Pages</label>
+                <depends>
+                    <parameter name="display" value="spec" ></parameter>
+                </depends>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

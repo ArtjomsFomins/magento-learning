@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Framework\View\Element\Template"
+                   name="magemastery.first.layout.example"
+                   template="MageMastery_FirstLayout::example.phtml" />
+        </referenceContainer>
+        <referenceBlock name="magemastery.first.layout.example">
+            <arguments>
+                <argument
+                    name="view_model"
+                    xsi:type="object">MageMastery\FirstLayout\ViewModel\ProductViewModel</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>
