@@ -72,7 +72,8 @@ atlassian*
 /generated/*
 !/generated/.htaccess
 .DS_Store
-vendor
-lib
-setup
 dev/tests
+lib
+generated
+vendor
+setup

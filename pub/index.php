@@ -8,10 +8,6 @@
 
 use Magento\Framework\App\Bootstrap;
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 try {
     require __DIR__ . '/../app/bootstrap.php';
 } catch (\Exception $e) {
@@ -27,6 +23,7 @@ HTML;
     http_response_code(500);
     exit(1);
 }
+
 $bootstrap = Bootstrap::create(BP, $_SERVER);
 /** @var \Magento\Framework\App\Http $app */
 $app = $bootstrap->createApplication(\Magento\Framework\App\Http::class);
