@@ -8,17 +8,9 @@ use Magento\Framework\View\Element\Block\ArgumentInterface;
 
 class ProductViewModel implements ArgumentInterface
 {
-    // private $resource;
 
-    // public function __construct(ResourceTest $resource)
-    // {
-    //     $this->resource = $resource;
-    // }
-
-    public function getProductBySku(string $sku)
+    public function getProductBySku(string $sku): string
     {
-
-        // return $this->resource->load($sku, 'sku');
         return '33333';
     }
 }

@@ -18,7 +18,7 @@
                     </option>
                 </options>
             </parameter>
-           <parameter name="page_id" xsi:type="multiselect" visible="true" required="true" sort_order="10" source_model="Magebit\PageListWidget\Block\Widget\CmsPages" >
+            <parameter name="display_pages" xsi:type="multiselect" visible="true" required="true" sort_order="10" source_model="Magebit\PageListWidget\Block\Widget\PageList" >
                 <label translate="true">Specific Pages</label>
                 <depends>
                     <parameter name="display" value="spec" ></parameter>

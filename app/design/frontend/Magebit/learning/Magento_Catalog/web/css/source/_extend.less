@@ -1,0 +1,104 @@
+
+ul, ol {
+    margin-bottom: 0rem;
+    padding-left: 0px;
+}
+ul > li, ol > li {
+    margin-bottom: 0px;
+}
+.product-info-main .rating-summary, .customer-review .rating-summary {
+    margin-right: 10px;
+}
+.product.attribute.sku {
+    list-style: none;
+}
+.attributes {
+    background: #F9F9F9 0% 0% no-repeat padding-box;
+    padding: 20px 0px 20px 40px;
+    &__item {
+        &:not(:first-child) {
+            margin-top: 10px;
+        }
+        &-value {
+            display: inline-block;
+        }
+    }
+}
+.action {
+    color: #FF5501;
+    text-decoration: underline;
+    &:visited {
+        color: #FF5501;
+    }
+    & .product-reviews-summary .reviews-actions a:not(:last-child) {
+        margin-right: 10px;
+    }
+    &.add {
+        border: 1px solid #333333;
+        border-radius: 2px;
+        padding: 6px 10px;
+
+        color: #333333;
+        text-decoration: none;
+    }
+}
+.page-title {
+    color: #333333;
+    font-size: 32px;
+    font-weight: 600;
+}
+#product-addtocart-button {
+    width: 100%;
+    background: #FF5501;
+    border-color: #FF5501;
+    text-decoration: none;
+}
+
+.product-info-main  {
+    .product-info-price {
+        display: flex;
+        align-items: center;
+
+    }
+    .product-info-stock-sku {
+        padding-left: 8px;
+    }
+}
+.block .title {
+    border-bottom: 1px solid #C2C2C2;
+    padding-bottom: 3px;
+}
+.block .title ,.abs-box-tocart, .bundle-options-container .block-bundle-summary .box-tocart, .box-tocart, .fieldset{
+    margin-bottom: 0px;
+}
+.products {
+    margin: 0;
+}
+
+.control {
+    display: inline-flex;
+    align-items: center;
+    height: 52px;
+    &__changer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        box-sizing: border-box;
+        border: 1px solid#C2C2C2;
+        padding: 0px 20px;
+        &-minus {
+            color: #333333;
+        }
+        &-plus {
+            color: #FF5501;
+        }
+    }
+    &__input {
+        height: 100% !important;
+        border: 0 !important;
+        border-top: 1px solid #C2C2C2 !important;
+        border-bottom: 1px solid #C2C2C2 !important;
+
+    }
+}

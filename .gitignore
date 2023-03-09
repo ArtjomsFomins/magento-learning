@@ -73,6 +73,6 @@ atlassian*
 !/generated/.htaccess
 .DS_Store
 vendor
-dev
 lib
 setup
+dev/tests

@@ -1,4 +1,12 @@
 <?php
+use Magebit\PageListWidget\Block\Widget\PageList;
+/** @var PageList $block */
 ?>
-<h3><?= $block->escapeHtml($block->getData('title')) ?></h3>
-<h3><?= $block->escapeHtml(__('Size:')) ?> <?= $block->escapeHtml($block->getData('display')) ?></h3>
+<h1><?= $block->getData('display')?></h1>
+<ul>
+    <?php foreach($block->getListOfPages() as $page): ?>
+        <li>
+            <a href="/<?= $page['value'] ?>"><?= $page['label'] ?></a>
+        </li>
+    <?php endforeach; ?>
+</ul>

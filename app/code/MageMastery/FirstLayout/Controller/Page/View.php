@@ -15,11 +15,17 @@ class View implements ActionInterface
 {
     private PageFactory $resultPageFactory;
 
+    /**
+     * @param PageFactory $resultPageFactory
+     */
     public function __construct(PageFactory $resultPageFactory)
     {
         $this->resultPageFactory = $resultPageFactory;
     }
 
+    /**
+     * @return Page
+     */
     public function execute(): Page
     {
         $page = $this->resultPageFactory->create();
