@@ -1,37 +1,20 @@
+'use strict';
+
 define([
-   // "jquery",
-    //'ko',
-   ], function($,ko){
+    'ko',
+    'uiElement'
+], function (ko, Element) {
+    console.log("hello")
+    return Element.extend({
+        defaults: {
+            // template: 'Magento_Catalog/input-counter'
+        },
 
-    /* code goes here */
-    console.log("hello!!!!!!!!!!")
-    class Qty {
-        constructor() {
-            this.input = document.querySelector(".counter__input")
-            this.value = parseInt(this.input.value,10)
-            console.log(this.value,'valueee')
-            if(isNaN(this.value)) this.value = 0
-        }
+        initObservable: function () {
+            this._super()
+                .observe('counterValue');
 
-        decrement() {
-            if(this.value !== 0) this.value--
-            this.input.value = this.value
-        }
-        increment() {
-
-            console.log(this.input)
-            this.value++
-            this.input.value = this.value
-
-        }
-    }
-    document.querySelector(".counter__changer-minus").addEventListener("click", () => {
-        const counter = new Qty()
-        console.log(counter,counter.input)
-        counter.decrement()
-    })
-    document.querySelector(".counter__changer-plus").addEventListener("click", () => {
-        const counter = new Qty()
-        counter.increment()
-    })
+            return this;
+        },
+    });
 });

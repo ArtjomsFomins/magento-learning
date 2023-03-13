@@ -12,12 +12,12 @@
 <div class="box-tocart">
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()) :?>
-        <div class="field qty ">
+        <div class="field qty" id="product_addtocart_form" data-bind="scope:'qty-counter'" >
             <div class="control counter">
-                <div tabindex="0" class="counter__changer counter__changer-minus">
+                <div tabindex="0" class="counter__changer counter__changer-minus" >
                     <span>-</span>
                 </div>
-                <input type="number"
+                <input type="text"
                        name="qty"
                        id="qty"
                        min="0"
@@ -25,16 +25,17 @@
                        title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
                        class="input-text qty counter__input"
                        data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
+                       data-bind="value: counterValue()"
                        />
-                <div tabindex="0"  class="counter__changer counter__changer-plus">
+                <div tabindex="0"  class="counter__changer counter__changer-plus" data-bind="click: increment" >
                     <span>+</span>
                 </div>
             </div>
             <?php if($_product->isInStock()): ?>
             <div class="stock">
-                <img class="stock__image" src="<?= $block->getViewFileUrl('images/check-mark.svg')?>" alt="check mark" />
+                <img class="stock__image" src="<?= $block->getViewFileUrl('Magento_Catalog::images/check-mark.svg')?>" alt="check mark" />
                 <p class="stock__text">  in stock</p>
-                <span class="stock__qty"> <?= $_product->getQty() ?> items available</span>
+                <span class="stock__qty"> <?= $_product->getExtensionAttributes()->getStockItem()->getQty() ?> items available</span>
             </div>
             <?php endif; ?>
         </div>
@@ -54,8 +55,16 @@
 <script type="text/x-magento-init">
     {
         "#product_addtocart_form": {
-            "Magento_Catalog/js/validate-product": {},
-            "Magento_Catalog/js/qty-counter": {}
+        "Magento_Ui/js/core/app": {
+           "components": {
+                "qty-counter": {
+                    "component": "qty-counter",
+                    "config": {
+                        "counterValue": 0
+                    }
+                }
+            }
+        }
         }
     }
 </script>
