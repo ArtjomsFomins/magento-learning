@@ -1,0 +1,18 @@
+<?php
+
+/** @var \Magento\Catalog\Block\Product\View\Attributes $block  */
+
+/**
+ * @var Magento\Catalog\Helper\Output
+ */
+$helper = $this->helper(Magento\Catalog\Helper\Output::class);
+$product = $block->getProduct();
+$attributes = $product->getAttributes();
+
+//
+?>
+<?php if(count($attributes) === 0): ?>
+    <h2>oops!!!</h2>
+<?php else: ?>
+<?php endif; ?>
+

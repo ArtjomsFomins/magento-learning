@@ -17,7 +17,7 @@ ul > li, ol > li {
 .product-reviews-summary .reviews-actions a:not(:last-child) {
     margin-right: 20px;
 }
-.action view {
+.action.view {
     display: inline-block;
 }
 .block.related .related-available .product-item-name {
@@ -170,3 +170,81 @@ ul > li, ol > li {
         margin-left: 6px;
     }
 }
+.products-related {
+    & .action {
+        text-decoration: underline;
+    }
+    & .price {
+        font-size: 22px;
+    }
+    & .product-reviews-summary {
+        display: flex;
+        align-items: center;
+    }
+}
+.product-item-link {
+    font-weight: 600 !important;
+    font-size: 16px;
+}
+.products-upsell {
+    & .product-items {
+        display: block;
+
+    }
+    & .product-item {
+        width: auto !important;
+    }
+    & .product-item-info {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: auto !important;
+        flex-direction: row;
+    }
+    & .product-image-container {
+        width: 88px !important;
+    }
+    & .product-image-wrapper {
+        padding-bottom: 77% !important;
+    }
+    & .product-image-photo {
+        object-fit: cover;
+    }
+    & .product-reviews-summary {
+        display: flex;
+        align-items: center;
+    }
+    & .reviews-actions {
+        flex: 1;
+    }
+    & .price {
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+.upsell__btn {
+    color: white;
+    font-weight: 600;
+    background-color: #333333;
+    transition: background-color 0.3s linear;
+    padding: 6px 10px;
+    border-radius: 2px;
+    &:visited {
+        color: rgb(184, 182, 182) !important;
+    }
+    &:hover {
+        background-color: #535353;
+    }
+}
+
+/**
+
+<ul>
+        <?php foreach($attributes as $attribute): ?>
+            <li>
+                <span><?= $attribute['value'] ?></span>
+                <p></p>
+            </li>
+        <?php endforeach;?>
+    </ul>
+*/

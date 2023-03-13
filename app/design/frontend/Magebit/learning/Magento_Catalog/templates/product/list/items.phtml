@@ -209,6 +209,10 @@ $_item = null;
                                    class="product photo product-item-photo">
                                     <?= $block->getImage($_item, $image)->toHtml() ?>
                                 </a>
+
+
+
+
                                 <div class="product details product-item-details">
                                     <strong class="product name product-item-name"><a
                                                 class="product-item-link"
@@ -217,11 +221,11 @@ $_item = null;
                                             <?= $block->escapeHtml($_item->getName()) ?></a>
                                     </strong>
 
-                                    <?= /* @noEscape */ $block->getProductPrice($_item) ?>
-
                                     <?php if ($templateType):?>
                                         <?= $block->getReviewsSummaryHtml($_item, $templateType) ?>
                                     <?php endif; ?>
+                                    <?= /* @noEscape */ $block->getProductPrice($_item) ?>
+
 
                                     <?php if ($canItemsAddToCart && !$_item->isComposite() && $_item->isSaleable()
                                         && $type == 'related'):?>
@@ -230,7 +234,7 @@ $_item = null;
                                                 <button type="submit"
                                                         title="<?= $block->escapeHtmlAttr("Add to cart") ?>"
                                                         class="action primary tocart"
-                                                        id="product-addtocart-button" disabled>
+                                                        id="product-addtocart-button">
                                                     <span><?= $block->escapeHtml("Add to cart") ?></span>
                                                 </button>
                                                 <?= $block->getChildHtml('', true) ?>
@@ -238,9 +242,16 @@ $_item = null;
                                         <?php endif; ?>
                                     <?php endif; ?>
                                 </div>
+
+                                <?php if ($type === 'upsell'): ?>
+                                        <a class="upsell__btn" href="<?= $block->escapeUrl($block->getProductUrl($_item)) ?>">
+                                            View Product
+                                        </a>
+                                <?php endif; ?>
+
                             </div>
                             </li>
-                        <?php endforeach ?>
+                        <?php endforeach; ?>
                     </ol>
                 </div>
             </div>
