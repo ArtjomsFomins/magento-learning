@@ -13,11 +13,11 @@
         <referenceContainer name="product.info.main">
             <container name="attributes__list" htmlTag="div" htmlClass="attributes" after="product.info.price">
                 <container name="attributes__list-container" htmlTag="div" htmlClass="attributes__container">
-                    <block class="Magento\Catalog\Block\Product\View\Attributes" name="attributes.items" template="Magento_Catalog::product/view/attribute2.phtml"/>
+                    <block class="Magento\Catalog\Block\Product\View\Attributes" name="attributes.items" template="Magento_Catalog::product/view/attributes.phtml"/>
                 </container>
             </container>
         </referenceContainer>
-        <move element="product.info.description" destination="attributes__list" after="attributes__list-container"></move>
+        <move  element="product.info.description" destination="attributes__list" after="attributes__list-container"></move>
     </body>
 </page>
 
