@@ -7,41 +7,43 @@
     <body>
         <referenceBlock name="view.addto.wishlist" remove="true"></referenceBlock>
         <referenceBlock name="view.addto.compare" remove="true"></referenceBlock>
-
-        <!-- <referenceBlock name="product.info.simple" remove="true"></referenceBlock> -->
-        <referenceContainer name="product.info.main">
-            <container htmlTag="ul" htmlClass="attributes" after="product.info.price">
-                <block class="Magento\Catalog\Block\Product\View" name="product.attribute.color" template="Magento_Catalog::product/view/attribute.phtml">
-                    <arguments>
-                        <argument name="at_call" xsi:type="string">getcolor</argument>
-                        <argument name="at_code" xsi:type="string">color</argument>
-                        <argument name="at_label" xsi:type="string">Color:</argument>
-                        <argument name="css_class" xsi:type="string">attributes__item</argument>
-                        <argument name="at_type" xsi:type="string">text</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Catalog\Block\Product\View" name="product.attribute.material" template="Magento_Catalog::product/view/attribute.phtml">
-                    <arguments>
-                        <argument name="at_call" xsi:type="string">getmaterial</argument>
-                        <argument name="at_code" xsi:type="string">material</argument>
-                        <argument name="at_label" xsi:type="string">Material:</argument>
-                        <argument name="css_class" xsi:type="string">attributes__item</argument>
-                        <argument name="at_type" xsi:type="string">array</argument>
-                    </arguments>
-                </block>
-                <block class="Magento\Catalog\Block\Product\View" name="product.attribute.size" template="Magento_Catalog::product/view/attribute.phtml">
-                    <arguments>
-                        <argument name="at_call" xsi:type="string">getsize</argument>
-                        <argument name="at_code" xsi:type="string">size</argument>
-                        <argument name="at_label" xsi:type="string">Size:</argument>
-                        <argument name="css_class" xsi:type="string">attributes__item</argument>
-                        <argument name="at_type" xsi:type="string">stringy</argument>
-                    </arguments>
-                </block>
-            </container>
-        </referenceContainer>
+        <referenceBlock name="product.info.simple" remove="true"></referenceBlock>
         <move element="product.info.upsell" destination="product.info.addto" after="-" />
         <referenceBlock display="true" name="catalog.product.related"></referenceBlock>
+        <referenceContainer name="product.info.main">
+            <container name="attributes__list" htmlTag="div" htmlClass="attributes" after="product.info.price">
+                <container name="attributes__list-container" htmlTag="ul" htmlClass="attributes__container">
+                    <block class="Magento\Catalog\Block\Product\View" name="product.attribute.color" template="Magento_Catalog::product/view/attribute.phtml">
+                        <arguments>
+                            <argument name="at_call" xsi:type="string">getcolor</argument>
+                            <argument name="at_code" xsi:type="string">color</argument>
+                            <argument name="at_label" xsi:type="string">Color:</argument>
+                            <argument name="css_class" xsi:type="string">attributes__item</argument>
+                            <argument name="at_type" xsi:type="string">text</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\View" name="product.attribute.material" template="Magento_Catalog::product/view/attribute.phtml">
+                        <arguments>
+                            <argument name="at_call" xsi:type="string">getmaterial</argument>
+                            <argument name="at_code" xsi:type="string">material</argument>
+                            <argument name="at_label" xsi:type="string">Material:</argument>
+                            <argument name="css_class" xsi:type="string">attributes__item</argument>
+                            <argument name="at_type" xsi:type="string">array</argument>
+                        </arguments>
+                    </block>
+                    <block class="Magento\Catalog\Block\Product\View" name="product.attribute.size" template="Magento_Catalog::product/view/attribute.phtml">
+                        <arguments>
+                            <argument name="at_call" xsi:type="string">getsize</argument>
+                            <argument name="at_code" xsi:type="string">size</argument>
+                            <argument name="at_label" xsi:type="string">Size:</argument>
+                            <argument name="css_class" xsi:type="string">attributes__item</argument>
+                            <argument name="at_type" xsi:type="string">stringy</argument>
+                        </arguments>
+                    </block>
+                </container>
+            </container>
+        </referenceContainer>
+        <move element="product.info.description" destination="attributes__list" after="attributes__list-container"></move>
     </body>
 </page>
 

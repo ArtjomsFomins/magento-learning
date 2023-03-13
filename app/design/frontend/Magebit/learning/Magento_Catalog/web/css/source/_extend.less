@@ -11,6 +11,58 @@ ul > li, ol > li {
 .product.attribute.sku {
     list-style: none;
 }
+.product-options-bottom .price-box, .product-info-price .price-box {
+    padding-bottom: 0px;
+}
+.product-reviews-summary .reviews-actions a:not(:last-child) {
+    margin-right: 20px;
+}
+.action view {
+    display: inline-block;
+}
+.block.related .related-available .product-item-name {
+    margin-left: 0px;
+}
+.products-grid .product-item-info:hover, .products-grid .product-item-info.active {
+    box-shadow: 0px 0px 8px #00000029;
+    border: 0;
+}
+.products-grid .product-item-inner {
+    box-shadow: none;
+    border: 0;
+}
+.product {
+    &-items {
+        display: flex;
+        gap: 30px;
+    }
+    &-item {
+        display: flex;
+        flex-direction: column;
+        &-info {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+            width: auto;
+            max-width: auto;
+        }
+        &-details {
+            display: flex;
+            flex-direction: column;
+            flex: 1 1 auto;
+        }
+        &-name {
+            flex:1 1 auto;
+        }
+    }
+}
+.products {
+    margin-top: 20px !important;
+}
+.column.main .product-item {
+    display: flex;
+    flex-direction: column;
+}
 .attributes {
     background: #F9F9F9 0% 0% no-repeat padding-box;
     padding: 20px 0px 20px 40px;
@@ -74,7 +126,7 @@ ul > li, ol > li {
     margin: 0;
 }
 
-.control {
+.counter {
     display: inline-flex;
     align-items: center;
     height: 52px;
@@ -98,6 +150,24 @@ ul > li, ol > li {
         border: 0 !important;
         border-top: 1px solid #C2C2C2 !important;
         border-bottom: 1px solid #C2C2C2 !important;
-
+        width: 86px !important;
+    }
+}
+.field.qty {
+    display: flex;
+    align-items: center;
+}
+.stock {
+    display: flex;
+    align-items: center;
+    &__text {
+        color: #575757;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    &__qty {
+        margin-left: 6px;
+    }
+    &__images {
     }
 }

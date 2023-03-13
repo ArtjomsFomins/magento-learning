@@ -12,9 +12,9 @@
 <div class="box-tocart">
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()) :?>
-        <div class="field qty">
-            <div class="control">
-                <div class="control__changer control__changer-minus">
+        <div class="field qty ">
+            <div class="control counter">
+                <div tabindex="0" class="counter__changer counter__changer-minus">
                     <span>-</span>
                 </div>
                 <input type="number"
@@ -23,18 +23,18 @@
                        min="0"
                        value="<?= $block->getProductDefaultQty() * 1 ?>"
                        title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
-                       class="input-text qty control__input"
+                       class="input-text qty counter__input"
                        data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                        />
-                <div class="control__changer control__changer-plus">
+                <div tabindex="0"  class="counter__changer counter__changer-plus">
                     <span>+</span>
                 </div>
             </div>
             <?php if($_product->isInStock()): ?>
-            <div>
-                <img src="<?= $block->getViewFileUrl('images/check-mark.svg')?>" alt="check mark" />
-                <p>  in stock</p>
-                <span> <?= $_product->getQty() ?> items available</span>
+            <div class="stock">
+                <img class="stock__image" src="<?= $block->getViewFileUrl('images/check-mark.svg')?>" alt="check mark" />
+                <p class="stock__text">  in stock</p>
+                <span class="stock__qty"> <?= $_product->getQty() ?> items available</span>
             </div>
             <?php endif; ?>
         </div>
