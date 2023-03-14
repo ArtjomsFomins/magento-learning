@@ -10,21 +10,20 @@ define([
         initObservable: function () {
             this._super()
                 .observe('counterValue')
-                //"buttonDisable": "true",
-
-            this._super().observe('buttonDisable')
-            //let button = ko.observable(false)
             return this
         },
         increment: function() {
-            const value = parseInt(this.counterValue(),10)
+            const value = this.getValue()
             this.counterValue(value + 1)
             if(value > 0) {
                 document.querySelector('.cart__btn').disabled = false
             }
         },
+        getValue: function () {
+            return parseInt(this.counterValue(),10)
+        },
         decrement: function() {
-            const value = parseInt(this.counterValue(),10)
+            const value = this.getValue()
             if(value === 1) {
                 document.querySelector('.cart__btn').disabled = true
             }
@@ -34,7 +33,7 @@ define([
             this.counterValue(value - 1)
         },
         isOverZero: function() {
-            const value = parseInt(this.counterValue(),10)
+            const value = this.getValue()
             if(value > 0) return false
 
             return true
