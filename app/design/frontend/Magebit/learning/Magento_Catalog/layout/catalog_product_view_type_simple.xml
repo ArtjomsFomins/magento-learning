@@ -20,10 +20,11 @@
             </container>
         </referenceContainer>
 
-        <referenceContainer name='columns'>
-            <container name="related.products" htmlTag="div" htmlClass="related-products" after='product.info.media' />
+        <referenceContainer name="main.content">
+            <container name="related.products" htmlTag="div" htmlClass="related-products" after='columns' />
 
         </referenceContainer>
+
         <move element="product.info.upsell" destination="product.info.addto" after="-" />
         <move element="product.info.description" destination="attributes__list" after="attributes__list-container"/>
         <move element="catalog.product.related" destination="related.products" />

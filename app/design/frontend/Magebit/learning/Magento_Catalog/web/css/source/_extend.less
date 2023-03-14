@@ -21,10 +21,11 @@ ul > li, ol > li {
     margin-right: 3px;
 }
 .page-layout-1column .product-info-main {
-    width: 44.5%;
+    width: 45.1%;
 }
 .page-title-wrapper.product {
-    margin-top: 15px;
+    margin-top: 8px;
+    margin-bottom: -2px;
 }
 .product.attribute.sku {
     list-style: none;
@@ -33,7 +34,7 @@ ul > li, ol > li {
     padding-bottom: 0px;
 }
 .product-reviews-summary .reviews-actions a:not(:last-child) {
-    margin-right: 5px;
+    margin-right: 8px;
 }
 .action.view {
     display: inline-block;
@@ -46,11 +47,14 @@ ul > li, ol > li {
     border: 0;
 }
 .fieldset > .field, .fieldset > .fields > .field {
-    margin: 0 0 21px;
+    margin: 0 0 20px;
 }
 .products-grid .product-item-inner {
     box-shadow: none;
     border: 0;
+}
+.product-item .price-box {
+    margin: 0px 0 25px;
 }
 .product-info-main  {
     & .product-reviews-summary {
@@ -80,7 +84,7 @@ ul > li, ol > li {
 
 }
 .fotorama__stage {
-    height: 655px !important;
+    height: 649px !important;
 }
 .fotorama1678772735651 .fotorama__thumb-border {
     height: 111px;
@@ -142,7 +146,7 @@ ul > li, ol > li {
     }
     & .description {
         padding: 0px 0px 20px 19px;
-        margin-top: 11px;
+        margin-top: 13px;
         font-size: 12px;
         & p {
             margin: 0px;
@@ -161,7 +165,7 @@ ul > li, ol > li {
     &.add {
         border: 1px solid #333333;
         border-radius: 2px;
-        padding: 6px 10px;
+        padding: 5px 8px;
         font-weight: bold;
         font-size: 12px;
         color: #333333;
@@ -240,7 +244,7 @@ ul > li, ol > li {
         text-transform: uppercase;
         font-weight: bold;
         margin-bottom: 0px;
-        margin-left: 3px;
+        margin-left: 1px;
     }
     &__qty {
         margin-left: 7px;
@@ -321,7 +325,7 @@ ul > li, ol > li {
         margin: 0 8px 0 0;
     }
     & .product-reviews-summary {
-        margin-top: 3px;
+        margin-top: 1px;
         margin-bottom: 18px;
     }
 }
@@ -330,7 +334,7 @@ ul > li, ol > li {
     font-weight: 600;
     background-color: #333333;
     transition: background-color 0.3s linear;
-    padding: 6px 10px;
+    padding: 9px 10px 7px 10px;
     border-radius: 2px;
     &:visited {
         color: rgb(184, 182, 182) !important;
@@ -343,10 +347,15 @@ ul > li, ol > li {
 
 
 .related-products {
-    clear: both;
-
+    margin-top: 58px;
     & #block-related-heading {
         font-size: 24px;
         font-weight: 600;
+    }
+    & .item.product.product-item {
+        display: flex;
+    }
+    .block .title {
+        padding-bottom: 20px;
     }
 }
