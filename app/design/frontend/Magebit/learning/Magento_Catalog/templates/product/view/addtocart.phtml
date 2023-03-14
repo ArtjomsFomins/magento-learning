@@ -9,25 +9,26 @@
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
 <?php if ($_product->isSaleable()) :?>
-<div class="box-tocart">
+<div class="box-tocart" data-bind="scope:'qty-counter'" >
     <div class="fieldset">
         <?php if ($block->shouldRenderQuantity()) :?>
-        <div class="field qty" id="product_addtocart_form" data-bind="scope:'qty-counter'" >
+        <div class="field qty" id="product_addtocart_form"  >
             <div class="control counter">
-                <div tabindex="0" class="counter__changer counter__changer-minus" >
-                    <span>-</span>
+                <div tabindex="0" class="counter__changer counter__changer-minus" data-bind="click: decrement, event: {keypress: decrement}" >
+                    <span></span>
                 </div>
-                <input type="text"
+                <input type="number"
                        name="qty"
                        id="qty"
-                       min="0"
                        value="<?= $block->getProductDefaultQty() * 1 ?>"
                        title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
                        class="input-text qty counter__input"
                        data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
-                       data-bind="value: counterValue()"
+                       data-bind="textInput: counterValue"
+                       pattern="^[-/d]/d*$"
+                       step="1"
                        />
-                <div tabindex="0"  class="counter__changer counter__changer-plus" data-bind="click: increment" >
+                <div tabindex="0"  class="counter__changer counter__changer-plus" data-bind="click: increment, event: {keypress: increment}" >
                     <span>+</span>
                 </div>
             </div>
@@ -43,8 +44,8 @@
         <div class="actions">
             <button type="submit"
                     title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
-                    class="action primary tocart"
-                    id="product-addtocart-button" disabled>
+                    class="action primary tocart cart__btn"
+                    id="product-addtocart-button">
                 <span><?= $block->escapeHtml($buttonTitle) ?></span>
             </button>
             <?= $block->getChildHtml('', true) ?>
@@ -60,7 +61,8 @@
                 "qty-counter": {
                     "component": "qty-counter",
                     "config": {
-                        "counterValue": 0
+                        "counterValue": "1",
+                        "buttonDisable": "true"
                     }
                 }
             }

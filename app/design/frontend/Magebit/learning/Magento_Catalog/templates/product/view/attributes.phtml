@@ -7,12 +7,30 @@
  */
 $helper = $this->helper(Magento\Catalog\Helper\Output::class);
 $product = $block->getProduct();
-$attributes = $product->getAttributes();
+$attributes = $block->getAdditionalData();
 
-//
+$count = 0;
 ?>
 <?php if(count($attributes) === 0): ?>
     <h2>oops!!!</h2>
-<?php else: ?>
+    <?php else: ?>
+        <ul>
+            <?php if($product->getAttributeText('size')): ?>
+                <li class="attributes__item">
+                    <span class="attributes__title">Dimension:</span>
+                    <p class="attributes__text"><?= $product->getAttributeText('size') ?></p>
+                </li>
+            <?php else: ?>
+                <?php $count++; ?>
+            <?php endif; ?>
+            <li class="attributes__item">
+                <span class="attributes__title">Colour:</span>
+                <p class="attributes__text"><?= $product->getAttributeText('color') ?></p>
+            </li>
+            <li class="attributes__item">
+                <span class="attributes__title">Material:</span>
+                <p class="attributes__text"><?= implode(', ',$product->getAttributeText('material')) ?></p>
+            </li>
+        </ul>
 <?php endif; ?>
 

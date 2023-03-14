@@ -1,15 +1,17 @@
 <?xml version="1.0"?>
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-
-    <!-- <script scr="Magento_Catalog::js/qty-counter.js"/> -->
-    </head>
     <body>
         <referenceBlock name="view.addto.wishlist" remove="true"/>
         <referenceBlock name="view.addto.compare" remove="true"/>
         <referenceBlock name="product.info.simple" remove="true"/>
-        <move element="product.info.upsell" destination="product.info.addto" after="-" />
+        <referenceBlock name="product.info.simple" remove="true"/>
+        <referenceBlock name="product.info.additional" remove="true"/>
+        <referenceBlock name="product.reviews" remove="true"/>
+        <referenceBlock name="product.review.form" remove="true"/>
+        <referenceBlock name="product.info.details" remove="true"/>
         <referenceBlock display="true" name="catalog.product.related"/>
+
+
         <referenceContainer name="product.info.main">
             <container name="attributes__list" htmlTag="div" htmlClass="attributes" after="product.info.price">
                 <container name="attributes__list-container" htmlTag="div" htmlClass="attributes__container">
@@ -17,7 +19,13 @@
                 </container>
             </container>
         </referenceContainer>
-        <move  element="product.info.description" destination="attributes__list" after="attributes__list-container"></move>
+
+        <referenceContainer name='columns'>
+            <container name="related.products" htmlTag="div" htmlClass="related-products" after='product.info.media' />
+
+        </referenceContainer>
+        <move element="product.info.upsell" destination="product.info.addto" after="-" />
+        <move element="product.info.description" destination="attributes__list" after="attributes__list-container"/>
+        <move element="catalog.product.related" destination="related.products" />
     </body>
 </page>
-
