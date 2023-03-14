@@ -53,9 +53,7 @@ ul > li, ol > li {
     box-shadow: none;
     border: 0;
 }
-.product-item .price-box {
-    margin: 0px 0 25px;
-}
+
 .product-info-main  {
     & .product-reviews-summary {
         margin-bottom: 28px;
@@ -93,7 +91,7 @@ ul > li, ol > li {
 .product {
     &-items {
         display: flex;
-        gap: 30px;
+        gap: 29px;
     }
     &-item {
         display: flex;
@@ -112,7 +110,6 @@ ul > li, ol > li {
             margin-left: 20px;
         }
         &-name {
-            flex:1 1 auto;
         }
     }
 
@@ -126,6 +123,7 @@ ul > li, ol > li {
     background: #F9F9F9 0% 0% no-repeat padding-box;
     &__container {
         padding: 11px 0px 0px 32px;
+        margin-bottom: 13px;
     }
     &__item {
         &:not(:first-child) {
@@ -146,7 +144,6 @@ ul > li, ol > li {
     }
     & .description {
         padding: 0px 0px 20px 19px;
-        margin-top: 13px;
         font-size: 12px;
         & p {
             margin: 0px;
@@ -354,8 +351,66 @@ ul > li, ol > li {
     }
     & .item.product.product-item {
         display: flex;
+        width: 18.1%;
     }
-    .block .title {
+
+    & .block .title {
         padding-bottom: 20px;
+    }
+    & .block-content.content {
+        margin-top: 29px;
+    }
+    & .product.photo.product-item-photo {
+        min-height: 280px;
+        & img {
+            object-fit: cover;
+        }
+    }
+    & .product.details.product-item-details {
+        margin: 0px 11px;
+    }
+    & .product-item-details {
+        margin: 0px 18px;
+        margin-bottom: 10px;
+    }
+    & .product.name.product-item-name {
+        flex: auto;
+    }
+    & .products-grid .product-item-info:hover, .products-grid .product-item-info.active:hover {
+        margin: 0px;
+        padding: 0px;
+        & button {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: all;
+        }
+    }
+    & .product-item-name {
+        margin: 0px;
+    }
+    & .rating-summary {
+        margin: 0 8px 0 0;
+    }
+    & .product-reviews-summary.short{
+        margin-bottom: 10px;
+    }
+    & .price-box{
+        margin: 0px !important;
+    }
+    & .product-item .price-box {
+        margin: 0px 0 0px;
+    }
+    & .actions {
+        margin-top: 10px;
+        & button {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding-top: 14px;
+            padding-bottom: 17px;
+            transition: opacity 0.3s linear;
+        }
     }
 }

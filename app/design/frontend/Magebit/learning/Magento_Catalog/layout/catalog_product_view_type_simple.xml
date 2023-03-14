@@ -14,9 +14,7 @@
 
         <referenceContainer name="product.info.main">
             <container name="attributes__list" htmlTag="div" htmlClass="attributes" after="product.info.price">
-                <container name="attributes__list-container" htmlTag="div" htmlClass="attributes__container">
-                    <block class="Magento\Catalog\Block\Product\View\Attributes" name="attributes.items" template="Magento_Catalog::product/view/attributes.phtml"/>
-                </container>
+                <block class="Magento\Catalog\Block\Product\View\Attributes" name="attributes.items" template="Magento_Catalog::product/view/attributes.phtml"/>
             </container>
         </referenceContainer>
 
@@ -26,7 +24,7 @@
         </referenceContainer>
 
         <move element="product.info.upsell" destination="product.info.addto" after="-" />
-        <move element="product.info.description" destination="attributes__list" after="attributes__list-container"/>
+        <move element="product.info.description" destination="attributes__list" after="attributes.items"/>
         <move element="catalog.product.related" destination="related.products" />
     </body>
 </page>
