@@ -1,12 +1,22 @@
 <?php
+/**
+ * Magebit_PageListWidget
+ *
+ * @category     Magebit
+ * @package      Magebit_PageListWidget
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+ */
 use Magebit\PageListWidget\Block\Widget\PageList;
+
 /** @var PageList $block */
+
 ?>
-<h1><?= $block->getData('display')?></h1>
+<h1><?= $escaper->escapeHtml($block->getData('display'))?></h1>
 <ul>
-    <?php foreach($block->getListOfPages() as $page): ?>
+    <?php foreach ($block->getListOfPages() as $page): ?>
         <li>
-            <a href="/<?= $page['value'] ?>"><?= $page['label'] ?></a>
+            <a href="/<?= $escaper->escapeHtml($page['value'])?>"><?= $escaper->escapeHtml($page['label']) ?></a>
         </li>
     <?php endforeach; ?>
 </ul>

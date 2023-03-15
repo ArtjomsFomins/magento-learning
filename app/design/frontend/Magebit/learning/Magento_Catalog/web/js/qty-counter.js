@@ -11,11 +11,11 @@ define([
             190, // .
             69  // e (scientific notaion, 1e2 === 100)
         ]
-          if (codes.includes(event.keyCode)) {
+        if (codes.includes(event.keyCode)) {
             event.preventDefault();
             return false;
-          }
-          return true;
+        }
+        return true;
         });
         input.addEventListener('input', function (e) {
             var reg = /^(?!0)[0-9]*$/;
@@ -26,9 +26,9 @@ define([
                 this.value = this.value.replace(reg, '')
             }
             const intValue = parseInt(result,10)
-            if(intValue > 0) {
+            if (intValue > 0) {
                 button.disabled = false
-            } else if(intValue === 0 || isNaN(intValue)) {
+            } else if (intValue === 0 || isNaN(intValue)) {
                 button.disabled = true
                 this.value = '0'
             }
@@ -40,30 +40,32 @@ define([
                 .observe('counterValue')
             return this
         },
-        increment: function() {
+        increment: function () {
             let value = this.getValue()
             value++
             this.counterValue(value)
-            if(value > 0) {
+            if (value > 0) {
                 button.disabled = false
             }
         },
         getValue: function () {
             return parseInt(this.counterValue(),10)
         },
-        decrement: function() {
+        decrement: function () {
             const value = this.getValue()
-            if(value === 1) {
+            if (value === 1) {
                 button.disabled = true
             }
-            if(value === 0) {
+            if (value === 0) {
                 return
             }
             this.counterValue(value - 1)
         },
-        isOverZero: function() {
+        isOverZero: function () {
             const value = this.getValue()
-            if(value > 0) return false
+            if (value > 0) {
+                return false
+            }
 
             return true
         }

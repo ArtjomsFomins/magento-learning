@@ -1,20 +1,31 @@
 <?php
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @copyright Copyright (c) 2023 Magebit (https://magebit.com/)
+ * @author    <info@magebit.com>
+ * @license   GNU General Public License ("GPL") v3.0
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-/** @var \Magento\Catalog\Block\Product\View $block  */
+
+/**
+ * @var \Magento\Catalog\Block\Product\View $block
+ * @var \Magento\Framework\Escaper $escaper */
 ?>
 <?php $_product = $block->getProduct(); ?>
 <?php $buttonTitle = __('Add to Cart'); ?>
-<?php if ($_product->isSaleable()) :?>
+<?php if ($_product->isSaleable()):?>
 <div class="box-tocart" data-bind="scope:'qty-counter'" >
     <div class="fieldset">
-        <?php if ($block->shouldRenderQuantity()) :?>
+        <?php if ($block->shouldRenderQuantity()):?>
         <div class="field qty" id="product_addtocart_form"  >
             <div class="control counter">
-                <div tabindex="0" class="counter__changer counter__changer-minus" data-bind="click: decrement, event: {keypress: decrement}" >
+                <div
+                    tabindex="0"
+                    class="counter__changer counter__changer-minus"
+                    data-bind="click: decrement, event: {keypress: decrement}"
+                >
                     <span></span>
                 </div>
                 <input type="number"
@@ -28,15 +39,24 @@
                        pattern="^[-/d]/d*$"
 
                        />
-                <div tabindex="0"  class="counter__changer counter__changer-plus" data-bind="click: increment, event: {keypress: increment}" >
+                <div tabindex="0"
+                    class="counter__changer counter__changer-plus"
+                    data-bind="click: increment, event: {keypress: increment}"
+                >
                     <span>+</span>
                 </div>
             </div>
-            <?php if($_product->isInStock()): ?>
+            <?php if ($_product->isInStock()): ?>
             <div class="stock">
-                <img class="stock__image" src="<?= $block->getViewFileUrl('Magento_Catalog::images/check-mark.svg')?>" alt="check mark" />
+                <img class="stock__image"
+                    src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magento_Catalog::images/check-mark.svg'))?>"
+                    alt="check mark"
+                />
                 <p class="stock__text">  in stock</p>
-                <span class="stock__qty"> <?= $_product->getExtensionAttributes()->getStockItem()->getQty() ?> items available</span>
+                <span class="stock__qty">
+                    <?= $escaper->escapeHtml($_product->getExtensionAttributes()->getStockItem()->getQty()) ?>
+                    items available
+                </span>
             </div>
             <?php endif; ?>
         </div>

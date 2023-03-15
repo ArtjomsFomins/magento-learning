@@ -2,7 +2,10 @@
     @media(min-width:@screen__xs) {
         margin-top: 58px;
     }
-    & #block-related-heading {
+    & .related-available {
+        padding: 10px !important;
+    }
+    & .block-title.title strong {
         font-size: 24px;
         font-weight: 600;
     }
@@ -23,15 +26,17 @@
     }
     & .product.photo.product-item-photo {
         min-height: 280px;
+        margin: 0 auto;
         & img {
             object-fit: cover;
         }
     }
     & .product.details.product-item-details {
-        margin: 0px 11px;
+        margin: 0;
+        width: 100%;
     }
     & .product-item-details {
-        margin: 0px 18px;
+        margin: 0 18px;
         margin-bottom: 10px;
     }
     & .product.name.product-item-name {
@@ -43,41 +48,42 @@
             align-items: flex-start;
         }
     }
-    & .products-grid .product-item-info:hover, .products-grid .product-item-info.active:hover {
-        margin: 0px;
-        padding: 0px;
+    & .products-grid .product-item-info:hover,
+    .products-grid .product-item-info.active:hover {
+        margin: 0;
+        padding: 0;
         & button {
             opacity: 1;
-            visibility: visible;
             pointer-events: all;
+            visibility: visible;
         }
     }
     & .product-item-name {
-        margin: 0px;
+        margin: 0;
     }
     & .rating-summary {
         margin: 0 8px 0 0;
     }
-    & .product-reviews-summary.short{
+    & .product-reviews-summary.short {
         margin-bottom: 10px;
     }
-    & .price-box{
-        margin: 0px !important;
+    & .price-box {
+        margin: 0 !important;
     }
     & .product-item .price-box {
-        margin: 0px 0 0px;
+        margin: 0 0 0;
     }
     & .actions {
-        margin: 10px 0px;
+        margin: 10px 0;
         & button {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
             font-size: 18px;
             font-weight: bold;
-            padding-top: 14px;
+            opacity: 0;
             padding-bottom: 17px;
+            padding-top: 14px;
+            pointer-events: none;
             transition: opacity 0.3s linear;
+            visibility: hidden;
         }
     }
 }
