@@ -26,7 +26,7 @@
                        data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                        data-bind="textInput: counterValue"
                        pattern="^[-/d]/d*$"
-                       step="1"
+
                        />
                 <div tabindex="0"  class="counter__changer counter__changer-plus" data-bind="click: increment, event: {keypress: increment}" >
                     <span>+</span>

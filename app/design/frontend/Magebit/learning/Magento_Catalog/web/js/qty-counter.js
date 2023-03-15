@@ -4,7 +4,35 @@ define([
     'ko',
     'uiElement'
 ], function (ko, Element) {
-    console.log('hello')
+    const input = document.querySelector('.counter__input');
+    const button = document.querySelector('.cart__btn');
+    input.addEventListener('keydown', event => {
+        const codes = [
+            190, // .
+            69  // e (scientific notaion, 1e2 === 100)
+        ]
+          if (codes.includes(event.keyCode)) {
+            event.preventDefault();
+            return false;
+          }
+          return true;
+        });
+        input.addEventListener('input', function (e) {
+            var reg = /^(?!0)[0-9]*$/;
+            console.log(this.value)
+            const result = this.value.match(reg)
+            if (!result || result[0] === '' ) {
+                this.value =  this.value.slice(0,-1)
+                this.value = this.value.replace(reg, '')
+            }
+            const intValue = parseInt(result,10)
+            if(intValue > 0) {
+                button.disabled = false
+            } else if(intValue === 0 || isNaN(intValue)) {
+                button.disabled = true
+                this.value = '0'
+            }
+        });
     return Element.extend({
 
         initObservable: function () {
@@ -13,10 +41,11 @@ define([
             return this
         },
         increment: function() {
-            const value = this.getValue()
-            this.counterValue(value + 1)
+            let value = this.getValue()
+            value++
+            this.counterValue(value)
             if(value > 0) {
-                document.querySelector('.cart__btn').disabled = false
+                button.disabled = false
             }
         },
         getValue: function () {
@@ -25,7 +54,7 @@ define([
         decrement: function() {
             const value = this.getValue()
             if(value === 1) {
-                document.querySelector('.cart__btn').disabled = true
+                button.disabled = true
             }
             if(value === 0) {
                 return
