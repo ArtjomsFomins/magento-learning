@@ -1,46 +1,66 @@
 <?php
-
-/** @var \Magento\Catalog\Block\Product\View\Attributes $block  */
-
 /**
- * @var Magento\Catalog\Helper\Output
+ * @copyright Copyright (c) 2023 Magebit (https://magebit.com/)
+ * @author    <info@magebit.com>
+ * @license   GNU General Public License ("GPL") v3.0
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-$helper = $this->helper(Magento\Catalog\Helper\Output::class);
+/** @var \Magento\Catalog\Block\Product\View\Attributes $block
+ * @var \Magento\Framework\Escaper $escaper */
+
 $product = $block->getProduct();
 $attributes = $block->getAdditionalData();
-
-$customAttributes = [ 'size' => [ 'label' => 'Dimension:', 'code' => 'size'], 'color' => [ 'label' => 'Colour:', 'code' => 'color'], 'material' => [ 'label' => 'Material:', 'code' => 'material']];
+$customAttributes = [
+    'size' => [ 'label' => 'Dimension:', 'code' => 'size'],
+    'color' => [ 'label' => 'Colour:', 'code' => 'color'],
+    'material' => [ 'label' => 'Material:', 'code' => 'material']
+];
 $count = count($customAttributes);
 
 ?>
-<?php if(count($attributes) > 0): ?>
+<?php if (count($attributes) > 0): ?>
         <div class="attributes__container">
             <ul>
-                <?php foreach($customAttributes as $customAttribute): ?>
+                <?php foreach ($customAttributes as $customAttribute): ?>
 
                     <?php
                         $attributeText= $product->getAttributeText($customAttribute['code']);
-                        if($attributeText): ?>
-                            <li class="attributes__item">
-                                <span class="attributes__title"><?= $customAttribute['label'] ?></span>
-                                <?php
-                                 if(is_array($attributeText)) $attributeText = implode(', ', $attributeText)
-                                 ?>
-                                 <p class="attributes__text"><?= $attributeText ?></p>
-                            </li>
+                    if ($attributeText): ?>
+                        <li class="attributes__item">
+                            <span class="attributes__title">
+                                <?= $escaper->escapeHtml($customAttribute['label']) ?>
+                            </span>
+                            <?php
+                            if (is_array($attributeText)) {
+                                $attributeText = implode(', ', $attributeText);
+                            }
+                            ?>
+                            <p class="attributes__text">
+                                <?= $escaper->escapeHtml($attributeText) ?>
+                            </p>
+                        </li>
                         <?php $count--; ?>
-                        <?php endif; ?>
+                    <?php endif; ?>
 
                 <?php endforeach; ?>
 
-                <?php if($count !== 0): ?>
+                <?php if ($count !== 0): ?>
 
-                        <?php foreach($attributes as $attribute): ?>
-                            <?php if($count === 0) break ?>
-                            <?php if(!in_array($attribute['code'], $customAttributes)): ?>
+                        <?php foreach ($attributes as $attribute): ?>
+
+                            <?php if ($count === 0) {
+                                break;
+                            } ?>
+                            <?php if (!in_array($attribute['code'], $customAttributes)): ?>
                                 <li class="attributes__item">
-                                    <span class="attributes__title"><?= $attribute['label'] ?></span>
-                                    <p class="attributes__text"><?= $attribute['value'] ?></p>
+                                    <span class="attributes__title">
+                                        <?= $escaper->escapeHtml($attribute['label']) ?>
+                                    </span>
+                                    <p class="attributes__text">
+                                        <?= $escaper->escapeHtml($attribute['value']) ?>
+                                    </p>
                                 </li>
                                 <?php $count-- ?>
                             <?php endif; ?>
