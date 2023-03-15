@@ -9,7 +9,7 @@ $helper = $this->helper(Magento\Catalog\Helper\Output::class);
 $product = $block->getProduct();
 $attributes = $block->getAdditionalData();
 
-$customAttributes = [ 'size' => [ 'label' => 'Dimension:', 'code' => 'size'], 'code' => [ 'label' => 'Colour:', 'code' => 'color'], 'material' => [ 'label' => 'Material:', 'code' => 'material']];
+$customAttributes = [ 'size' => [ 'label' => 'Dimension:', 'code' => 'size'], 'color' => [ 'label' => 'Colour:', 'code' => 'color'], 'material' => [ 'label' => 'Material:', 'code' => 'material']];
 $count = count($customAttributes);
 
 ?>
