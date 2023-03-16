@@ -24,7 +24,7 @@
             <div class="control counter">
                 <div
                     tabindex="0"
-                    class="counter__changer counter__changer-minus"
+                    class="counter-changer counter-changer-minus"
                     data-bind="click: decrement, event: {keypress: decrement}"
                 >
                     <span></span>
@@ -34,27 +34,27 @@
                        id="qty"
                        value="<?= $block->getProductDefaultQty() * 1 ?>"
                        title="<?= $block->escapeHtmlAttr(__('Qty')) ?>"
-                       class="input-text qty counter__input"
+                       class="input-text qty counter-input"
                        data-validate="<?= $block->escapeHtml(json_encode($block->getQuantityValidators())) ?>"
                        data-bind="textInput: counterValue"
                        pattern="^[-/d]/d*$"
 
                        />
                 <div tabindex="0"
-                    class="counter__changer counter__changer-plus"
+                    class="counter-changer counter-changer-plus"
                     data-bind="click: increment, event: {keypress: increment}"
                 >
-                    <span>+</span>
+                    <span class="plus"></span>
                 </div>
             </div>
             <?php if ($_product->isInStock()): ?>
             <div class="stock">
-                <img class="stock__image"
+                <img class="stock-image"
                     src="<?= $escaper->escapeUrl($block->getViewFileUrl('Magento_Catalog::images/check-mark.svg'))?>"
                     alt="check mark"
                 />
-                <p class="stock__text">  in stock</p>
-                <span class="stock__qty">
+                <p class="stock-text">  in stock</p>
+                <span class="stock-qty">
                     <?= $escaper->escapeHtml($_product->getExtensionAttributes()->getStockItem()->getQty()) ?>
                     items available
                 </span>

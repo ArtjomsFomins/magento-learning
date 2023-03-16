@@ -22,20 +22,20 @@ $count = count($customAttributes);
 
 ?>
 <?php if (count($attributes) > 0): ?>
-        <div class="attributes__container">
+        <div class="attributes-container">
             <ul>
                 <?php foreach ($customAttributes as $customAttribute): ?>
 
                     <?php $attributeText= $product->getAttributeText($customAttribute['code']) ?>
                     <?php if ($attributeText): ?>
-                        <li class="attributes__item">
-                            <span class="attributes__title">
+                        <li class="attributes-item">
+                            <span class="attributes-title">
                                 <?= $escaper->escapeHtml($customAttribute['label']) ?>
                             </span>
                             <?php if (is_array($attributeText)) {
                                 $attributeText = implode(', ', $attributeText);
                             } ?>
-                            <p class="attributes__text">
+                            <p class="attributes-text">
                                 <?= $escaper->escapeHtml($attributeText) ?>
                             </p>
                         </li>
@@ -50,11 +50,11 @@ $count = count($customAttributes);
 
                             <?php if ($count === 0) { break; } ?>
                             <?php if (!in_array($attribute['code'], $customAttributes)): ?>
-                                <li class="attributes__item">
-                                    <span class="attributes__title">
+                                <li class="attributes-item">
+                                    <span class="attributes-title">
                                         <?= $escaper->escapeHtml($attribute['label']) ?>
                                     </span>
-                                    <p class="attributes__text">
+                                    <p class="attributes-text">
                                         <?= $escaper->escapeHtml($attribute['value']) ?>
                                     </p>
                                 </li>
