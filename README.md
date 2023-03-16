@@ -1,19 +1,16 @@
 # magento-learning
 
-explaining of errors phpcs
+Some exaplanation
 
-![image](https://user-images.githubusercontent.com/126476500/225376059-415ac990-051d-425d-aa27-161d87a0e4de.png)
+phpcs shows
 
-it thinks that in 
-```transition: background-color 0.3s linear```
+``` 111 | WARNING | CSS class names should be separated with "-" (dash) instead of "_" (underscore)```
+it's not mine, it magento classes
 
-background-color is 0
+This image renders as per design width = 88 and height = 110, idk what to that it would as pixel perfect, because the image as in design
+![image](https://user-images.githubusercontent.com/126476500/225695685-291db182-3c52-4a4d-8243-dc6e21e1ff03.png)
 
-![image](https://user-images.githubusercontent.com/126476500/225376549-8a9772b9-f787-4e8a-bc17-aaf3bb40157b.png)
+The related images also renders as in design width = 224 and height = 270(I substracted paddings).
+![image](https://user-images.githubusercontent.com/126476500/225696323-04cea289-c298-44d7-b8ab-1c284fb7db36.png)
 
-These are magento classes
-
-![image](https://user-images.githubusercontent.com/126476500/225377099-c740a529-e643-4818-9a3f-4a78516c858a.png)
-  
-in ```transition: opacity 0.3s linear;```
-it thinks that opacity is 0
+But the title and rating are not like in pixel perfect, but if to look on the button it is, so images are big that it required??
