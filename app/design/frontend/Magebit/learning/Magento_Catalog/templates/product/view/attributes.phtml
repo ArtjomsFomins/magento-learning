@@ -8,7 +8,8 @@
  * file that was distributed with this source code.
  */
 /** @var \Magento\Catalog\Block\Product\View\Attributes $block
- * @var \Magento\Framework\Escaper $escaper */
+ * @var \Magento\Framework\Escaper $escaper
+ */
 
 $product = $block->getProduct();
 $attributes = $block->getAdditionalData();
@@ -25,18 +26,15 @@ $count = count($customAttributes);
             <ul>
                 <?php foreach ($customAttributes as $customAttribute): ?>
 
-                    <?php
-                        $attributeText= $product->getAttributeText($customAttribute['code']);
-                    if ($attributeText): ?>
+                    <?php $attributeText= $product->getAttributeText($customAttribute['code']) ?>
+                    <?php if ($attributeText): ?>
                         <li class="attributes__item">
                             <span class="attributes__title">
                                 <?= $escaper->escapeHtml($customAttribute['label']) ?>
                             </span>
-                            <?php
-                            if (is_array($attributeText)) {
+                            <?php if (is_array($attributeText)) {
                                 $attributeText = implode(', ', $attributeText);
-                            }
-                            ?>
+                            } ?>
                             <p class="attributes__text">
                                 <?= $escaper->escapeHtml($attributeText) ?>
                             </p>
@@ -50,9 +48,7 @@ $count = count($customAttributes);
 
                         <?php foreach ($attributes as $attribute): ?>
 
-                            <?php if ($count === 0) {
-                                break;
-                            } ?>
+                            <?php if ($count === 0) { break; } ?>
                             <?php if (!in_array($attribute['code'], $customAttributes)): ?>
                                 <li class="attributes__item">
                                     <span class="attributes__title">

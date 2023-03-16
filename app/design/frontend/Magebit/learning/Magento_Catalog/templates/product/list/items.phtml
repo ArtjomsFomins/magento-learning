@@ -11,14 +11,15 @@
 use Magento\Catalog\ViewModel\Product\Listing\PreparePostData;
 use Magento\Framework\App\ActionInterface;
 
-/* @var $block \Magento\Catalog\Block\Product\AbstractProduct */
-/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+/* @var \Magento\Catalog\Block\Product\AbstractProduct  $block
+*/
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+*/
 
 ?>
 
 <?php
 switch ($type = $block->getType()) {
-
     case 'related-rule':
         if ($exist = $block->hasItems()) {
             $type = 'related';
@@ -213,9 +214,6 @@ $_item = null;
                                    class="product photo product-item-photo">
                                     <?= $block->getImage($_item, $image)->toHtml() ?>
                                 </a>
-
-
-
 
                                 <div class="product details product-item-details">
                                     <strong class="product name product-item-name"><a

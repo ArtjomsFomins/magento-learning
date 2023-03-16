@@ -25,15 +25,8 @@ use Magento\Framework\Api\SearchCriteriaBuilder;
  */
 class PageList extends Template implements OptionSourceInterface, BlockInterface
 {
-    /**
-     * @var string */
-    protected $template = "page-list.phtml";
-    /**
-     * @var PageRepositoryInterface */
+    protected $_template = "page-list.phtml";
     private PageRepositoryInterface $pageRepositoryInterface;
-
-    /**
-     * @var SearchCriteriaBuilder */
     private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
@@ -54,6 +47,7 @@ class PageList extends Template implements OptionSourceInterface, BlockInterface
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         parent::__construct($context, $data);
     }
+
     /**
      * Function which return cms pages in prettier version
      *
@@ -61,7 +55,6 @@ class PageList extends Template implements OptionSourceInterface, BlockInterface
      */
     public function toOptionArray(): array
     {
-
         $optionArray = [];
         $pages = $this->getCmsPageCollection();
         $cnt = 0;
@@ -69,8 +62,10 @@ class PageList extends Template implements OptionSourceInterface, BlockInterface
             $optionArray[$cnt]['value'] = $page->getIdentifier();
             $optionArray[$cnt++]['label'] = $page->getTitle();
         }
+
         return $optionArray;
     }
+
     /**
      * Function that return all cms pages
      *
@@ -78,7 +73,8 @@ class PageList extends Template implements OptionSourceInterface, BlockInterface
      */
     protected function getCmsPageCollection(): array
     {
-        $searchCriteria = $searchCriteria = $this->searchCriteriaBuilder->create();
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+
         return $this->pageRepositoryInterface->getList($searchCriteria)->getItems();
     }
 

@@ -9,7 +9,9 @@
  * file that was distributed with this source code.
  */
 -->
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<page
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="view.addto.wishlist" remove="true"/>
         <referenceBlock name="view.addto.compare" remove="true"/>
@@ -23,8 +25,13 @@
 
 
         <referenceContainer name="product.info.main">
-            <container name="attributes__list" htmlTag="div" htmlClass="attributes" after="product.info.price">
-                <block class="Magento\Catalog\Block\Product\View\Attributes" name="attributes.items" template="Magento_Catalog::product/view/attributes.phtml"/>
+            <container name="attributes__list"
+                htmlTag="div"
+                htmlClass="attributes"
+                after="product.info.price">
+                    <block class="Magento\Catalog\Block\Product\View\Attributes"
+                    name="attributes.items"
+                    template="Magento_Catalog::product/view/attributes.phtml"/>
             </container>
         </referenceContainer>
 

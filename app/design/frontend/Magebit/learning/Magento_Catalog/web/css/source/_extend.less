@@ -10,7 +10,7 @@
         margin-bottom: 0;
     }
 
-    .page-layout-1column .product.media {
+    .product.media {
         width: 54%;
     }
     .product-options-bottom .price-box .price-container .price,
@@ -19,25 +19,24 @@
     }
     .product-info-main .rating-summary,
     .customer-review .rating-summary {
-        margin-right: 3px;
+        margin-right: 5px;
     }
-    .page-layout-1column {
 
-        .product-info-main {
+
+        & .product-info-main {
             width: auto;
             @media(min-width: @screen__m) {
                 width: 45.1%;
             }
         }
-        .product.media {
+        & .product.media {
             width: auto;
             @media(min-width: @screen__m) {
                 width: 54%;
             }
         }
-    }
+
     .page-title-wrapper.product {
-        margin-bottom: -2px;
         margin-top: 8px;
     }
     .product.attribute.sku {
@@ -48,7 +47,7 @@
         padding-bottom: 0;
     }
     .product-reviews-summary .reviews-actions a:not(:last-child) {
-        margin-right: 8px;
+        margin-right: 18px;
     }
     .action.view {
         display: inline-block;
@@ -75,12 +74,13 @@
     .product-info-main {
 
         & .product-reviews-summary {
-            margin-bottom: 28px;
+            margin-bottom: 29px;
         }
         .product-info-price {
 
             align-items: center;
             display: flex;
+            margin-bottom: 15px;
         }
         .product.attribute.sku {
             & .type {
@@ -99,6 +99,12 @@
     & .fotorama__stage {
         height: 649px !important;
     }
+    &  .fotorama__stage__frame .fotorama__img {
+        max-height: initial !important;
+        max-width: initial !important;
+        left: 48%;
+        top: 50%;
+    }
     & .fotorama__thumb-border {
         height: 111px;
     }
@@ -114,7 +120,6 @@
                 display: flex;
                 flex: 1 1 auto;
                 flex-direction: column;
-                max-width: auto;
                 width: auto;
             }
             &-details {
@@ -245,7 +250,7 @@
         font-weight: 600 !important;
     }
     .box-tocart .action.tocart:not(:last-child) {
-        margin-bottom: 20px;
+        margin-bottom: 42px;
     }
     .product-social-links {
         .block-title.title {

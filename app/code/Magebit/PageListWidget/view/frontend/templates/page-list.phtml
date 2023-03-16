@@ -9,10 +9,11 @@
  */
 use Magebit\PageListWidget\Block\Widget\PageList;
 
-/** @var PageList $block */
+/** @var PageList $block
+*/
 
 ?>
-<h1><?= $escaper->escapeHtml($block->getData('display'))?></h1>
+<h1><?= $escaper->escapeHtml($block->getData('title'))?></h1>
 <ul>
     <?php foreach ($block->getListOfPages() as $page): ?>
         <li>
