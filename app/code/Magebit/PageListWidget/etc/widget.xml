@@ -1,12 +1,13 @@
+<?xml version="1.0"?>
+<!--
+    Magebit_PageListWidget
+    @category     Magebit
+    @package      Magebit_PageListWidget
+    @author       Artjoms Fomins <info@magebit.com>
+    @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+-->
 <widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
-    <!--
-        Magebit_PageListWidget
-        @category     Magebit
-        @package      Magebit_PageListWidget
-        @author       Artjoms Fomins <info@magebit.com>
-        @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
-    -->
     <widget class="Magebit\PageListWidget\Block\Widget\PageList" id="orange_test_widget">
         <label>My New Page List Widget</label>
         <description>This is a Page List Widget!!!</description>

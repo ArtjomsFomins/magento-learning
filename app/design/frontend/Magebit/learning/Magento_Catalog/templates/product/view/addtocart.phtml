@@ -65,7 +65,7 @@
         <div class="actions">
             <button type="submit"
                     title="<?= $block->escapeHtmlAttr($buttonTitle) ?>"
-                    class="action primary tocart cart__btn"
+                    class="action primary tocart cart-btn"
                     id="product-addtocart-button">
                 <span><?= $block->escapeHtml($buttonTitle) ?></span>
             </button>
@@ -77,16 +77,16 @@
 <script type="text/x-magento-init">
     {
         "#product_addtocart_form": {
-        "Magento_Ui/js/core/app": {
-            "components": {
-                "qty-counter": {
-                    "component": "qty-counter",
-                    "config": {
-                        "counterValue": "1"
+            "Magento_Ui/js/core/app": {
+                "components": {
+                    "qty-counter": {
+                        "component": "qty-counter",
+                        "config": {
+                            "counterValue": "1"
+                        }
                     }
                 }
             }
-        }
         }
     }
 </script>

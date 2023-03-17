@@ -24,8 +24,8 @@
                 <height>110</height>
             </image>
             <image id="related_products_list" type="small_image">
-                <width>204</width>
-                <height>270</height>
+                <width>224</width>
+                <height>280</height>
             </image>
         </images>
     </media>

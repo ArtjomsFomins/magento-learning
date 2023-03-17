@@ -1,8 +1,8 @@
 "use strict";
 
 define(["ko", "uiElement"], function (ko, Element) {
-    const input = document.querySelector(".counter__input");
-    const button = document.querySelector(".cart__btn");
+    const input = document.querySelector(".counter-input");
+    const button = document.querySelector(".cart-btn");
     input.addEventListener("keydown", (event) => {
         const codes = [
             190, // .
@@ -17,6 +17,7 @@ define(["ko", "uiElement"], function (ko, Element) {
 
         return true;
     });
+
     input.addEventListener("input", function (e) {
         var reg = /^(?!0)[0-9]*$/;
         const result = this.value.match(reg);
@@ -35,6 +36,7 @@ define(["ko", "uiElement"], function (ko, Element) {
             this.value = "0";
         }
     });
+
     return Element.extend({
         initObservable: function () {
             this._super().observe("counterValue");
