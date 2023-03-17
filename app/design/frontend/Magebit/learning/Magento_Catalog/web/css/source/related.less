@@ -33,19 +33,19 @@
         margin: 0 auto;
         margin: auto;
         min-height: 280px;
+
         & img {
             object-fit: cover;
         }
+
         & .product-image-container {
             height: 100%;
         }
-        & .product-image-wrapper {
-        }
+
     }
 
     & .product.details.product-item-details {
-        margin-top: 4px;
-        margin: 0;
+        margin: 4px 0 0 0;
         padding: 0 10px;
         width: calc(100% - 10px);
     }
@@ -57,6 +57,11 @@
 
     & .product.name.product-item-name {
         flex: auto;
+    }
+
+    .abs-product-link > a:hover,
+    .product-item-name > a:hover, .product.name a > a:hover {
+        text-decoration: none;
     }
 
     & .product-item-info {
