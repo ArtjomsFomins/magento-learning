@@ -1,12 +1,14 @@
 .catalog-product-view {
     @import 'variables.less';
+
     ul,
     ol {
         margin-bottom: 0;
         padding-left: 0;
     }
-    ul > li,
-    ol > li {
+
+    ul>li,
+    ol>li {
         margin-bottom: 0;
     }
 
@@ -23,16 +25,19 @@
     .customer-review .rating-summary {
         margin-right: 5px;
     }
+
     & .product-info-main {
         width: auto;
-        @media(min-width: @screen__m) {
+
+        @media (min-width: @screen__m) {
             width: 45.1%;
         }
     }
 
     & .product.media {
         width: auto;
-        @media(min-width: @screen__m) {
+
+        @media (min-width: @screen__m) {
             width: 54%;
         }
     }
@@ -69,8 +74,8 @@
         box-shadow: 0 0 8px @learning-border;
     }
 
-    .fieldset > .field,
-    .fieldset > .fields > .field {
+    .fieldset>.field,
+    .fieldset>.fields>.field {
         margin: 0 0 20px;
     }
 
@@ -105,7 +110,6 @@
         & .stock {
             margin: 0 18px 0;
         }
-
     }
 
     & .fotorama__stage {
@@ -116,7 +120,7 @@
         margin-right: 6px;
     }
 
-    &  .fotorama__stage__frame .fotorama__img {
+    & .fotorama__stage__frame .fotorama__img {
         left: 48%;
         top: 50%;
     }
@@ -184,6 +188,7 @@
     .attributes .description {
         font-size: 12px;
         padding: 0 18px 20px 19px;
+
         & p {
             margin: 0;
         }
@@ -191,14 +196,16 @@
 
     .product-reviews-summary .reviews-actions {
         display: block;
-        @media(min-width: @screen__xs) {
+
+        @media (min-width: @screen__xs) {
             display: inline-block;
         }
     }
 
     .reviews-actions {
         margin-top: 11px;
-        @media(min-width: @screen__xs) {
+
+        @media (min-width: @screen__xs) {
             margin-top: 1px !important;
         }
     }
@@ -242,7 +249,6 @@
         width: 100%;
     }
 
-
     .block .title {
         border-bottom: 1px solid @learning-silver;
         padding-bottom: 8px;
@@ -284,13 +290,6 @@
         margin-bottom: 42px;
     }
 
-    .product-social-links {
-        .block-title.title {
-            & strong {
-            }
-        }
-    }
-
     .block .title strong {
         font-size: 16px;
         font-weight: bold;
@@ -308,4 +307,5 @@
     @import 'counter.less';
     @import 'upsell.less';
     @import 'related.less';
+
 }

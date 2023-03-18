@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @copyright Copyright (c) 2023 Magebit (https://magebit.com/)
  * @author    <info@magebit.com>
@@ -14,55 +15,57 @@
 $product = $block->getProduct();
 $attributes = $block->getAdditionalData();
 $customAttributes = [
-    'size' => [ 'label' => 'Dimension:', 'code' => 'size'],
-    'color' => [ 'label' => 'Colour:', 'code' => 'color'],
-    'material' => [ 'label' => 'Material:', 'code' => 'material']
+    'size' => ['label' => 'Dimension:', 'code' => 'size'],
+    'color' => ['label' => 'Colour:', 'code' => 'color'],
+    'material' => ['label' => 'Material:', 'code' => 'material']
 ];
 $count = count($customAttributes);
 
 ?>
-<?php if (count($attributes) > 0): ?>
-        <div class="attributes-container">
-            <ul>
-                <?php foreach ($customAttributes as $customAttribute): ?>
+<?php if (count($attributes) > 0) : ?>
+    <div class="attributes-container">
+        <ul>
+            <?php foreach ($customAttributes as $customAttribute) : ?>
 
-                    <?php $attributeText= $product->getAttributeText($customAttribute['code']) ?>
-                    <?php if ($attributeText): ?>
+                <?php $attributeText = $product->getAttributeText($customAttribute['code']) ?>
+                <?php if ($attributeText) : ?>
+                    <li class="attributes-item">
+                        <span class="attributes-title">
+                            <?= $escaper->escapeHtml($customAttribute['label']) ?>
+                        </span>
+                        <?php if (is_array($attributeText)) {
+                            $attributeText = implode(', ', $attributeText);
+                        } ?>
+                        <p class="attributes-text">
+                            <?= $escaper->escapeHtml($attributeText) ?>
+                        </p>
+                    </li>
+                    <?php $count--; ?>
+                <?php endif; ?>
+
+            <?php endforeach; ?>
+
+            <?php if ($count !== 0) : ?>
+
+                <?php foreach ($attributes as $attribute) : ?>
+
+                    <?php if ($count === 0) {
+                        break;
+                    } ?>
+                    <?php if (!in_array($attribute['code'], $customAttributes)) : ?>
                         <li class="attributes-item">
                             <span class="attributes-title">
-                                <?= $escaper->escapeHtml($customAttribute['label']) ?>
+                                <?= $escaper->escapeHtml($attribute['label']) ?>
                             </span>
-                            <?php if (is_array($attributeText)) {
-                                $attributeText = implode(', ', $attributeText);
-                            } ?>
                             <p class="attributes-text">
-                                <?= $escaper->escapeHtml($attributeText) ?>
+                                <?= $escaper->escapeHtml($attribute['value']) ?>
                             </p>
                         </li>
-                        <?php $count--; ?>
+                        <?php $count-- ?>
                     <?php endif; ?>
 
                 <?php endforeach; ?>
-
-                <?php if ($count !== 0): ?>
-
-                        <?php foreach ($attributes as $attribute): ?>
-
-                            <?php if ($count === 0) { break; } ?>
-                            <?php if (!in_array($attribute['code'], $customAttributes)): ?>
-                                <li class="attributes-item">
-                                    <span class="attributes-title">
-                                        <?= $escaper->escapeHtml($attribute['label']) ?>
-                                    </span>
-                                    <p class="attributes-text">
-                                        <?= $escaper->escapeHtml($attribute['value']) ?>
-                                    </p>
-                                </li>
-                                <?php $count-- ?>
-                            <?php endif; ?>
-
-                        <?php  endforeach; ?>
-                <?php endif; ?>
-            </ul>
+            <?php endif; ?>
+        </ul>
     </div>
 <?php endif; ?>

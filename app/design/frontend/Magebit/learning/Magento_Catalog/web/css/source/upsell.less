@@ -5,6 +5,7 @@
 
     & .product-item {
         width: auto !important;
+
         &:not(:first-child) {
             margin-top: 10px;
         }
@@ -16,7 +17,8 @@
         flex-direction: column;
         justify-content: center;
         width: auto !important;
-        @media(min-width: @screen__xs) {
+
+        @media (min-width: @screen__xs) {
             flex-direction: row;
         }
     }
@@ -25,10 +27,11 @@
         align-items: center;
         margin-left: 0;
 
-        @media(min-width:@screen__xs) {
+        @media (min-width: @screen__xs) {
             align-items: flex-start;
         }
-        @media(min-width: @screen__l) {
+
+        @media (min-width: @screen__l) {
             align-items: normal;
             margin-left: 20px;
         }
@@ -47,7 +50,8 @@
     & .reviews-actions {
         display: none;
         flex: 1;
-        @media(min-width: @screen__l) {
+
+        @media (min-width: @screen__l) {
             display: block;
         }
     }
@@ -73,11 +77,13 @@
 
     & .product-item .price-box {
         margin: 0 0 10px;
-        @media(min-width: @screen__xs) {
+
+        @media (min-width: @screen__xs) {
             margin: 0 0 25px;
         }
     }
 }
+
 .upsell-btn {
     background-color: @learning-shaft;
     border-radius: 2px;
@@ -88,7 +94,8 @@
     padding: 6px 11px 7px 10px;
     transition: background-color 0.3s linear;
     width: 95%;
-    @media(min-width:@screen__xs) {
+
+    @media (min-width: @screen__xs) {
         width: auto;
         margin-bottom: 0;
     }
@@ -100,5 +107,4 @@
     &:hover {
         background-color: @learning-emperor;
     }
-
 }
