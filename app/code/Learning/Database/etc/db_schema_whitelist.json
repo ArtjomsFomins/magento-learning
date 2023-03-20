@@ -1,0 +1,17 @@
+{
+    "students": {
+        "column": {
+            "id": true,
+            "name": true,
+            "last_name": true,
+            "average_grade": true,
+            "kicked": true
+        },
+        "index": {
+            "STUDENTS_NAME_LAST_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

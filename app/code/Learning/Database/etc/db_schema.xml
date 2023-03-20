@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+    Learning_Database
+    @category     Learning
+    @package      Learning_Database
+    @author       Artjoms Fomins <info@magebit.com>
+    @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="students" engine="innodb" resource="default" comment="Student table" >
+        <column name="id" xsi:type="bigint" unsigned="true" nullable="false" identity="true" comment="Student's id"/>
+        <column name="name" xsi:type="varchar" length="255" nullable="false" comment="Student's name"/>
+        <column name="last_name" xsi:type="varchar" length="255" nullable="false" comment="Student's last name"/>
+        <column name="average_grade" xsi:type="smallint" nullable="true" default="0" comment="Student's avg. score"/>
+        <column name="kicked" xsi:type="boolean" nullable="false" default="false"
+            comment="whether student kicked or not"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="STUDENTS_NAME_LASTNAME" indexType="fulltext">
+            <column name="name"/>
+            <column name="last_name"/>
+        </index>
+    </table>
+</schema>
