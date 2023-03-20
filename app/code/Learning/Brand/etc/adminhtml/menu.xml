@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <!-- Main menu -->
+        <add id="Learning_Core::learning"
+            title="Learning Group"
+            translate="title"
+            module="Learning_Core"
+            sortOrder="50"
+            resource="Magento_Backend::content"
+        />
+        <!-- Main menu Title -->
+        <add id="Learning_Brand::learning_general"
+            title="Brand Settings"
+            translate="title"
+            module="Learning_Brand"
+            sortOrder="60"
+            parent="Learning_Core::learning"
+            resource="Magento_Backend::content"
+        />
+        <!-- Sub menu items -->
+        <add id="Learning_Brand::learning_brand_brand"
+            title="Manage Brands"
+            module="Learning_Brand"
+            translate="title"
+            sortOrder="30"
+            resource="Magento_Backend::content"
+            parent="Learning_Brand::learning_general"
+            action="learning_brand/brand/index/"
+        />
+    </menu>
+</config>
