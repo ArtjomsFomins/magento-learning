@@ -77,3 +77,9 @@ lib
 generated
 vendor
 setup
+/pub/*
+dev
+var
+pub
+phpserver
+bin
