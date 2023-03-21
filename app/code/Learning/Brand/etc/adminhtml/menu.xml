@@ -5,7 +5,7 @@
         <add id="Learning_Brand::home" title="Brand listing" module="Learning_Brand" sortOrder="1000"
             parent="Magento_Catalog::catalog_categories"
             resource="Magento_Catalog::categories"
-            action="dev_grid/index/index"
+            action="learning_brand/brand/index"
         />
     </menu>
 </config>
