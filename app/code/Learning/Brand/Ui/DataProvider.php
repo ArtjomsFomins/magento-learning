@@ -5,27 +5,30 @@ use Magento\Ui\DataProvider\AbstractDataProvider;
 
 class DataProvider extends AbstractDataProvider
 {
-    protected $collection;
+    /**
+     * @param string $name
+     * @param string $primaryFieldName
+     * @param string $requestFieldName
+     * @param array $data
+     */
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
-        $collectionFactory,
-        array $meta = [],
         array $data = []
     ) {
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-        $this->collection = $collectionFactory->create();
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $data);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getData()
     {
-        $result = [];
-
-        foreach ($this->collection->getItems() as $item) {
-            $result[$item->getId()]['general'] = $item->getData();
-        }
-
-        return $result;
+        return [];
+    }
+    public function addFilter(\Magento\Framework\Api\Filter $filter)
+    {
+        return null;
     }
 }

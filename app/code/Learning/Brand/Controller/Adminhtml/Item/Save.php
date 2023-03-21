@@ -2,102 +2,129 @@
 
 namespace Learning\Brand\Controller\Adminhtml\Brand;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\App\Request\DataPersistorInterface;
-use Magento\Framework\Exception\LocalizedException;
-use Magento\Catalog\Api\CategoryRepositoryInterface;
-use Magento\Catalog\Model\ResourceModel\Eav\AttributeFactory;
-use Learning\Brand\Model\Brand;
-use Learning\Brand\Model\ResourceModel\Brand\Collection;
+use Magento\Customer\Api\Data\GroupInterfaceFactory;
+use Magento\Customer\Api\GroupRepositoryInterface;
+use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\ObjectManager;
 
 /**
-* Class Save
-*
-* @package learning\Brand\Controller\Adminhtml\Brand
-*/
-class Save extends Action
+ * Controller class Save. Performs save action of customers group
+ */
+class Save extends \Magento\Customer\Controller\Adminhtml\Group implements HttpPostActionInterface
 {
     /**
-     * @var CategoryRepositoryInterface
+     * @var \Magento\Framework\Reflection\DataObjectProcessor
      */
-    protected $categoryRepository;
-    /**
-     * @var \Magento\Framework\App\Request\DataPersistorInterface
-     */
-    protected $dataPersistor;
-    /**
-     * @var \Magento\Catalog\Model\ResourceModel\Eav\AttributeFactory
-     */
-    protected $attributeFactory;
+    protected $dataObjectProcessor;
 
-    private $itemFactory;
     /**
-     * @param \Magento\Backend\App\Action\Context                       $context
-     * @param \Magento\Framework\App\Request\DataPersistorInterface     $dataPersistor
-     * @param \Magento\Catalog\Model\ResourceModel\Eav\AttributeFactory $attributeFactory
-     * @param \Magento\Catalog\Api\CategoryRepositoryInterface          $categoryRepository
+     * @var \Magento\Customer\Api\Data\GroupExtensionInterfaceFactory
+     */
+    private $groupExtensionInterfaceFactory;
+
+    /**
+     *
+     * @param \Magento\Backend\App\Action\Context $context
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param GroupRepositoryInterface $groupRepository
+     * @param GroupInterfaceFactory $groupDataFactory
+     * @param \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param \Magento\Framework\Reflection\DataObjectProcessor $dataObjectProcessor
+     * @param \Magento\Customer\Api\Data\GroupExtensionInterfaceFactory $groupExtensionInterfaceFactory
      */
     public function __construct(
-        Context $context,
-        ItemFactory $itemFactory
+        \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\Registry $coreRegistry,
+        GroupRepositoryInterface $groupRepository,
+        GroupInterfaceFactory $groupDataFactory,
+        \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory,
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        \Magento\Framework\Reflection\DataObjectProcessor $dataObjectProcessor,
+        \Magento\Customer\Api\Data\GroupExtensionInterfaceFactory $groupExtensionInterfaceFactory
     ) {
-        $this->dataPersistor = $dataPersistor;
-        $this->attributeFactory = $attributeFactory;
-        $this->categoryRepository = $categoryRepository;
-        $this->itemFactory = $itemFactory;
-        parent::__construct($context);
+        $this->dataObjectProcessor = $dataObjectProcessor;
+        $this->groupExtensionInterfaceFactory = $groupExtensionInterfaceFactory
+            ?: ObjectManager::getInstance()->get(\Magento\Customer\Api\Data\GroupExtensionInterfaceFactory::class);
+        parent::__construct(
+            $context,
+            $coreRegistry,
+            $groupRepository,
+            $groupDataFactory,
+            $resultForwardFactory,
+            $resultPageFactory
+        );
     }
 
     /**
-     * Save action
+     * Store Customer Group Data to session
      *
-     * @return \Magento\Framework\Controller\ResultInterface
-     * @throws \Magento\Framework\Exception\LocalizedException
+     * @param array $customerGroupData
+     * @return void
+     */
+    protected function storeCustomerGroupDataToSession($customerGroupData)
+    {
+        if (array_key_exists('code', $customerGroupData)) {
+            $customerGroupData['customer_group_code'] = $customerGroupData['code'];
+            unset($customerGroupData['code']);
+        }
+        $this->_getSession()->setCustomerGroupData($customerGroupData);
+    }
+
+    /**
+     * Create or save customer group.
+     *
+     * @return \Magento\Backend\Model\View\Result\Redirect|\Magento\Backend\Model\View\Result\Forward
      */
     public function execute()
     {
-        /**
-         * @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect
-         */
+        $taxClass = (int)$this->getRequest()->getParam('tax_class');
 
-        $this->itemFactory->create()->setData($this->getRequest()->getPostValue()['general'])->save();
-        return $this->resultRedirectFactory->create()->setPath('learning/index/index');
-        // $resultRedirect = $this->resultRedirectFactory->create();
-        // $data = $this->getRequest()->getPostValue();
-        // if ($data) {
-        //     $id = $this->getRequest()->getParam('id');
+        /** @var \Magento\Customer\Api\Data\GroupInterface $customerGroup */
+        $customerGroup = null;
+        if ($taxClass) {
+            $id = $this->getRequest()->getParam('id');
+            $websitesToExclude = empty($this->getRequest()->getParam('customer_group_excluded_websites'))
+                ? [] : $this->getRequest()->getParam('customer_group_excluded_websites');
+            $resultRedirect = $this->resultRedirectFactory->create();
+            try {
+                $customerGroupCode = (string)$this->getRequest()->getParam('code');
 
-        //     $model = $this->_objectManager->create(Brand::class)->load($id);
-        //     if (!$model->getId() && $id) {
-        //         $this->messageManager->addErrorMessage(__('This Brand no longer exists.'));
-        //         return $resultRedirect->setPath('*/*/');
-        //     }
+                if ($id !== null) {
+                    $customerGroup = $this->groupRepository->getById((int)$id);
+                    $customerGroupCode = $customerGroupCode ?: $customerGroup->getCode();
+                } else {
+                    $customerGroup = $this->groupDataFactory->create();
+                }
+                $customerGroup->setCode(!empty($customerGroupCode) ? $customerGroupCode : null);
+                $customerGroup->setTaxClassId($taxClass);
 
-        //     $attr = $this->attributeFactory->create()->loadByCode('catalog_product', 'brand');
-        //     if ($attr->usesSource()) {
-        //         $brandName = $attr->getSource()->getOptionText($data['brand']);
-        //         $model->setData('brand_name', $brandName);
-        //     }
+                if ($websitesToExclude !== null) {
+                    $customerGroupExtensionAttributes = $this->groupExtensionInterfaceFactory->create();
+                    $customerGroupExtensionAttributes->setExcludeWebsiteIds($websitesToExclude);
+                    $customerGroup->setExtensionAttributes($customerGroupExtensionAttributes);
+                }
 
-        //     try {
-        //         $model->save();
-        //         $this->messageManager->addSuccessMessage(__('You saved the Brand.'));
-        //         $this->dataPersistor->clear('learning_brand_brand');
+                $this->groupRepository->save($customerGroup);
 
-        //         if ($this->getRequest()->getParam('back')) {
-        //             return $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
-        //         }
-        //         return $resultRedirect->setPath('*/*/');
-        //     } catch (LocalizedException $e) {
-        //         $this->messageManager->addErrorMessage($e->getMessage());
-        //     } catch (\Exception $e) {
-        //         $this->messageManager->addExceptionMessage($e, __('Something went wrong while saving the Brand.'));
-        //     }
-
-        //     $this->dataPersistor->set('learning_brand_brand', $data);
-        //     return $resultRedirect->setPath('*/*/edit', ['id' => $this->getRequest()->getParam('id')]);
-        // }
-        // return $resultRedirect->setPath('*/*/');
+                $this->messageManager->addSuccessMessage(__('You saved the customer group.'));
+                $resultRedirect->setPath('customer/group');
+            } catch (\Exception $e) {
+                $this->messageManager->addErrorMessage($e->getMessage());
+                if ($customerGroup != null) {
+                    $this->storeCustomerGroupDataToSession(
+                        $this->dataObjectProcessor->buildOutputDataArray(
+                            $customerGroup,
+                            \Magento\Customer\Api\Data\GroupInterface::class
+                        )
+                    );
+                }
+                $resultRedirect->setPath('customer/group/edit', ['id' => $id]);
+            }
+            return $resultRedirect;
+        } else {
+            return $this->resultForwardFactory->create()->forward('new');
+        }
     }
 }

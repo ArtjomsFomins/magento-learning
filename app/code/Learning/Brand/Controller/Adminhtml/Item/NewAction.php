@@ -14,7 +14,7 @@ class NewAction extends \Magento\Customer\Controller\Adminhtml\Group implements 
 {
     public function execute()
     {
-        $resultPage = $this->resultPageFactory->create(ResultFactory::TYPE_PAGE);
+        $resultPage = $this->resultPageFactory->create();
 
         return $resultPage;
     }
