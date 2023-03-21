@@ -1,19 +1,19 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
- <type name="Dev\Grid\Ui\DataProvider\Category\ListingDataProvider">
-   <plugin name="dev_grid_attributes" type="Dev\Grid\Plugin\AddAttributesToUiDataProvider"/>
- </type>
- <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
-  <arguments>
-   <argument name="collections" xsi:type="array">
-     <item name="learning_brand_brand_listing_data_source" xsi:type="string">LearningBrandCategoryCollection</item>
-   </argument>
-  </arguments>
- </type>
- <virtualType name="LearningBrandCategoryCollection" type="Learning\Brand\Ui\DataProvider\Category\Listing\Collection">
-   <arguments>
-     <argument name="mainTable" xsi:type="string">catalog_category_entity</argument>
-     <argument name="resourceModel" xsi:type="string">Learning\Brand\Model\ResourceModel\Category</argument>
-   </arguments>
- </virtualType>
+    <!-- <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="brandAddItem" xsi:type="object">Learning\Brand\Console\Command\AddItem</item>
+            </argument>
+        </arguments>
+    </type> -->
+     <preference for="Learning\Brand\Api\Data\ItemInterface" type="Learning\Brand\Model\Item" />
+     <preference for="Learning\Brand\Api\Data\ItemRepositoryInterface" type="Learning\Brand\Model\ItemRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="learning_items_grid_data_source" xsi:type="string">Learning\Brand\Model\ResourceModel\Item\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
 </config>
