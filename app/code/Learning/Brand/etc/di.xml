@@ -7,8 +7,8 @@
             </argument>
         </arguments>
     </type> -->
-     <preference for="Learning\Brand\Api\Data\ItemInterface" type="Learning\Brand\Model\Item" />
-     <preference for="Learning\Brand\Api\Data\ItemRepositoryInterface" type="Learning\Brand\Model\ItemRepository" />
+     <!-- <preference for="Learning\Brand\Api\Data\ItemInterface" type="Learning\Brand\Model\Item" /> -->
+     <!-- <preference for="Learning\Brand\Api\Data\ItemRepositoryInterface" type="Learning\Brand\Model\ItemRepository" /> -->
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -16,4 +16,10 @@
             </argument>
         </arguments>
     </type>
+    <virtualType name="Learning\Brand\Model\ResourceModel\Item\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">learning_brand</argument>
+            <argument name="resourceModel" xsi:type="string">Learning\Brand\Model\ResourceModel\Category</argument>
+        </arguments>
+    </virtualType>
 </config>

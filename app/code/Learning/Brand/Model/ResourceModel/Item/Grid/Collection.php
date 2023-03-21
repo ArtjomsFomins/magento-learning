@@ -3,7 +3,7 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-namespace Magento\Customer\Model\ResourceModel\Grid;
+namespace Learning\Brand\Model\ResourceModel\Item\Grid;
 
 use Magento\Customer\Model\ResourceModel\Customer;
 use Magento\Customer\Ui\Component\DataProvider\Document;
