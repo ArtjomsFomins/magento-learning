@@ -35,6 +35,9 @@
     </settings>
     <dataSource name="learning_items_form_data_source">
         <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="submit_url" path="learning/item/save" xsi:type="url" />
+            </item>
             <item name="js_config" xsi:type="array">
                 <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
             </item>
