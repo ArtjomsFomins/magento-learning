@@ -8,38 +8,40 @@ use Magento\Framework\App\ProductMetadataInterface;
 
 class AddAttributesToUiDataProvider
 {
-   private $productMetadata;
-   private $attributeRepository;
+    private $productMetadata;
+    private $attributeRepository;
 
-   public function __construct(AttributeRepositoryInterface $attributeRepository,
-                               ProductMetadataInterface $productMetadata)
-   {  
-        $this->attributeRepository = $attributeRepository; 
+    public function __construct(
+        AttributeRepositoryInterface $attributeRepository,
+        ProductMetadataInterface $productMetadata
+    ) {
+        $this->attributeRepository = $attributeRepository;
         $this->productMetadata = $productMetadata;
-   }
+    }
 
-   public function afterGetSearchResult(CategoryDataProvider $subject, SearchResult $result) {
-       if ($result->isLoaded()) { 
-          return $result; 
-       } 
-        
-       $edition = $this->productMetadata->getEdition();
+    public function afterGetSearchResult(CategoryDataProvider $subject, SearchResult $result)
+    {
+        if ($result->isLoaded()) {
+            return $result;
+        }
 
-       $column = 'entity_id';
-        
-       if($edition == 'Enterprise')
-          $column = 'row_id';
-        
-       $attribute = $this->attributeRepository->get('catalog_category', 'name'); 
+        $edition = $this->productMetadata->getEdition();
 
-       $result->getSelect()->joinLeft(
-          ['devgridname' => $attribute->getBackendTable()],
-          "devgridname.".$column." = main_table.".$column." AND devgridname.attribute_id = ".$attribute->getAttributeId(),
-          ['name' => "devgridname.value"] 
-       );  
-      
-       $result->getSelect()->where('devgridname.value LIKE "B%"');
+        $column = 'entity_id';
 
-       return $result;
-   }
+        if ($edition == 'Enterprise') {
+            $column = 'row_id';
+        }
+
+        $attribute = $this->attributeRepository->get('catalog_category', 'name');
+        // $result->getSelect()->joinLeft(
+            //     ['devgridname' => $attribute->getBackendTable()],
+            //     "devgridname.".$column." = main_table.".$column." AND devgridname.attribute_id = ".$attribute->getAttributeId(),
+            //     ['name' => "devgridname.value"]
+        // );
+
+        // $result->getSelect()->where('devgridname.value LIKE "B%"');
+        $result->getSelect()->from('learning_brand');
+        return $result;
+    }
 }
