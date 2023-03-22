@@ -11,6 +11,8 @@ use Magento\Framework\Data\Collection\AbstractDb;
 
 class Item extends AbstractModel
 {
+    protected $_eventPrefix = 'learning_sample_item';
+
     public function __construct(
         Context          $context,
         Registry         $registry,

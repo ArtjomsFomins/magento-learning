@@ -1,0 +1,14 @@
+{
+    "learning_brand": {
+        "column": {
+            "id": true,
+            "brand_name": true
+        },
+        "index": {
+            "LEARNING_BRAND_BRAND_NAME": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}
