@@ -15,12 +15,22 @@
             <argument name="resourceModel" xsi:type="string">Learning\Brand\Model\ResourceModel\Item</argument>
         </arguments>
     </virtualType>
-    <type name="Learning\Brand\Observer\Logger">
+    <!-- <type name="Learning\Brand\Observer\Logger">
         <arguments>
-            <argument name="logger" xsi:type="object">LearningLogger</argument>
+            <argument name="logger" xsi:type="object">Learning\Brand\Observer\Logger</argument>
         </arguments>
-    </type>
+    </type> -->
     <type name="Learning\Brand\Console\Command\AddItem">
-            <plugin name="console_logger" type="\Learning\Brand\Plugin\Logger"/>
+        <arguments>
+            <argument name="name" xsi:type="string">learning:item:add</argument>
+        </arguments>
+        <plugin name="console_logger" type="\Learning\Brand\Plugin\Logger"/>
+    </type>
+    <type name="Magento\Framework\Console\CommandListInterface">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="learning_item_add" xsi:type="object">Learning\Brand\Console\Command\AddItem</item>
+            </argument>
+        </arguments>
     </type>
 </config>

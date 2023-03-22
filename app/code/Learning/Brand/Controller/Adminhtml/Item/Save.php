@@ -27,11 +27,8 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
      */
     public function execute()
     {
-        // $body = $this->getRequest()->getPostValue()['general'];
-        // dd($body);
         $this->itemFactory->create()->setData($this->getRequest()->getPostValue()['general'])->save();
-        // $this->itemFactory->create()->setData(['brand_name' => 'name'])->save();
 
-        return $this->resultRedirectFactory->create()->setPath('learning/index/index');
+        return $this->resultRedirectFactory->create()->setPath('learning_brand/brand/index');
     }
 }

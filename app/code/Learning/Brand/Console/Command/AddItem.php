@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AddItem extends Command
 {
-    const INPUT_KEY_NAME = 'name';
+    const INPUT_KEY_NAME = 'brand_name';
     const INPUT_KEY_DESCRIPTION = 'description';
 
     private ItemFactory $itemFactory;
@@ -18,7 +18,7 @@ class AddItem extends Command
     public function __construct(ItemFactory $itemFactory)
     {
         $this->itemFactory = $itemFactory;
-        parent::__construct();
+        parent::__construct('learning:item:add');
     }
 
     /**
@@ -27,6 +27,7 @@ class AddItem extends Command
     protected function configure()
     {
         $this->setName('learning:item:add')->addArgument(self::INPUT_KEY_NAME, InputArgument::REQUIRED, 'Item name');
+        $this->setDescription('add item through console');
         parent::configure();
     }
 
