@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Backend\App\Action;
@@ -7,7 +9,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
-* Class Index
+* @inheritDoc
 *
 * @package Magebit\Faq\Controller\Adminhtml\Brand
 */
