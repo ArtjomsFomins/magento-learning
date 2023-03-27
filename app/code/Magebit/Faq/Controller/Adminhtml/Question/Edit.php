@@ -3,61 +3,68 @@
  * Copyright © Magento, Inc. All rights reserved.
  * See COPYING.txt for license details.
  */
-declare(strict_types = 1);
-
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
-use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterface;
-use Magebit\Faq\Api\Data\CustomerInterface;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\App\Action\HttpGetActionInterface;
 
+/**
+ * Edit CMS block action.
+ */
 class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
     /**
-     * Array of actions which can be processed without secret key validation
-     *
-     * @var array
-     */
-    protected $_publicActions = ['edit'];
-
-    /**
-     * @var \Magento\Framework\View\Result\PageFactory
+     * @var \Magebit\Faq\Model\QuestionFactory
      */
     protected $resultPageFactory;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Catalog\Controller\Adminhtml\Product\Builder $productBuilder
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Framework\Registry $coreRegistry
+     * @param \Magebit\Faq\Model\QuestionFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Catalog\Controller\Adminhtml\Product\Builder $productBuilder,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Magento\Store\Model\StoreManagerInterface $storeManager = null
+        \Magento\Framework\Registry $coreRegistry,
+        \Magebit\Faq\Model\QuestionFactory $resultPageFactory
     ) {
-        parent::__construct($context, $productBuilder);
         $this->resultPageFactory = $resultPageFactory;
-        // $this->storeManager = $storeManager ?: ObjectManager::getInstance()
-        //     ->get(\Magento\Store\Model\StoreManagerInterface::class);
+        parent::__construct($context, $coreRegistry);
     }
 
     /**
-     * Product edit form
+     * Edit CMS block
      *
      * @return \Magento\Framework\Controller\ResultInterface
+     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function execute()
     {
+        // 1. Get ID and create model
+        $id = $this->getRequest()->getParam('id');
+        $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
+
+        // 2. Initial checking
+        if ($id) {
+            $model->load($id);
+            if (!$model->getId()) {
+                $this->messageManager->addErrorMessage(__('This block no longer exists.'));
+                /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+                $resultRedirect = $this->resultRedirectFactory->create();
+                return $resultRedirect->setPath('*/*/');
+            }
+        }
+
+        $this->_coreRegistry->register('question_block', $model);
+
+        // 5. Build edit form
+        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-
-
+        $this->initPage($resultPage)->addBreadcrumb(
+            $id ? __('Edit Block') : __('New Block'),
+            $id ? __('Edit Block') : __('New Block')
+        );
+        $resultPage->getConfig()->getTitle()->prepend(__('Blocks'));
+        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? $model->getTitle() : __('New Block'));
         return $resultPage;
     }
 }

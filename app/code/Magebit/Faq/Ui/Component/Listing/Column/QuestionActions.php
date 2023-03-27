@@ -27,8 +27,8 @@ use Magento\Ui\Component\Listing\Columns\Column;
 class QuestionActions extends Column
 {
     /** Url path */
-    const CMS_URL_PATH_EDIT = 'question/*/edit';
-    const CMS_URL_PATH_DELETE = 'question/*/delete';
+    const CMS_URL_PATH_EDIT = 'faq/question/edit';
+    const CMS_URL_PATH_DELETE = 'faq/question/delete';
 
     /**
      * @var \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder
@@ -89,12 +89,12 @@ class QuestionActions extends Column
     public function prepareDataSource(array $dataSource)
     {
         if (isset($dataSource['data']['items'])) {
-            $storeId = $this->context->getFilterParam('store_id');
+            $storeId = $this->context->getFilterParam('id');
 
             foreach ($dataSource['data']['items'] as &$item) {
                 $item[$this->getData('name')]['edit'] = [
                     'href' => $this->urlBuilder->getUrl(
-                        'customer/*/edit',
+                        self::CMS_URL_PATH_EDIT,
                         ['id' => $item['id'], 'store' => $storeId]
                     ),
                     'label' => __('Edit'),

@@ -15,20 +15,21 @@
             <item name="provider" xsi:type="string">faq_question_form.faq_question_form_data_source</item>
         </item>
         <item name="label" xsi:type="string" translate="true">General</item>
-        <item name="layout" xsi:type="array">
-            <item name="type" xsi:type="string">tabs</item>
-            <item name="navContainerName" xsi:type="string">left</item>
-        </item>
-        <item name="buttons" xsi:type="array">
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+        <!-- <item name="buttons" xsi:type="array">
             <item name="save" xsi:type="array">
                 <item name="name" xsi:type="string">save</item>
                 <item name="label" xsi:type="string" translate="true">Save</item>
                 <item name="class" xsi:type="string">primary</item>
                 <item name="url" xsi:type="string">*/*/save</item>
             </item>
-        </item>
+        </item> -->
     </argument>
     <settings>
+        <buttons>
+            <button name="back" class="Magebit\Faq\Ui\Component\Form\Button\Back"/>
+            <button name="save" class="Magebit\Faq\Ui\Component\Form\Button\Save"/>
+        </buttons>
         <namespace>faq_question_form</namespace>
         <ajaxSave>true</ajaxSave>
         <ajaxSaveType>simple</ajaxSaveType>
@@ -44,9 +45,9 @@
             </item>
         </argument>
         <settings>
-            <submitUrl path="learning_brand/item/save"/>
+            <submitUrl path="faq/question/save"/>
         </settings>
-        <dataProvider class="Learning\Brand\Ui\DataProvider" name="faq_question_form_data_source">
+        <dataProvider class="Magebit\Faq\Model\Question\DataProvider" name="faq_question_form_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>
                 <primaryFieldName>id</primaryFieldName>
@@ -81,7 +82,7 @@
                 </checkbox>
             </formElements>
         </field>
-        <field name="question" formElement="input" sortOrder="10">
+        <field name="question" formElement="input" sortOrder="20">
             <settings>
                 <visible>true</visible>
                 <elementTmpl>ui/form/element/input</elementTmpl>
@@ -91,7 +92,7 @@
                 </validation>
             </settings>
         </field>
-        <field name="answer" sortOrder="20">
+        <field name="answer" sortOrder="30">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="formElement" xsi:type="string">textarea</item>
