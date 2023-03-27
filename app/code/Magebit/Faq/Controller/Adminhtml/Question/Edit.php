@@ -13,58 +13,60 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
     /**
-     * @var \Magebit\Faq\Model\QuestionFactory
+     * @var \Magento\Framework\View\Result\PageFactory
      */
     protected $resultPageFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magebit\Faq\Model\QuestionFactory $resultPageFactory
+     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
-        \Magebit\Faq\Model\QuestionFactory $resultPageFactory
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory
     ) {
         $this->resultPageFactory = $resultPageFactory;
-        parent::__construct($context, $coreRegistry);
+        parent::__construct($context);
     }
 
     /**
-     * Edit CMS block
+     * Product edit form
      *
      * @return \Magento\Framework\Controller\ResultInterface
-     * @SuppressWarnings(PHPMD.NPathComplexity)
      */
     public function execute()
     {
-        // 1. Get ID and create model
-        $id = $this->getRequest()->getParam('id');
-        $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
-
-        // 2. Initial checking
-        if ($id) {
-            $model->load($id);
-            if (!$model->getId()) {
-                $this->messageManager->addErrorMessage(__('This block no longer exists.'));
-                /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
-                $resultRedirect = $this->resultRedirectFactory->create();
-                return $resultRedirect->setPath('*/*/');
-            }
-        }
-
-        $this->_coreRegistry->register('question_block', $model);
-
-        // 5. Build edit form
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit Block') : __('New Block'),
-            $id ? __('Edit Block') : __('New Block')
-        );
-        $resultPage->getConfig()->getTitle()->prepend(__('Blocks'));
-        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? $model->getTitle() : __('New Block'));
         return $resultPage;
+
+        // 1. Get ID and create model
+        // $id = $this->getRequest()->getParam('id');
+        // $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
+
+        // // 2. Initial checking
+        // if ($id) {
+        //     $model->load($id);
+        //     if (!$model->getId()) {
+        //         $this->messageManager->addErrorMessage(__('This block no longer exists.'));
+        //         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        //         $resultRedirect = $this->resultRedirectFactory->create();
+        //         return $resultRedirect->setPath('*/*/');
+        //     }
+        // }
+
+        // // $this->_coreRegistry->register('question_block', $model);
+
+        // // 5. Build edit form
+        // /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        // $resultPage = $this->resultPageFactory->create();
+        // $this->initPage($resultPage)->addBreadcrumb(
+        //     $id ? __('Edit Block') : __('New Block'),
+        //     $id ? __('Edit Block') : __('New Block')
+        // );
+        // $resultPage->getConfig()->getTitle()->prepend(__('Blocks'));
+        // $resultPage->getConfig()->getTitle()->prepend($model->getId() ? $model->getTitle() : __('New Block'));
+        // return $resultPage;
     }
 }

@@ -121,7 +121,12 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
         if ($redirect ==='continue') {
             $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
         } elseif ($redirect === 'close') {
-            $resultRedirect->setPath('*/*/edit');
+            try {
+                //code...
+                $resultRedirect->setPath('*/*/edit');
+            } catch (\Throwable $th) {
+                dd($th);
+            }
         } elseif ($redirect === 'duplicate') {
             $duplicateModel = $this->blockFactory->create(['data' => $data]);
             $duplicateModel->setId(null);
