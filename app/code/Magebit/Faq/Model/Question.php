@@ -27,7 +27,7 @@ use Magento\Backend\Model\Validator\UrlKey\CompositeUrlKey;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * CMS block model
+ * Question block model
  *
  * @method Block setStoreId(int $storeId)
  * @method int getStoreId()
@@ -35,7 +35,7 @@ use Magento\Framework\Exception\LocalizedException;
 class Question extends AbstractModel implements QuestionInterface
 {
     /**
-     * CMS block cache tag
+     * Question block cache tag
      */
     public const CACHE_TAG = 'question_b';
 
@@ -99,7 +99,7 @@ class Question extends AbstractModel implements QuestionInterface
      */
     protected function _construct()
     {
-        $this->_init(\Magento\Cms\Model\ResourceModel\Block::class);
+        $this->_init(\Magebit\Faq\Model\ResourceModel\Question::class);
     }
 
     /**

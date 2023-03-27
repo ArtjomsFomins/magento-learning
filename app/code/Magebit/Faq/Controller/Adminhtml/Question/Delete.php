@@ -43,7 +43,7 @@ class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterf
         if ($id) {
             try {
                 // init model and delete
-                $model = $this->_objectManager->create(\Magebit\Faq\Model\QuestionFactory::class);
+                $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
                 $model->load($id);
                 $model->delete();
                 // display success message

@@ -60,7 +60,7 @@ class Save implements ButtonProviderInterface
                         'buttonAdapter' => [
                             'actions' => [
                                 [
-                                    'targetName' => 'cms_block_form.cms_block_form',
+                                    'targetName' => 'faq_question_form.faq_question_form',
                                     'actionName' => 'save',
                                     'params' => [
                                         true,

@@ -1,53 +1,85 @@
 <?php
-
 /**
- * Magebit_Faq
- *
- * @category     Magebit
- * @package      Magebit_Faq
- * @author       Artjoms Fomins <info@magebit.com>
- * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
-
-declare(strict_types = 1);
-
 namespace Magebit\Faq\Model\Question;
 
-use Magento\Ui\DataProvider\AbstractDataProvider;
+use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Ui\DataProvider\Modifier\PoolInterface;
 
 /**
- * @inheritDoc
+ * Class DataProvider
  */
-class DataProvider extends AbstractDataProvider
+class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 {
-    protected $collection;
     /**
+     * @var \Magebit\Faq\Model\ResourceModel\Question\Collection
+     */
+    protected $collection;
+
+    /**
+     * @var DataPersistorInterface
+     */
+    protected $dataPersistor;
+
+    /**
+     * @var array
+     */
+    protected $loadedData;
+
+    /**
+     * Constructor
+     *
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
+     * @param CollectionFactory $blockCollectionFactory
+     * @param DataPersistorInterface $dataPersistor
+     * @param array $meta
      * @param array $data
+     * @param PoolInterface|null $pool
      */
     public function __construct(
         $name,
         $primaryFieldName,
         $requestFieldName,
+        CollectionFactory $blockCollectionFactory,
+        DataPersistorInterface $dataPersistor,
         array $meta = [],
-        array $data = []
+        array $data = [],
+        PoolInterface $pool = null
     ) {
-        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
-        // $this->collection = $collectionFactory->create();
+        $this->collection = $blockCollectionFactory->create();
+        $this->dataPersistor = $dataPersistor;
+        parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data, $pool);
     }
 
     /**
-     * {@inheritdoc}
+     * Get data
+     *
+     * @return array
      */
     public function getData()
     {
-        return [];
-        // $result = [];
-    }
-    public function addFilter(\Magento\Framework\Api\Filter $filter)
-    {
-        return null;
+        if (isset($this->loadedData)) {
+            return $this->loadedData;
+        }
+        $items = $this->collection->getItems();
+        /** @var \Magento\Cms\Model\Block $block */
+        foreach ($items as $block) {
+            $this->loadedData[$block->getId()] = $block->getData();
+        }
+
+        $data = $this->dataPersistor->get('cms_block');
+        if (!empty($data)) {
+            $block = $this->collection->getNewEmptyItem();
+            $block->setData($data);
+            $this->loadedData[$block->getId()] = $block->getData();
+            $this->dataPersistor->clear('cms_block');
+        }
+
+        return $this->loadedData;
     }
 }
