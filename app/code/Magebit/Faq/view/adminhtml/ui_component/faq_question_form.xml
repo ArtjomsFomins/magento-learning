@@ -29,6 +29,7 @@
         <buttons>
             <button name="back" class="Magebit\Faq\Ui\Component\Form\Button\Back"/>
             <button name="save" class="Magebit\Faq\Ui\Component\Form\Button\Save"/>
+            <button name="delete" class="Magebit\Faq\Ui\Component\Form\Button\Delete"/>
         </buttons>
         <namespace>faq_question_form</namespace>
         <ajaxSave>true</ajaxSave>

@@ -11,7 +11,7 @@
 
 declare(strict_types = 1);
 
-namespace Magebit\Faq\Controller\Adminhtml\Index;
+namespace Magebit\Faq\Controller\Index;
 
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\ResultFactory;

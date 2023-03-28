@@ -1,23 +1,18 @@
 <?php
-
 /**
- * Magebit_Faq
  *
- * @category     Magebit
- * @package      Magebit_Faq
- * @author       Artjoms Fomins <info@magebit.com>
- * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
  */
-
-declare(strict_types = 1);
-
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
-use Magento\Cms\Model\ResourceModel\Page\CollectionFactory;
+use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
+use Magebit\Faq\Api\QuestionRepositoryInterface;
+use Magento\Framework\App\ObjectManager;
 
 /**
  * Class MassDelete
@@ -29,7 +24,7 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magento_Customer::delete';
+    const ADMIN_RESOURCE = 'Magento_Cms::block';
 
     /**
      * @var Filter
@@ -41,15 +36,24 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
      */
     protected $collectionFactory;
 
+
+    /**
+     * @var QuestionRepositoryInterface
+     */
+    private $questionRepository;
+
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
+     * @param QuestionRepositoryInterface|null $questionRepository
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, questionRepositoryInterface $questionRepository = null)
     {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
+        $this->questionRepository = $questionRepository ?:
+            ObjectManager::getInstance()->create(QuestionRepositoryInterface::class);
         parent::__construct($context);
     }
 
@@ -64,15 +68,18 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();
 
-        foreach ($collection as $page) {
-            $page->delete();
+        /** @var \Magebit\Faq\Model\Question $block */
+        foreach ($collection as $block) {
+            $this->questionRepository->delete($block);
+            // $block->delete();
+            // $deleteItem = $this->_objectManager->get(\Magebit\Faq\Model\Question::class)->load($block->getId());
+            // $deleteItem->delete();
         }
 
         $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));
 
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-
         return $resultRedirect->setPath('*/*/');
     }
 }

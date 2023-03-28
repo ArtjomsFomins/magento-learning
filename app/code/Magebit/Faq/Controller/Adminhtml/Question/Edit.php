@@ -65,8 +65,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
             $id ? __('Edit Block') : __('New Block'),
             $id ? __('Edit Block') : __('New Block')
         );
-        $resultPage->getConfig()->getTitle()->prepend(__('Blocks'));
-        $resultPage->getConfig()->getTitle()->prepend($model->getId() ? $model->getTitle() : __('Frequently Asked Questions'));
+        $resultPage->getConfig()->getTitle()->prepend(__('Frequently Asked Questions'));
         return $resultPage;
     }
 

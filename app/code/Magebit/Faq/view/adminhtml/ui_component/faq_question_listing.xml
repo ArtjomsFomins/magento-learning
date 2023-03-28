@@ -80,7 +80,7 @@
             <settings>
                 <callback>
                     <target>editSelected</target>
-                    <provider>faq_question_listing.faq_question_listing.cms_page_columns_editor</provider>
+                    <provider>faq_question_listing.faq_question_listing.faq_question_listing_columns_editor</provider>
                 </callback>
                 <type>edit</type>
                 <label translate="true">Edit</label>

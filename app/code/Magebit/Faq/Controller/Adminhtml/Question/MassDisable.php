@@ -18,7 +18,7 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
-use Magento\Cms\Model\ResourceModel\Page\CollectionFactory;
+use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 
 /**
  * Class MassDisable
@@ -65,8 +65,11 @@ class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionI
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
         foreach ($collection as $item) {
-            $item->setIsActive(false);
-            $item->save();
+            $disabledItem = $this->_objectManager->get(\Magebit\Faq\Model\Question::class)->load($item->getId());
+            $disabledItem->setStatus(0);
+            $disabledItem->save();
+            // $item->setIsActive(false);
+            // $item->save();
         }
 
         $this->messageManager->addSuccessMessage(

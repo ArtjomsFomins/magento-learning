@@ -22,6 +22,7 @@
     <virtualType name="Magebit\Faq\Model\ResourceModel\Question\Collection"
         type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult"
         >
+
         <arguments>
             <argument name="mainTable" xsi:type="string">faq</argument>
             <argument name="resourceModel" xsi:type="string">Magebit\Faq\Model\ResourceModel\Question</argument>
