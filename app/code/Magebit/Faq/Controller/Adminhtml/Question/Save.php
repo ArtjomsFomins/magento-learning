@@ -15,7 +15,7 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
 
 /**
- * Save CMS block action.
+ * Save question action.
  */
 class Save extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
@@ -121,12 +121,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
         if ($redirect ==='continue') {
             $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
         } elseif ($redirect === 'close') {
-            try {
-                //code...
-                $resultRedirect->setPath('*/*/edit');
-            } catch (\Throwable $th) {
-                dd($th);
-            }
+            $resultRedirect->setPath('*/*/index');
         } elseif ($redirect === 'duplicate') {
             $duplicateModel = $this->blockFactory->create(['data' => $data]);
             $duplicateModel->setId(null);

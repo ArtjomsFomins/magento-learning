@@ -68,10 +68,7 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
         foreach ($collection as $item) {
-            $item->setStatus(1);
-            $item->save();
-            // $item->setIsActive(false);
-            // $item->save();
+            $this->questionManagemnt->enableQuestion((int)$item->getId());
         }
 
         $this->messageManager->addSuccessMessage(

@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Magebit_Faq
  *
@@ -17,7 +16,6 @@ namespace Magebit\Faq\Api\Data;
 /**
  * Question interface.
  * @api
- * @since 100.0.2
  */
 interface QuestionInterface
 {

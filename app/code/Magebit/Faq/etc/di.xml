@@ -11,7 +11,7 @@
     >
     <preference for="Magebit\Faq\Api\QuestionRepositoryInterface" type="Magebit\Faq\Model\QuestionRepository" />
     <preference for="Magebit\Faq\Api\Data\QuestionInterface" type="Magebit\Faq\Model\Question"/>
-      <preference for="Magebit\Faq\Api\Data\QuestionManagementInterface" type="Magebit\Faq\Model\QuestionManagement" />
+    <preference for="Magebit\Faq\Api\Data\QuestionManagementInterface" type="Magebit\Faq\Model\QuestionManagement" />
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
@@ -28,4 +28,5 @@
             <argument name="resourceModel" xsi:type="string">Magebit\Faq\Model\ResourceModel\Question</argument>
         </arguments>
     </virtualType>
+
 </config>

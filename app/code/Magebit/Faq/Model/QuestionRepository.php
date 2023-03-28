@@ -49,7 +49,7 @@ class QuestionRepository implements QuestionRepositoryInterface
     protected $questionCollectionFactory;
 
     /**
-     * @var Data\QuestionSearchResultsInterfaceFactory
+     * @var Data\QuestionSearchResultInterfaceFactory
      */
     protected $searchResultsFactory;
 
@@ -88,7 +88,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @param QuestionFactory $questionFactory
      * @param Data\QuestionInterfaceFactory $dataQuestionFactory
      * @param QuestionCollectionFactory $questionCollectionFactory
-     * @param Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory
+     * @param Data\QuestionSearchResultInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param DataObjectProcessor $dataObjectProcessor
      * @param StoreManagerInterface $storeManager
@@ -181,7 +181,7 @@ class QuestionRepository implements QuestionRepositoryInterface
         $question = $this->questionFactory->create();
         $this->resource->load($question, $questionId);
         if (!$question->getId()) {
-            throw new NoSuchEntityException(__('The CMS question with the "%1" ID doesn\'t exist.', $questionId));
+            throw new NoSuchEntityException(__('The question with the "%1" ID doesn\'t exist.', $questionId));
         }
         return $question;
     }
@@ -196,12 +196,10 @@ class QuestionRepository implements QuestionRepositoryInterface
      */
     public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
     {
-        /** @var \Magebit\Faq\Model\ResourceModel\Question\Collection $collection */
         $collection = $this->questionCollectionFactory->create();
 
         $this->collectionProcessor->process($criteria, $collection);
 
-        /** @var Data\QuestionSearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());

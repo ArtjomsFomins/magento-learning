@@ -1,7 +1,18 @@
 <?php
-/** @var \Magebit\Faq\Block\Template $block */
-?>
 
-<div class="template">
-    <h1>hello</h1>
-</div>
+/**
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+ */
+
+use Magebit\Faq\Block\QuestionList;
+
+/** @var QuestionList $block
+ */
+?>
+<div>text</div>
+<h1><?= $block->getQuestions() ?></h1>

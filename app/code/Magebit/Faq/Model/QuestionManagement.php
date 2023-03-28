@@ -14,6 +14,8 @@ use Magebit\Faq\Api\CustomerManagementInterface;
 use Magebit\Faq\Api\QuestionManagementInterface;
 use Magebit\Faq\Model\ResourceModel\Customer\CollectionFactory;
 
+use Magebit\Faq\Model\QuestionRepository;
+
 
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magebit\Faq\Api\Data;
@@ -80,6 +82,8 @@ class QuestionManagement implements QuestionManagementInterface
      * @var HydratorInterface
      */
     private $hydrator;
+
+    protected QuestionRepository $questionRepository;
     /**
      * @param ResourceQuestion $resource
      * @param QuestionFactory $questionFactory
@@ -104,7 +108,8 @@ class QuestionManagement implements QuestionManagementInterface
         DataObjectProcessor $dataObjectProcessor,
         StoreManagerInterface $storeManager,
         CollectionProcessorInterface $collectionProcessor = null,
-        ?HydratorInterface $hydrator = null
+        ?HydratorInterface $hydrator = null,
+        QuestionRepository $questionRepository
     ) {
         $this->resource = $resource;
         $this->questionFactory = $questionFactory;
@@ -116,18 +121,27 @@ class QuestionManagement implements QuestionManagementInterface
         $this->storeManager = $storeManager;
         $this->collectionProcessor = $collectionProcessor;
         $this->hydrator = $hydrator ?? ObjectManager::getInstance()->get(HydratorInterface::class);
+        $this->questionRepository = $questionRepository;
     }
 
-    public function enableQuestion(int $questionId)
+    public function enableQuestion(int $questionId): Question
     {
-        $question = $this->getById($questionId);
-        $question->setStatus(1);
+        $question = $this->questionRepository->getById($questionId);
+        if ((int)$question->getStatus() === 0) {
+            $question->setStatus(1);
+            $this->questionRepository->save($question);
+        }
+        return $question;
     }
 
-    public function disableQuestion(int $questionId)
+    public function disableQuestion(int $questionId): Question
     {
-        $question = $this->getById($questionId);
-        $question->setStatus(0);
+        $question = $this->questionRepository->getById($questionId);
+        if ((int)$question->getStatus() === 1) {
+            $question->setStatus(0);
+            $this->questionRepository->save($question);
+        }
+        return $question;
     }
 
     /**

@@ -21,7 +21,7 @@ use Magento\Framework\View\Result\Page;
 /**
  * @inheritDoc
  */
-class Index extends \Magento\Backend\App\Action
+class Index implements \Magento\Framework\App\ActionInterface
 {
     private PageFactory $pageFactory;
 
@@ -31,7 +31,7 @@ class Index extends \Magento\Backend\App\Action
     ) {
         $this->pageFactory = $rawFactory;
 
-        parent::__construct($context);
+        // parent::__construct($context);
     }
 
     /**

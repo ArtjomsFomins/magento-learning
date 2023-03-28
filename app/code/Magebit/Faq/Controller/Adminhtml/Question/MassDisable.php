@@ -14,6 +14,7 @@ declare(strict_types = 1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
+use Magebit\Faq\Model\QuestionManagement;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
@@ -42,15 +43,17 @@ class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionI
      */
     protected $collectionFactory;
 
+    protected QuestionManagement $questionManagement;
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, QuestionManagement $questionManagement)
     {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
+        $this->questionManagement = $questionManagement;
         parent::__construct($context);
     }
 
@@ -65,11 +68,7 @@ class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionI
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
         foreach ($collection as $item) {
-            // $disabledItem = $this->_objectManager->get(\Magebit\Faq\Model\Question::class)->load($item->getId());
-            // $disabledItem->setStatus(0);
-            // $disabledItem->save();
-            $item->setStatus(0);
-            $item->save();
+            $this->questionManagement->disableQuestion((int)$item->getId());
         }
 
         $this->messageManager->addSuccessMessage(
