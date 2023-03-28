@@ -52,8 +52,7 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
     {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
-        $this->questionRepository = $questionRepository ?:
-            ObjectManager::getInstance()->create(QuestionRepositoryInterface::class);
+        $this->questionRepository = $questionRepository;
         parent::__construct($context);
     }
 
@@ -68,12 +67,8 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();
 
-        /** @var \Magebit\Faq\Model\Question $block */
         foreach ($collection as $block) {
-            $this->questionRepository->delete($block);
-            // $block->delete();
-            // $deleteItem = $this->_objectManager->get(\Magebit\Faq\Model\Question::class)->load($block->getId());
-            // $deleteItem->delete();
+            $block->delete();
         }
 
         $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));

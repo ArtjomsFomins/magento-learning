@@ -10,16 +10,16 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd"
     >
     <preference for="Magebit\Faq\Api\QuestionRepositoryInterface" type="Magebit\Faq\Model\QuestionRepository" />
-    <preference for="Magebit\Faq\Api\Data\QuestionInterface" type="Magebit\Faq\Model\Question" />
+    <preference for="Magebit\Faq\Api\Data\QuestionInterface" type="Magebit\Faq\Model\Question"/>
+      <preference for="Magebit\Faq\Api\Data\QuestionManagementInterface" type="Magebit\Faq\Model\QuestionManagement" />
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="faq_question_listing_data_source"
-                    xsi:type="string">Magebit\Faq\Model\ResourceModel\Question\Collection</item>
+                <item name="faq_question_listing_data_source" xsi:type="string">Magebit\Faq\Model\ResourceModel\Question\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
-    <virtualType name="Magebit\Faq\Model\ResourceModel\Question\Collection"
+    <virtualType name="Magebit\Faq\Model\ResourceModel\Question\Grid\Collection"
         type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult"
         >
 

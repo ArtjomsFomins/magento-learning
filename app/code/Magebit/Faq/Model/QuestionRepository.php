@@ -117,7 +117,7 @@ class QuestionRepository implements QuestionRepositoryInterface
         $this->dataQuestionFactory = $dataQuestionFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
         $this->storeManager = $storeManager;
-        $this->collectionProcessor = $collectionProcessor ?: $this->getCollectionProcessor();
+        $this->collectionProcessor = $collectionProcessor;
         $this->hydrator = $hydrator ?? ObjectManager::getInstance()->get(HydratorInterface::class);
     }
 
@@ -127,21 +127,22 @@ class QuestionRepository implements QuestionRepositoryInterface
      */
     public function get($categoryId, $storeId = null)
     {
-        // $cacheKey = $storeId ?? 'all';
-        // if (!isset($this->instances[$categoryId][$cacheKey])) {
-        //     /** @var Category $category */
-        //     $category = $this->categoryFactory->create();
-        //     if (null !== $storeId) {
-        //         $category->setStoreId($storeId);
-        //     }
-        //     $category->load($categoryId);
-        //     if (!$category->getId()) {
-        //         throw NoSuchEntityException::singleField('id', $categoryId);
-        //     }
-        //     $this->instances[$categoryId][$cacheKey] = $category;
-        // }
-        // return $this->instances[$categoryId][$cacheKey];
     }
+
+    // public function get($categoryId, $storeId = null)
+    // {
+    //     $cacheKey = $storeId ?? 'all';
+    //     /** @var Category $category */
+    //     $category = $this->questionFactory->create();
+    //     if (null !== $storeId) {
+    //         $category->setStoreId($storeId);
+    //     }
+    //     $category->load($categoryId);
+    //     if (!$category->getId()) {
+    //         throw NoSuchEntityException::singleField('id', $categoryId);
+    //     }
+    //     return $category;
+    // }
 
     /**
      * Save question data
@@ -249,7 +250,7 @@ class QuestionRepository implements QuestionRepositoryInterface
         //phpcs:disable Magento2.PHP.LiteralNamespaces
         if (!$this->collectionProcessor) {
             $this->collectionProcessor = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                'Magento\Cms\Model\Api\SearchCriteria\BlockCollectionProcessor'
+                'Magebit\Faq\Model\Api\SearchCriteria\BlockCollectionProcessor'
             );
         }
         return $this->collectionProcessor;

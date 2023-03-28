@@ -19,6 +19,8 @@ use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 
+use Magebit\Faq\Model\QuestionManagement;
+
 /**
  * Class MassEnable
  */
@@ -41,15 +43,17 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
      */
     protected $collectionFactory;
 
+    protected QuestionManagement $questionManagemnt;
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, QuestionManagement $questionManagemnt)
     {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
+        $this->questionManagemnt = $questionManagemnt;
         parent::__construct($context);
     }
 
@@ -64,9 +68,8 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
         foreach ($collection as $item) {
-            $disabledItem = $this->_objectManager->get(\Magebit\Faq\Model\Question::class)->load($item->getId());
-            $disabledItem->setStatus(1);
-            $disabledItem->save();
+            $item->setStatus(1);
+            $item->save();
             // $item->setIsActive(false);
             // $item->save();
         }

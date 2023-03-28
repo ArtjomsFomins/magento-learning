@@ -8,7 +8,6 @@
 -->
 <form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
-    component="Magento_Customer/js/form/components/form"
     >
     <argument name="data" xsi:type="array">
         <item name="js_config" xsi:type="array">
@@ -16,14 +15,6 @@
         </item>
         <item name="label" xsi:type="string" translate="true">General</item>
         <item name="template" xsi:type="string">templates/form/collapsible</item>
-        <!-- <item name="buttons" xsi:type="array">
-            <item name="save" xsi:type="array">
-                <item name="name" xsi:type="string">save</item>
-                <item name="label" xsi:type="string" translate="true">Save</item>
-                <item name="class" xsi:type="string">primary</item>
-                <item name="url" xsi:type="string">*/*/save</item>
-            </item>
-        </item> -->
     </argument>
     <settings>
         <buttons>
@@ -32,8 +23,6 @@
             <button name="delete" class="Magebit\Faq\Ui\Component\Form\Button\Delete"/>
         </buttons>
         <namespace>faq_question_form</namespace>
-        <ajaxSave>true</ajaxSave>
-        <ajaxSaveType>simple</ajaxSaveType>
         <dataScope>data</dataScope>
         <deps>
             <dep>faq_question_form.faq_question_form_data_source</dep>
