@@ -36,7 +36,7 @@ interface QuestionInterface
      *
      * @return string
      */
-    public function getId(): string;
+    public function getId(): ?string;
 
     /**
      * Get question title

@@ -107,7 +107,7 @@ class Question extends AbstractModel implements QuestionInterface
      *
      * @return string
      */
-    public function getId(): string
+    public function getId(): ?string
     {
         return $this->getData(self::ID);
     }

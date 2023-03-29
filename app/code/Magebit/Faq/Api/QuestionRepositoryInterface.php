@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Magebit\Faq\Api;
 
 use Magebit\Faq\Api\Data\QuestionInterface;
-use Magebit\Faq\Api\Data\QuestionSearchResultsInterface;
 use Magento\Framework\Api\SearchCriteriaInterface;
+use Magebit\Faq\Model\QuestionSearchResults;
 
 /**
  * Question CRUD interface.
@@ -45,10 +45,10 @@ interface QuestionRepositoryInterface
      * Retrieve questions matching the specified criteria.
      *
      * @param SearchCriteriaInterface $searchCriteria
-     * @return \Magebit\Faq\Api\Data\QuestionSearchResultsInterface
+     * @return QuestionSearchResults
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getList(SearchCriteriaInterface $searchCriteria): QuestionSearchResultsInterface;
+    public function getList(SearchCriteriaInterface $searchCriteria): QuestionSearchResults;
 
     /**
      * Delete question.

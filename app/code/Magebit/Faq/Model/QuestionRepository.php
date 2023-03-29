@@ -27,7 +27,7 @@ use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\EntityManager\HydratorInterface;
 use Magebit\Faq\Api\Data\QuestionInterface;
-use Magebit\Faq\Api\Data\QuestionSearchResultsInterface;
+use Magebit\Faq\Model\QuestionSearchResults;
 
 /**
  * Default Question repo impl.
@@ -151,9 +151,9 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @param \Magento\Framework\Api\SearchCriteriaInterface $criteria
-     * @return QuestionSearchResultsInterface
+     * @return QuestionSearchResults
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria): QuestionSearchResultsInterface
+    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria): QuestionSearchResults
     {
         $collection = $this->questionCollectionFactory->create();
 
