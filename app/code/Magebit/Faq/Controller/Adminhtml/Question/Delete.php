@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
+use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 
 /**
@@ -20,14 +21,16 @@ use Magento\Framework\App\Action\HttpPostActionInterface;
  */
 class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
+    protected QuestionRepositoryInterface $questionRepository;
     /**
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
+     * @param QuestionRepositoryInterface $questionRepository
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry
+        QuestionRepositoryInterface $questionRepository
     ) {
+        $this->questionRepository = $questionRepository;
         parent::__construct($context);
     }
 
@@ -44,11 +47,7 @@ class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterf
         $id = $this->getRequest()->getParam('id');
         if ($id) {
             try {
-                // init model and delete
-                $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
-                $model->load($id);
-                $model->delete();
-                // display success message
+                $this->questionRepository->deletebyId($id);
                 $this->messageManager->addSuccessMessage(__('You deleted the question.'));
                 // go to grid
                 return $resultRedirect->setPath('*/*/');

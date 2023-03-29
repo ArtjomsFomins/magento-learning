@@ -22,15 +22,8 @@ use Magento\Ui\DataProvider\Modifier\PoolInterface;
  */
 class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 {
-    /**
-     * @var \Magebit\Faq\Model\ResourceModel\Question\Collection
-     */
-    protected $collection;
     protected DataPersistorInterface $dataPersistor;
-    /**
-     * @var array
-     */
-    protected $loadedData;
+    protected array $loadedData = [];
 
     /**
      * Constructor
@@ -75,12 +68,12 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
             $this->loadedData[$question->getId()] = $question->getData();
         }
 
-        $data = $this->dataPersistor->get('cms_block');
+        $data = $this->dataPersistor->get('question_block');
         if (!empty($data)) {
             $question = $this->collection->getNewEmptyItem();
             $question->setData($data);
             $this->loadedData[$question->getId()] = $question->getData();
-            $this->dataPersistor->clear('cms_block');
+            $this->dataPersistor->clear('question_block');
         }
 
         return $this->loadedData;

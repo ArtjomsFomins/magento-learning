@@ -13,22 +13,16 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
-use Magento\Backend\App\Action\Context;
-use Magebit\Faq\Api\QuestionRepositoryInterface as QuestionRepository;
-use Magento\Framework\Controller\Result\JsonFactory;
 use Magebit\Faq\Api\Data\QuestionInterface;
+use Magebit\Faq\Api\QuestionRepositoryInterface as QuestionRepository;
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\Controller\Result\JsonFactory;
 
 /**
  * Class Controller that responsible for inline editing
  */
 class InlineEdit extends \Magento\Backend\App\Action
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    public const ADMIN_RESOURCE = 'Magento_Cms::Question';
     protected \Magebit\Faq\Api\QuestionRepositoryInterface $questionRepository;
     protected \Magento\Framework\Controller\Result\JsonFactory $jsonFactory;
 
@@ -67,7 +61,7 @@ class InlineEdit extends \Magento\Backend\App\Action
                 $error = true;
             } else {
                 foreach (array_keys($postItems) as $questionId) {
-                    $question = $this->questionRepository->getById($questionId);
+                    $question = $this->questionRepository->get($questionId);
                     try {
                         $question->setData(array_merge($question->getData(), $postItems[$questionId]));
                         $this->questionRepository->save($question);
@@ -95,7 +89,7 @@ class InlineEdit extends \Magento\Backend\App\Action
      * @param string $errorText
      * @return string
      */
-    protected function getErrorWithquestionId(QuestionInterface $question, $errorText)
+    protected function getErrorWithquestionId(QuestionInterface $question, $errorText): string
     {
         return '[question ID: ' . $question->getId() . '] ' . $errorText;
     }

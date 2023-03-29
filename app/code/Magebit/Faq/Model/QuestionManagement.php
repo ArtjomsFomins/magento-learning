@@ -11,77 +11,27 @@
 
 namespace Magebit\Faq\Model;
 
-use Magebit\Faq\Api\CustomerManagementInterface;
 use Magebit\Faq\Api\QuestionManagementInterface;
-use Magebit\Faq\Model\ResourceModel\Customer\CollectionFactory;
-use Magebit\Faq\Model\QuestionRepository;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magebit\Faq\Api\Data;
 use Magebit\Faq\Model\ResourceModel\Question as ResourceQuestion;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory as QuestionCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
-use Magento\Framework\App\ObjectManager;
-use Magento\Framework\Exception\CouldNotDeleteException;
-use Magento\Framework\Exception\CouldNotSaveException;
-use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
-use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\EntityManager\HydratorInterface;
 
 class QuestionManagement implements QuestionManagementInterface
 {
-    /**
-     * @var ResourceQuestion
-     */
-    protected $resource;
+    protected ResourceQuestion $resource;
+    protected QuestionFactory $questionFactory;
+    protected QuestionCollectionFactory $questionCollectionFactory;
+    protected Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory;
+    protected DataObjectHelper $dataObjectHelper;
+    protected DataObjectProcessor $dataObjectProcessor;
+    protected \Magebit\Faq\Api\Data\QuestionInterfaceFactory $dataQuestionFactory;
+    protected CollectionProcessorInterface $collectionProcessor;
+    protected QuestionRepositoryInterface $questionRepository;
 
-    /**
-     * @var QuestionFactory
-     */
-    protected $questionFactory;
-
-    /**
-     * @var QuestionCollectionFactory
-     */
-    protected $questionCollectionFactory;
-
-    /**
-     * @var Data\QuestionSearchResultsInterfaceFactory
-     */
-    protected $searchResultsFactory;
-
-    /**
-     * @var DataObjectHelper
-     */
-    protected $dataObjectHelper;
-
-    /**
-     * @var DataObjectProcessor
-     */
-    protected $dataObjectProcessor;
-
-    /**
-     * @var \Magebit\Faq\Api\Data\QuestionInterfaceFactory
-     */
-    protected $dataQuestionFactory;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private $collectionProcessor;
-
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
-
-    protected QuestionRepository $questionRepository;
     /**
      * @param ResourceQuestion $resource
      * @param QuestionFactory $questionFactory
@@ -90,10 +40,8 @@ class QuestionManagement implements QuestionManagementInterface
      * @param Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param DataObjectProcessor $dataObjectProcessor
-     * @param StoreManagerInterface $storeManager
      * @param CollectionProcessorInterface $collectionProcessor
-     * @param HydratorInterface|null $hydrator
-     * @param QuestionRepository $questionRepository
+     * @param QuestionRepositoryInterface $questionRepository
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -105,10 +53,8 @@ class QuestionManagement implements QuestionManagementInterface
         Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
-        StoreManagerInterface $storeManager,
         CollectionProcessorInterface $collectionProcessor = null,
-        ?HydratorInterface $hydrator = null,
-        QuestionRepository $questionRepository
+        QuestionRepositoryInterface $questionRepository
     ) {
         $this->resource = $resource;
         $this->questionFactory = $questionFactory;
@@ -117,9 +63,7 @@ class QuestionManagement implements QuestionManagementInterface
         $this->dataObjectHelper = $dataObjectHelper;
         $this->dataQuestionFactory = $dataQuestionFactory;
         $this->dataObjectProcessor = $dataObjectProcessor;
-        $this->storeManager = $storeManager;
         $this->collectionProcessor = $collectionProcessor;
-        $this->hydrator = $hydrator ?? ObjectManager::getInstance()->get(HydratorInterface::class);
         $this->questionRepository = $questionRepository;
     }
 
@@ -131,7 +75,7 @@ class QuestionManagement implements QuestionManagementInterface
      */
     public function enableQuestion(int $questionId): Question
     {
-        $question = $this->questionRepository->getById($questionId);
+        $question = $this->questionRepository->get($questionId);
         if ((int)$question->getStatus() === 0) {
             $question->setStatus(1);
             $this->questionRepository->save($question);
@@ -147,44 +91,11 @@ class QuestionManagement implements QuestionManagementInterface
      */
     public function disableQuestion(int $questionId): Question
     {
-        $question = $this->questionRepository->getById($questionId);
+        $question = $this->questionRepository->get($questionId);
         if ((int)$question->getStatus() === 1) {
             $question->setStatus(0);
             $this->questionRepository->save($question);
         }
         return $question;
-    }
-
-    /**
-     * Load question data by given question Identity
-     *
-     * @param string $questionId
-     * @return Question
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getById($questionId)
-    {
-        $question = $this->questionFactory->create();
-        $this->resource->load($question, $questionId);
-        if (!$question->getId()) {
-            throw new NoSuchEntityException(__('The CMS question with the "%1" ID doesn\'t exist.', $questionId));
-        }
-        return $question;
-    }
-
-    /**
-     * Retrieve collection processor
-     *
-     * @return CollectionProcessorInterface
-     */
-    private function getCollectionProcessor()
-    {
-        //phpcs:disable Magento2.PHP.LiteralNamespaces
-        if (!$this->collectionProcessor) {
-            $this->collectionProcessor = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                'Magebit\Faq\Model\Api\SearchCriteria\QuestionCollectionProcessor'
-            );
-        }
-        return $this->collectionProcessor;
     }
 }

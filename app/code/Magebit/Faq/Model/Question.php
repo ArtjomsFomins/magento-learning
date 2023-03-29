@@ -14,17 +14,11 @@ declare(strict_types=1);
 namespace Magebit\Faq\Model;
 
 use Magebit\Faq\Api\Data\QuestionInterface;
-use Magento\Framework\App\ObjectManager;
-use Magento\Framework\DataObject\IdentityInterface;
-use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\Validation\ValidationException;
-use Magento\Framework\Validator\HTML\WYSIWYGValidatorInterface;
-use Magento\Framework\Model\Context;
-use Magento\Framework\Registry;
-use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Data\Collection\AbstractDb;
-use Magento\Backend\Model\Validator\UrlKey\CompositeUrlKey;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\AbstractModel;
+use Magento\Framework\Model\Context;
+use Magento\Framework\Model\ResourceModel\AbstractResource;
+use Magento\Framework\Registry;
 
 /**
  * Question model
@@ -46,26 +40,9 @@ class Question extends AbstractModel implements QuestionInterface
     public const STATUS_DISABLED = 0;
 
     /**
-     * @var string
-     */
-    protected $_cacheTag = self::CACHE_TAG;
-
-    /**
      * Prefix of model events names
-     *
-     * @var string
      */
     protected $_eventPrefix = 'question_block';
-
-    /**
-     * @var WYSIWYGValidatorInterface
-     */
-    private $wysiwygValidator;
-
-    /**
-     * @var CompositeUrlKey
-     */
-    private $compositeUrlValidator;
 
     /**
      * @param Context $context
@@ -73,23 +50,15 @@ class Question extends AbstractModel implements QuestionInterface
      * @param AbstractResource|null $resource
      * @param AbstractDb|null $resourceCollection
      * @param array $data
-     * @param WYSIWYGValidatorInterface|null $wysiwygValidator
-     * @param CompositeUrlKey|null $compositeUrlValidator
      */
     public function __construct(
         Context $context,
         Registry $registry,
         AbstractResource $resource = null,
         AbstractDb $resourceCollection = null,
-        array $data = [],
-        ?WYSIWYGValidatorInterface $wysiwygValidator = null,
-        CompositeUrlKey $compositeUrlValidator = null
+        array $data = []
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
-        $this->wysiwygValidator = $wysiwygValidator
-            ?? ObjectManager::getInstance()->get(WYSIWYGValidatorInterface::class);
-        $this->compositeUrlValidator = $compositeUrlValidator
-            ?? ObjectManager::getInstance()->get(CompositeUrlKey::class);
     }
 
     /**
@@ -204,25 +173,5 @@ class Question extends AbstractModel implements QuestionInterface
     public function setPosition($position): QuestionInterface
     {
         return $this->setData(self::POSITION, $position);
-    }
-
-    /**
-     * Prepare question's statuses.
-     *
-     * @return array
-     */
-    public function getAvailableStatuses()
-    {
-        return [self::STATUS_ENABLED => __('Enabled'), self::STATUS_DISABLED => __('Disabled')];
-    }
-
-    /**
-     * Checks product can be duplicated
-     *
-     * @return boolean
-     */
-    public function isDuplicable()
-    {
-        return false;
     }
 }

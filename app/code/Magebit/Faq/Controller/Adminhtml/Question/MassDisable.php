@@ -14,35 +14,21 @@ declare(strict_types=1);
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magebit\Faq\Api\QuestionManagementInterface;
+use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
+use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
-use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
-use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 
 /**
  * Class Controller that responsible for massDisable
  */
 class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
-    /**
-     * Authorization level of a basic admin session
-     *
-     * @see _isAllowed()
-     */
-    public const ADMIN_RESOURCE = 'Magento_Cms::save';
-
-    /**
-     * @var Filter
-     */
-    protected $filter;
-
-    /**
-     * @var CollectionFactory
-     */
-    protected $collectionFactory;
-
+    protected Filter $filter;
+    protected CollectionFactory $collectionFactory;
     protected QuestionManagementInterface $questionManagement;
+
     /**
      * @param Context $context
      * @param Filter $filter

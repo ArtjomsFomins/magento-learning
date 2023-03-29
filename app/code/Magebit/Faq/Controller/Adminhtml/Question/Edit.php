@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
+use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 
 /**
@@ -21,18 +22,19 @@ use Magento\Framework\App\Action\HttpGetActionInterface;
 class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
     protected \Magento\Framework\View\Result\PageFactory $resultPageFactory;
-
+    protected QuestionRepositoryInterface $questionRepository;
     /**
      * @param \Magento\Backend\App\Action\Context $context
-     * @param \Magento\Framework\Registry $coreRegistry
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
+     * @param QuestionRepositoryInterface $questionRepository
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory
+        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
+        QuestionRepositoryInterface $questionRepository
     ) {
         $this->resultPageFactory = $resultPageFactory;
+        $this->questionRepository = $questionRepository;
         parent::__construct($context);
     }
 
@@ -43,13 +45,10 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
      */
     public function execute()
     {
-        // 1. Get ID and create model
         $id = $this->getRequest()->getParam('id');
-        $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
-
-        // 2. Initial checking
         if ($id) {
-            $model->load($id);
+            $model = $this->questionRepository->get($id);
+            // $model->load($id);
             if (!$model->getId()) {
                 $this->messageManager->addErrorMessage(__('This question no longer exists.'));
                 /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */

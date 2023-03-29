@@ -13,21 +13,20 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Model;
 
-use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magebit\Faq\Api\Data;
+use Magebit\Faq\Api\Data\QuestionInterface;
+use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magebit\Faq\Model\ResourceModel\Question as ResourceQuestion;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory as QuestionCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\App\ObjectManager;
+use Magento\Framework\EntityManager\HydratorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Store\Model\StoreManagerInterface;
-use Magento\Framework\EntityManager\HydratorInterface;
-use Magebit\Faq\Api\Data\QuestionInterface;
-use Magebit\Faq\Model\QuestionSearchResults;
 
 /**
  * Default Question repo impl.
@@ -87,15 +86,16 @@ class QuestionRepository implements QuestionRepositoryInterface
     /**
      * Get question
      *
-     * @param int $questionId
-     * @return void
+     * @param string $questionId
+     * @return Question
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function get($questionId): QuestionInterface
     {
         $question = $this->questionFactory->create();
-        $question->load($questionId);
+        $this->resource->load($question, $questionId);
         if (!$question->getId()) {
-            throw NoSuchEntityException::singleField('id', $questionId);
+            throw new NoSuchEntityException(__('The question with the "%1" ID doesn\'t exist.', $questionId));
         }
         return $question;
     }
@@ -115,7 +115,7 @@ class QuestionRepository implements QuestionRepositoryInterface
 
         if ($question->getId() && $question instanceof Question && !$question->getOrigData()) {
             $question = $this->hydrator->hydrate(
-                $this->getById($question->getId()),
+                $this->get($question->getId()),
                 $this->hydrator->extract($question)
             );
         }
@@ -124,23 +124,6 @@ class QuestionRepository implements QuestionRepositoryInterface
             $this->resource->save($question);
         } catch (\Exception $exception) {
             throw new CouldNotSaveException(__($exception->getMessage()));
-        }
-        return $question;
-    }
-
-    /**
-     * Load question data by given question Identity
-     *
-     * @param string $questionId
-     * @return Question
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     */
-    public function getById($questionId)
-    {
-        $question = $this->questionFactory->create();
-        $this->resource->load($question, $questionId);
-        if (!$question->getId()) {
-            throw new NoSuchEntityException(__('The question with the "%1" ID doesn\'t exist.', $questionId));
         }
         return $question;
     }
@@ -193,22 +176,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      */
     public function deleteById($questionId): bool
     {
-        return $this->delete($this->getById($questionId));
-    }
-
-    /**
-     * Retrieve collection processor
-     *
-     * @return CollectionProcessorInterface
-     */
-    private function getCollectionProcessor()
-    {
-        //phpcs:disable Magento2.PHP.LiteralNamespaces
-        if (!$this->collectionProcessor) {
-            $this->collectionProcessor = \Magento\Framework\App\ObjectManager::getInstance()->get(
-                'Magebit\Faq\Model\Api\SearchCriteria\BlockCollectionProcessor'
-            );
-        }
-        return $this->collectionProcessor;
+        $question = $this->get($questionId);
+        return $this->delete($question);
     }
 }

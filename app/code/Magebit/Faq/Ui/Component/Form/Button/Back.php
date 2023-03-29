@@ -22,15 +22,8 @@ use Magebit\Faq\Api\QuestionRepositoryInterface;
  */
 class Back implements ButtonProviderInterface
 {
-    /**
-     * @var Context
-     */
-    protected $context;
-
-    /**
-     * @var QuestionRepositoryInterface
-     */
-    protected $questionRepository;
+    protected Context $context;
+    protected QuestionRepositoryInterface $questionRepository;
 
     /**
      * @param Context $context

@@ -26,11 +26,9 @@ class Index implements \Magento\Framework\App\ActionInterface
     private PageFactory $pageFactory;
 
     /**
-     * @param Context $context
      * @param PageFactory $rawFactory
      */
     public function __construct(
-        Context $context,
         PageFactory $rawFactory
     ) {
         $this->pageFactory = $rawFactory;

@@ -22,19 +22,19 @@ interface QuestionInterface
     /**#@+
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
-    public const ID      = 'id';
-    public const IDENTIFIER    = 'identifier';
-    public const QUESTION         = 'question';
-    public const ANSWER       = 'answer';
+    public const ID = 'id';
+    public const IDENTIFIER = 'identifier';
+    public const QUESTION = 'question';
+    public const ANSWER = 'answer';
     public const STATUS = 'status';
-    public const POSITION   = 'position';
-    public const UPDATED_AT     = 'updated_at';
+    public const POSITION = 'position';
+    public const UPDATED_AT = 'updated_at';
     /**#@-*/
 
     /**
      * Get ID
      *
-     * @return string
+     * @return string|null
      */
     public function getId(): ?string;
 
@@ -79,7 +79,7 @@ interface QuestionInterface
      * @param string $title
      * @return QuestionInterface
      */
-    public function setQuestion($title): QuestionInterface;
+    public function setQuestion(string $title): QuestionInterface;
 
     /**
      * Set question's answer
@@ -87,7 +87,7 @@ interface QuestionInterface
      * @param string $answer
      * @return QuestionInterface
      */
-    public function setAnswer($answer): QuestionInterface;
+    public function setAnswer(string $answer): QuestionInterface;
 
     /**
      * Set question status
@@ -95,7 +95,7 @@ interface QuestionInterface
      * @param int $status
      * @return QuestionInterface
      */
-    public function setStatus($status): QuestionInterface;
+    public function setStatus(int $status): QuestionInterface;
 
     /**
      * Set question position
@@ -103,5 +103,5 @@ interface QuestionInterface
      * @param int $id
      * @return QuestionInterface
      */
-    public function setPosition($id): QuestionInterface;
+    public function setPosition(int $id): QuestionInterface;
 }

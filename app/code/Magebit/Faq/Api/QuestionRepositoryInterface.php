@@ -14,8 +14,8 @@ declare(strict_types=1);
 namespace Magebit\Faq\Api;
 
 use Magebit\Faq\Api\Data\QuestionInterface;
-use Magento\Framework\Api\SearchCriteriaInterface;
 use Magebit\Faq\Model\QuestionSearchResults;
+use Magento\Framework\Api\SearchCriteriaInterface;
 
 /**
  * Question CRUD interface.

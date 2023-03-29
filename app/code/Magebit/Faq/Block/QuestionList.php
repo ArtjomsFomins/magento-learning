@@ -13,12 +13,12 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Block;
 
-use Magento\Widget\Block\BlockInterface;
-use Magento\Framework\Api\SearchCriteriaBuilder;
-use Magento\Framework\View\Element\Template\Context;
 use Magebit\Faq\Model\QuestionRepository;
 use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
+use Magento\Framework\View\Element\Template\Context;
+use Magento\Widget\Block\BlockInterface;
 
 /**
  * Question content block
@@ -56,7 +56,7 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
     }
 
     /**
-     * Function for that returns all enabled questions
+     * Function that returns all enabled questions and sorting them by position ASC
      *
      * @return array
      */
@@ -68,14 +68,6 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
         $this->searchCriteriaBuilder->addFilters([$status])->setSortOrders([$sortOrder]);
 
         $searchCriteria = $this->searchCriteriaBuilder->create();
-        $searchQuestions =  $this->questionRepository->getList($searchCriteria);
-        $questions = [];
-        foreach ($searchQuestions->getItems() as $question) {
-            array_push($questions, [
-                'title' => $question->getQuestion(),
-                'answer' => $question->getAnswer(),
-            ]);
-        }
-        return $questions;
+        return  $this->questionRepository->getList($searchCriteria)->getItems();
     }
 }

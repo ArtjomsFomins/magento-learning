@@ -39,14 +39,14 @@ class Delete implements ButtonProviderInterface
     }
 
     /**
-     * Return CMS block ID
+     * Return question ID
      *
      * @return int|null
      */
-    public function getBlockId()
+    public function getQuestionId()
     {
         try {
-            return $this->questionRepository->getById(
+            return $this->questionRepository->get(
                 $this->context->getRequest()->getParam('id')
             )->getId();
         } catch (NoSuchEntityException $e) {
@@ -72,7 +72,7 @@ class Delete implements ButtonProviderInterface
     public function getButtonData()
     {
         $data = [];
-        if ($this->getBlockId()) {
+        if ($this->getQuestionId()) {
             $data = [
                 'label' => __('Delete Question'),
                 'class' => 'delete',
@@ -92,6 +92,6 @@ class Delete implements ButtonProviderInterface
      */
     public function getDeleteUrl()
     {
-        return $this->getUrl('faq/question/delete', ['id' => $this->getBlockId()]);
+        return $this->getUrl('faq/question/delete', ['id' => $this->getQuestionId()]);
     }
 }

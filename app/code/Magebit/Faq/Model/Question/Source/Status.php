@@ -13,14 +13,19 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Model\Question\Source;
 
+use Magebit\Faq\Model\Question;
+
 /**
  * Class converting int status to text
  */
 class Status implements \Magento\Framework\Data\OptionSourceInterface
 {
-    protected $emp;
+    protected Question $emp;
 
-    public function __construct(\Magebit\Faq\Model\Question $emp)
+    /**
+     * @param Question $emp
+     */
+    public function __construct(Question $emp)
     {
         $this->emp = $emp;
     }
