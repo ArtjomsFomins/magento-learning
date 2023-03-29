@@ -11,9 +11,9 @@
 
 namespace Magebit\Faq\Model;
 
+use Magebit\Faq\Api\Data;
 use Magebit\Faq\Api\QuestionManagementInterface;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
-use Magebit\Faq\Api\Data;
 use Magebit\Faq\Model\ResourceModel\Question as ResourceQuestion;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory as QuestionCollectionFactory;
 use Magento\Framework\Api\DataObjectHelper;
@@ -53,7 +53,7 @@ class QuestionManagement implements QuestionManagementInterface
         Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
-        CollectionProcessorInterface $collectionProcessor = null,
+        CollectionProcessorInterface $collectionProcessor,
         QuestionRepositoryInterface $questionRepository
     ) {
         $this->resource = $resource;

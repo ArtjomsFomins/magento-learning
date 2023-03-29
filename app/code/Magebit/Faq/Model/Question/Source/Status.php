@@ -35,7 +35,7 @@ class Status implements \Magento\Framework\Data\OptionSourceInterface
      *
      * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         $options[] = ['label' => '', 'value' => ''];
         $availableOptions = $this->getOptionArray();
@@ -53,7 +53,7 @@ class Status implements \Magento\Framework\Data\OptionSourceInterface
      *
      * @return array
      */
-    public static function getOptionArray()
+    public static function getOptionArray(): array
     {
         return [1 => __('Enabled'), 0 => __('Disabled')];
     }

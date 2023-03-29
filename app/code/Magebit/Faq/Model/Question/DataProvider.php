@@ -57,11 +57,8 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
      *
      * @return array
      */
-    public function getData()
+    public function getData(): array
     {
-        if (isset($this->loadedData)) {
-            return $this->loadedData;
-        }
         $items = $this->collection->getItems();
         /** @var \Magebit\Faq\Model\Question $question */
         foreach ($items as $question) {

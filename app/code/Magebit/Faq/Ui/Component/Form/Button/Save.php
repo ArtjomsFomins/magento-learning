@@ -23,7 +23,7 @@ class Save implements ButtonProviderInterface
      *
      * @return array
      */
-    public function getButtonData()
+    public function getButtonData(): array
     {
         return [
             'label' => __('Save'),
@@ -57,7 +57,7 @@ class Save implements ButtonProviderInterface
      *
      * @return array
      */
-    private function getOptions()
+    private function getOptions(): array
     {
         $options = [
             [

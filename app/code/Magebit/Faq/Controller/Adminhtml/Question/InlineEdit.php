@@ -17,6 +17,7 @@ use Magebit\Faq\Api\Data\QuestionInterface;
 use Magebit\Faq\Api\QuestionRepositoryInterface as QuestionRepository;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class Controller that responsible for inline editing
@@ -44,10 +45,10 @@ class InlineEdit extends \Magento\Backend\App\Action
     /**
      * Inline edit execution
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function execute()
+    public function execute():ResultInterface
     {
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
         $resultJson = $this->jsonFactory->create();

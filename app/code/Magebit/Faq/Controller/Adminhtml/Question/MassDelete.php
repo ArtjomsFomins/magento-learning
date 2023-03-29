@@ -15,6 +15,7 @@ namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Ui\Component\MassAction\Filter;
@@ -42,10 +43,10 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
     /**
      * Execute action
      *
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return Redirect
      * @throws \Magento\Framework\Exception\LocalizedException|\Exception
      */
-    public function execute()
+    public function execute(): Redirect
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();

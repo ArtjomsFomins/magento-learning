@@ -13,9 +13,9 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Ui\Component\Form\Button;
 
-use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Magento\Backend\Block\Widget\Context;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
+use Magento\Backend\Block\Widget\Context;
+use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
  * Class BackButton
@@ -42,7 +42,7 @@ class Back implements ButtonProviderInterface
      *
      * @return array
      */
-    public function getButtonData()
+    public function getButtonData(): array
     {
         return [
             'label' => __('Back'),
@@ -57,7 +57,7 @@ class Back implements ButtonProviderInterface
      *
      * @return string
      */
-    public function getBackUrl()
+    public function getBackUrl(): string
     {
         return $this->getUrl('*/*/');
     }
@@ -69,7 +69,7 @@ class Back implements ButtonProviderInterface
      * @param   array $params
      * @return  string
      */
-    public function getUrl($route = '', $params = [])
+    public function getUrl($route = '', $params = []): string
     {
         return $this->context->getUrlBuilder()->getUrl($route, $params);
     }

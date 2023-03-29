@@ -16,6 +16,7 @@ namespace Magebit\Faq\Controller\Adminhtml\Question;
 use Magebit\Faq\Api\QuestionManagementInterface;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 use Magento\Backend\App\Action\Context;
+use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Ui\Component\MassAction\Filter;
@@ -49,10 +50,10 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
     /**
      * Execute action
      *
-     * @return \Magento\Backend\Model\View\Result\Redirect
+     * @return \Redirect
      * @throws \Magento\Framework\Exception\LocalizedException|\Exception
      */
-    public function execute()
+    public function execute(): Redirect
     {
         $collection = $this->filter->getCollection($this->collectionFactory->create());
 
@@ -64,7 +65,7 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
             __('A total of %1 record(s) have been enabled.', $collection->getSize())
         );
 
-        /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
+        /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
         return $resultRedirect->setPath('*/question/');
     }

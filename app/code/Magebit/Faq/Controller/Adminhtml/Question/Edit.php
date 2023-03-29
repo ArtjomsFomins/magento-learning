@@ -14,7 +14,9 @@ declare(strict_types=1);
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magebit\Faq\Api\QuestionRepositoryInterface;
+use Magento\Backend\Model\View\Result\Page;
 use Magento\Framework\App\Action\HttpGetActionInterface;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Edit question action.
@@ -41,9 +43,9 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
     /**
      * Product edit form
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
         $id = $this->getRequest()->getParam('id');
         if ($id) {
@@ -58,7 +60,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         }
 
         // 5. Build edit form
-        /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
+        /** @var Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $this->initPage($resultPage)->addBreadcrumb(
             $id ? __('Edit Question') : __('New Question'),
@@ -71,12 +73,12 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
     /**
      * Init page
      *
-     * @param \Magento\Backend\Model\View\Result\Page $resultPage
-     * @return \Magento\Backend\Model\View\Result\Page
+     * @param Page $resultPage
+     * @return Page
      */
-    protected function initPage($resultPage)
+    protected function initPage($resultPage): Page
     {
-        $resultPage->setActiveMenu('Magento_Cms::cms_block')
+        $resultPage->setActiveMenu('Magebit_Faq::question_block')
             ->addBreadcrumb(__('CMS'), __('CMS'))
             ->addBreadcrumb(__('Static Question'), __('Static Question'));
         return $resultPage;

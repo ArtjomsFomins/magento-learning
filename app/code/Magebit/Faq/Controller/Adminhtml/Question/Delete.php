@@ -15,6 +15,7 @@ namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\Controller\ResultInterface;
 
 /**
  * Class that implement delete logic
@@ -37,9 +38,9 @@ class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterf
     /**
      * Delete action
      *
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
         /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();

@@ -137,7 +137,7 @@ class Question extends AbstractModel implements QuestionInterface
      * @param string $question
      * @return QuestionInterface
      */
-    public function setQuestion($question): QuestionInterface
+    public function setQuestion(string $question): QuestionInterface
     {
         return $this->setData(self::QUESTION, $question);
     }
@@ -148,7 +148,7 @@ class Question extends AbstractModel implements QuestionInterface
      * @param string $answer
      * @return QuestionInterface
      */
-    public function setAnswer($answer): QuestionInterface
+    public function setAnswer(string $answer): QuestionInterface
     {
         return $this->setData(self::ANSWER, $answer);
     }
@@ -159,7 +159,7 @@ class Question extends AbstractModel implements QuestionInterface
      * @param int $status
      * @return QuestionInterface
      */
-    public function setStatus($status): QuestionInterface
+    public function setStatus(int $status): QuestionInterface
     {
         return $this->setData(self::STATUS, $status);
     }
@@ -170,7 +170,7 @@ class Question extends AbstractModel implements QuestionInterface
      * @param int $position
      * @return QuestionInterface
      */
-    public function setPosition($position): QuestionInterface
+    public function setPosition(int $position): QuestionInterface
     {
         return $this->setData(self::POSITION, $position);
     }

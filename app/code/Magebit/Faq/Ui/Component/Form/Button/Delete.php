@@ -13,10 +13,10 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Ui\Component\Form\Button;
 
-use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
-use Magento\Backend\Block\Widget\Context;
 use Magebit\Faq\Api\QuestionRepositoryInterface;
+use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 /**
  * Class DeleteButton
@@ -41,9 +41,9 @@ class Delete implements ButtonProviderInterface
     /**
      * Return question ID
      *
-     * @return int|null
+     * @return string|null
      */
-    public function getQuestionId()
+    public function getQuestionId(): ?string
     {
         try {
             return $this->questionRepository->get(
@@ -61,15 +61,16 @@ class Delete implements ButtonProviderInterface
      * @param   array $params
      * @return  string
      */
-    public function getUrl($route = '', $params = [])
+    public function getUrl($route = '', $params = []): string
     {
         return $this->context->getUrlBuilder()->getUrl($route, $params);
     }
 
     /**
      * @inheritDoc
+     * @return array
      */
-    public function getButtonData()
+    public function getButtonData(): array
     {
         $data = [];
         if ($this->getQuestionId()) {
@@ -90,7 +91,7 @@ class Delete implements ButtonProviderInterface
      *
      * @return string
      */
-    public function getDeleteUrl()
+    public function getDeleteUrl(): string
     {
         return $this->getUrl('faq/question/delete', ['id' => $this->getQuestionId()]);
     }

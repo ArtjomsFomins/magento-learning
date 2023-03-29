@@ -19,6 +19,7 @@ use Magebit\Faq\Model\QuestionFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\Controller\ResultInterface;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
@@ -55,9 +56,9 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
      * Save action
      *
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @return ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
         $resultRedirect = $this->resultRedirectFactory->create();
         $data = $this->getRequest()->getPostValue();
@@ -104,10 +105,10 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
      *
      * @param \Magebit\Faq\Model\Question $model
      * @param array $data
-     * @param \Magento\Framework\Controller\ResultInterface $resultRedirect
-     * @return \Magento\Framework\Controller\ResultInterface
+     * @param ResultInterface $resultRedirect
+     * @return ResultInterface
      */
-    private function processBlockReturn($model, $data, $resultRedirect)
+    private function processBlockReturn($model, $data, $resultRedirect): ResultInterface
     {
         $redirect = $data['back'] ?? 'close';
 
