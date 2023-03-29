@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -28,27 +28,27 @@ use Magento\Framework\Registry;
 class Save extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
     protected DataPersistorInterface $dataPersistor;
-    private QuestionFactory $blockFactory;
-    private QuestionRepositoryInterface $blockRepository;
+    private QuestionFactory $questionFactory;
+    private QuestionRepositoryInterface $questionRepository;
 
     /**
      * @param Context $context
      * @param Registry $coreRegistry
      * @param DataPersistorInterface $dataPersistor
-     * @param QuestionFactory|null $blockFactory
-     * @param QuestionRepositoryInterface|null $blockRepository
+     * @param QuestionFactory|null $questionFactory
+     * @param QuestionRepositoryInterface|null $questionRepository
      */
     public function __construct(
         Context $context,
         Registry $coreRegistry,
         DataPersistorInterface $dataPersistor,
-        QuestionFactory $blockFactory = null,
-        QuestionRepositoryInterface $blockRepository = null
+        QuestionFactory $questionFactory = null,
+        QuestionRepositoryInterface $questionRepository = null
     ) {
         $this->dataPersistor = $dataPersistor;
-        $this->blockFactory = $blockFactory
+        $this->questionFactory = $questionFactory
             ?: \Magento\Framework\App\ObjectManager::getInstance()->get(QuestionFactory::class);
-        $this->blockRepository = $blockRepository
+        $this->questionRepository = $questionRepository
             ?: \Magento\Framework\App\ObjectManager::getInstance()->get(QuestionRepositoryInterface::class);
 
         parent::__construct($context);
@@ -71,13 +71,11 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
             if (empty($data['id'])) {
                 $data['id'] = null;
             }
-            $model = $this->blockFactory->create();
-
-
+            $model = $this->questionFactory->create();
             $id = $this->getRequest()->getParam('id');
             if ($id) {
                 try {
-                    $model = $this->blockRepository->getById($id);
+                    $model = $this->questionRepository->getById($id);
                 } catch (LocalizedException $e) {
                     $this->messageManager->addErrorMessage(__('This question no longer exists.'));
                     return $resultRedirect->setPath('*/*/');
@@ -87,7 +85,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
             $model->setData($data);
 
             try {
-                $this->blockRepository->save($model);
+                $this->questionRepository->save($model);
                 $this->messageManager->addSuccessMessage(__('You saved the question.'));
                 $this->dataPersistor->clear('question_block');
                 return $this->processBlockReturn($model, $data, $resultRedirect);
@@ -104,7 +102,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
     }
 
     /**
-     * Process and set the block return
+     * Process and set the question return
      *
      * @param \Magebit\Faq\Model\Question $model
      * @param array $data
@@ -115,16 +113,16 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
     {
         $redirect = $data['back'] ?? 'close';
 
-        if ($redirect ==='continue') {
+        if ($redirect === 'continue') {
             $resultRedirect->setPath('*/*/edit', ['id' => $model->getId()]);
         } elseif ($redirect === 'close') {
             $resultRedirect->setPath('*/*/index');
         } elseif ($redirect === 'duplicate') {
-            $duplicateModel = $this->blockFactory->create(['data' => $data]);
+            $duplicateModel = $this->questionFactory->create(['data' => $data]);
             $duplicateModel->setId(null);
             $duplicateModel->setIdentifier($data['identifier'] . '-' . uniqid());
             $duplicateModel->setIsActive(Question::STATUS_DISABLED);
-            $this->blockRepository->save($duplicateModel);
+            $this->questionRepository->save($duplicateModel);
             $id = $duplicateModel->getId();
             $this->messageManager->addSuccessMessage(__('You duplicated the question.'));
             $this->dataPersistor->set('question_block', $data);

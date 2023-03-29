@@ -9,16 +9,14 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Block;
 
 use Magento\Widget\Block\BlockInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
-
 use Magento\Framework\View\Element\Template\Context;
 use Magebit\Faq\Model\QuestionRepository;
-
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
 
@@ -36,6 +34,7 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
      * Question constructor
      *
      * @param FilterBuilder $filterBuilder
+     * @param SortOrderBuilder $sortOrder
      * @param QuestionRepository $questionRepository
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param Context $context
@@ -57,11 +56,11 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
     }
 
     /**
-     * function for that returns all enabled questions
+     * Function for that returns all enabled questions
      *
      * @return array
      */
-    public function getQuestions():array
+    public function getQuestions(): array
     {
         $status = $this->filterBuilder->setField('status')->setValue('1')->setConditionType('eq')->create();
         $sortOrder = $this->sortOrder->setField('position')->setDirection('ASC')->create();
@@ -78,9 +77,5 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
             ]);
         }
         return $questions;
-    }
-    public function _prepareLayout()
-    {
-        return parent::_prepareLayout();
     }
 }

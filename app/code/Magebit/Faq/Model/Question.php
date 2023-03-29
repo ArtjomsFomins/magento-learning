@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Model;
 
@@ -27,20 +27,20 @@ use Magento\Backend\Model\Validator\UrlKey\CompositeUrlKey;
 use Magento\Framework\Exception\LocalizedException;
 
 /**
- * Question block model
+ * Question model
  *
- * @method Block setStoreId(int $storeId)
+ * @method Question setStoreId(int $storeId)
  * @method int getStoreId()
  */
 class Question extends AbstractModel implements QuestionInterface
 {
     /**
-     * Question block cache tag
+     * Question cache tag
      */
     public const CACHE_TAG = 'question_b';
 
     /**#@+
-     * Block's statuses
+     * Question's statuses
      */
     public const STATUS_ENABLED = 1;
     public const STATUS_DISABLED = 0;
@@ -103,49 +103,7 @@ class Question extends AbstractModel implements QuestionInterface
     }
 
     /**
-     * Prevent blocks recursion
-     *
-     * @return AbstractModel
-     * @throws \Magento\Framework\Exception\LocalizedException
-     */
-    // public function beforeSave()
-    // {
-    //     if ($this->hasDataChanges()) {
-    //         $this->setUpdateTime(null);
-    //     }
-
-    //     $needle = 'block_id="' . $this->getId() . '"';
-    //     $content = ($this->getContent() !== null) ? $this->getContent() : '';
-    //     if (strpos($content, $needle) !== false) {
-    //         throw new \Magento\Framework\Exception\LocalizedException(
-    //             __('Make sure that static block content does not reference the block itself.')
-    //         );
-    //     }
-
-    //     $errors = $this->compositeUrlValidator->validate($this->getIdentifier());
-    //     if (!empty($errors)) {
-    //         throw new LocalizedException($errors[0]);
-    //     }
-
-    //     parent::beforeSave();
-
-    //     //Validating HTML content.
-    //     if ($content && $content !== $this->getOrigData(self::CONTENT)) {
-    //         try {
-    //             $this->wysiwygValidator->validate($content);
-    //         } catch (ValidationException $exception) {
-    //             throw new ValidationException(
-    //                 __('Content field contains restricted HTML elements. %1', $exception->getMessage()),
-    //                 $exception
-    //             );
-    //         }
-    //     }
-
-    //     return $this;
-    // }
-
-    /**
-     * Retrieve block id
+     * Retrieve question id
      *
      * @return int
      */
@@ -204,7 +162,6 @@ class Question extends AbstractModel implements QuestionInterface
         return $this->getData(self::UPDATED_AT);
     }
 
-
     /**
      * Set title
      *
@@ -250,7 +207,7 @@ class Question extends AbstractModel implements QuestionInterface
     }
 
     /**
-     * Prepare block's statuses.
+     * Prepare question's statuses.
      *
      * @return array
      */
@@ -258,7 +215,6 @@ class Question extends AbstractModel implements QuestionInterface
     {
         return [self::STATUS_ENABLED => __('Enabled'), self::STATUS_DISABLED => __('Disabled')];
     }
-
 
     /**
      * Checks product can be duplicated

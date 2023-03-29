@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -18,9 +18,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
-* Index question action
-*
-* @package Magebit\Faq\Controller\Adminhtml\Brand
+*  Index question action
 */
 class Index extends Action
 {
@@ -40,7 +38,7 @@ class Index extends Action
     }
 
     /**
-     * return main page
+     * Returns main page
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */

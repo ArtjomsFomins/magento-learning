@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -51,7 +51,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         if ($id) {
             $model->load($id);
             if (!$model->getId()) {
-                $this->messageManager->addErrorMessage(__('This block no longer exists.'));
+                $this->messageManager->addErrorMessage(__('This question no longer exists.'));
                 /** @var \Magento\Backend\Model\View\Result\Redirect $resultRedirect */
                 $resultRedirect = $this->resultRedirectFactory->create();
                 return $resultRedirect->setPath('*/*/');
@@ -62,8 +62,8 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
         $this->initPage($resultPage)->addBreadcrumb(
-            $id ? __('Edit Block') : __('New Block'),
-            $id ? __('Edit Block') : __('New Block')
+            $id ? __('Edit Question') : __('New Question'),
+            $id ? __('Edit Question') : __('New Question')
         );
         $resultPage->getConfig()->getTitle()->prepend(__('Frequently Asked Questions'));
         return $resultPage;
@@ -79,7 +79,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
     {
         $resultPage->setActiveMenu('Magento_Cms::cms_block')
             ->addBreadcrumb(__('CMS'), __('CMS'))
-            ->addBreadcrumb(__('Static Blocks'), __('Static Blocks'));
+            ->addBreadcrumb(__('Static Question'), __('Static Question'));
         return $resultPage;
     }
 }

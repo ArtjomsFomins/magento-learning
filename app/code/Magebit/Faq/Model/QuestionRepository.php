@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Model;
 
@@ -62,7 +62,7 @@ class QuestionRepository implements QuestionRepositoryInterface
         ResourceQuestion $resource,
         QuestionFactory $questionFactory,
         \Magebit\Faq\Api\Data\QuestionInterfaceFactory $dataQuestionFactory,
-        QuestionCollectionFactory $QuestionCollectionFactory,
+        QuestionCollectionFactory $questionCollectionFactory,
         Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
@@ -72,7 +72,7 @@ class QuestionRepository implements QuestionRepositoryInterface
     ) {
         $this->resource = $resource;
         $this->questionFactory = $questionFactory;
-        $this->questionCollectionFactory = $QuestionCollectionFactory;
+        $this->questionCollectionFactory = $questionCollectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->dataQuestionFactory = $dataQuestionFactory;
@@ -82,33 +82,27 @@ class QuestionRepository implements QuestionRepositoryInterface
         $this->hydrator = $hydrator ?? ObjectManager::getInstance()->get(HydratorInterface::class);
     }
 
-
     /**
-     * @inheritdoc
+     * Get question
+     *
+     * @param int $questionId
+     * @return void
      */
-    public function get($categoryId, $storeId = null)
+    public function get($questionId)
     {
+        /** @var Question $category */
+        $question = $this->questionFactory->create();
+        $question->load($questionId);
+        if (!$question->getId()) {
+            throw NoSuchEntityException::singleField('id', $questionId);
+        }
+        return $category;
     }
-
-    // public function get($categoryId, $storeId = null)
-    // {
-    //     $cacheKey = $storeId ?? 'all';
-    //     /** @var Category $category */
-    //     $category = $this->questionFactory->create();
-    //     if (null !== $storeId) {
-    //         $category->setStoreId($storeId);
-    //     }
-    //     $category->load($categoryId);
-    //     if (!$category->getId()) {
-    //         throw NoSuchEntityException::singleField('id', $categoryId);
-    //     }
-    //     return $category;
-    // }
 
     /**
      * Save question data
      *
-     * @param \Magento\Cms\Api\Data\QuestionInterface $question
+     * @param \Magebit\Faq\Api\Data\QuestionInterface $question
      * @return Question
      * @throws CouldNotSaveException
      */
@@ -119,7 +113,10 @@ class QuestionRepository implements QuestionRepositoryInterface
         }
 
         if ($question->getId() && $question instanceof Question && !$question->getOrigData()) {
-            $question = $this->hydrator->hydrate($this->getById($question->getId()), $this->hydrator->extract($question));
+            $question = $this->hydrator->hydrate(
+                $this->getById($question->getId()),
+                $this->hydrator->extract($question)
+            );
         }
 
         try {
@@ -164,7 +161,7 @@ class QuestionRepository implements QuestionRepositoryInterface
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());
-        // $searchResults->setTotalCount($collection->getSize());
+        $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
     }
 
@@ -201,7 +198,6 @@ class QuestionRepository implements QuestionRepositoryInterface
     /**
      * Retrieve collection processor
      *
-     * @deprecated 102.0.0
      * @return CollectionProcessorInterface
      */
     private function getCollectionProcessor()

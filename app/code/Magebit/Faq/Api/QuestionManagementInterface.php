@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Api;
 
@@ -20,7 +20,7 @@ namespace Magebit\Faq\Api;
 interface QuestionManagementInterface
 {
     /**
-     * enable question
+     * Enable question
      *
      * @param integer $questionId
      * @return void
@@ -28,7 +28,7 @@ interface QuestionManagementInterface
     public function enableQuestion(int $questionId);
 
     /**
-     * disable question
+     * Disable question
      *
      * @param integer $questionId
      * @return void

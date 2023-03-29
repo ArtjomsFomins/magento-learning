@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Model\ResourceModel\Question;
 
@@ -18,7 +18,7 @@ use Magebit\Faq\Model\Question;
 use Magebit\Faq\Model\ResourceModel\Question as QuestionResourceModel;
 
 /**
- * Collection class
+ * Class that responsbile for collection resource model
  */
 class Collection extends AbstractCollection
 {

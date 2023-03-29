@@ -9,12 +9,12 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Api\Data;
 
 /**
- * Question interface.
+ * Interface for question model.
  * @api
  */
 interface QuestionInterface
@@ -22,13 +22,13 @@ interface QuestionInterface
     /**#@+
      * Constants for keys of data array. Identical to the name of the getter in snake case
      */
-    const ID      = 'id';
-    const IDENTIFIER    = 'identifier';
-    const QUESTION         = 'question';
-    const ANSWER       = 'answer';
-    const STATUS = 'status';
-    const POSITION   = 'position';
-    const UPDATED_AT     = 'updated_at';
+    public const ID      = 'id';
+    public const IDENTIFIER    = 'identifier';
+    public const QUESTION         = 'question';
+    public const ANSWER       = 'answer';
+    public const STATUS = 'status';
+    public const POSITION   = 'position';
+    public const UPDATED_AT     = 'updated_at';
     /**#@-*/
 
     /**
@@ -44,7 +44,6 @@ interface QuestionInterface
      * @return string
      */
     public function getQuestion();
-
 
     /**
      * Get question's answer
@@ -73,7 +72,6 @@ interface QuestionInterface
      * @return string
      */
     public function getUpdateAt();
-
 
     /**
      * Set question title

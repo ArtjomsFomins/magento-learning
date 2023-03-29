@@ -1,12 +1,25 @@
 
-@gray: #F0F0F0;
+@gray: #f0f0f0;
 
+.faq-index-index {
+    @media screen and (min-width: 769px) {
+        &.page-layout-3columns .column.main {
+            width: 100%;
+        }
+    }
 
-.faq-title {
-    background-color: @gray;
-    padding: 10px;
-    text-transform: uppercase;
+    .column.main {
+        width: 100%;
+    }
+
+    .faq-title {
+        background-color: @gray;
+        padding: 10px;
+        text-transform: uppercase;
+    }
+
+    .faq-answer {
+        padding: 10px;
+    }
 }
-.faq-answer {
-    padding: 10px;
-}
+

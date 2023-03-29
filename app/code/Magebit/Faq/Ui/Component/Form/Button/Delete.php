@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Ui\Component\Form\Button;
 
@@ -24,18 +24,18 @@ use Magento\Framework\Exception\NoSuchEntityException;
 class Delete implements ButtonProviderInterface
 {
     protected Context $context;
-    protected QuestionRepositoryInterface $blockRepository;
+    protected QuestionRepositoryInterface $questionRepository;
 
     /**
      * @param Context $context
-     * @param QuestionRepositoryInterface $blockRepository
+     * @param QuestionRepositoryInterface $questionRepository
      */
     public function __construct(
         Context $context,
-        QuestionRepositoryInterface $blockRepository
+        QuestionRepositoryInterface $questionRepository
     ) {
         $this->context = $context;
-        $this->blockRepository = $blockRepository;
+        $this->questionRepository = $questionRepository;
     }
 
     /**
@@ -46,7 +46,7 @@ class Delete implements ButtonProviderInterface
     public function getBlockId()
     {
         try {
-            return $this->blockRepository->getById(
+            return $this->questionRepository->getById(
                 $this->context->getRequest()->getParam('id')
             )->getId();
         } catch (NoSuchEntityException $e) {

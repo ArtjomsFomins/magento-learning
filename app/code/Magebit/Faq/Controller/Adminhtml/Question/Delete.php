@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -26,8 +26,7 @@ class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterf
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magebit\Faq\Model\QuestionFactory $resultPageFactory
+        \Magento\Framework\Registry $coreRegistry
     ) {
         parent::__construct($context);
     }
@@ -61,7 +60,7 @@ class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterf
             }
         }
         // display error message
-        $this->messageManager->addErrorMessage(__('We can\'t find a block to delete.'));
+        $this->messageManager->addErrorMessage(__('We can\'t find a question to delete.'));
         // go to grid
         return $resultRedirect->setPath('*/*/');
     }

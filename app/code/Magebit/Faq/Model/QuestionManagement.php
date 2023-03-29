@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magebit_Faq
  *
@@ -13,10 +14,7 @@ namespace Magebit\Faq\Model;
 use Magebit\Faq\Api\CustomerManagementInterface;
 use Magebit\Faq\Api\QuestionManagementInterface;
 use Magebit\Faq\Model\ResourceModel\Customer\CollectionFactory;
-
 use Magebit\Faq\Model\QuestionRepository;
-
-
 use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magebit\Faq\Api\Data;
 use Magebit\Faq\Model\ResourceModel\Question as ResourceQuestion;
@@ -64,7 +62,7 @@ class QuestionManagement implements QuestionManagementInterface
     protected $dataObjectProcessor;
 
     /**
-     * @var \Magento\Cms\Api\Data\QuestionInterfaceFactory
+     * @var \Magebit\Faq\Api\Data\QuestionInterfaceFactory
      */
     protected $dataQuestionFactory;
 
@@ -95,6 +93,7 @@ class QuestionManagement implements QuestionManagementInterface
      * @param StoreManagerInterface $storeManager
      * @param CollectionProcessorInterface $collectionProcessor
      * @param HydratorInterface|null $hydrator
+     * @param QuestionRepository $questionRepository
      *
      * @SuppressWarnings(PHPMD.ExcessiveParameterList)
      */
@@ -102,7 +101,7 @@ class QuestionManagement implements QuestionManagementInterface
         ResourceQuestion $resource,
         QuestionFactory $questionFactory,
         \Magebit\Faq\Api\Data\QuestionInterfaceFactory $dataQuestionFactory,
-        QuestionCollectionFactory $QuestionCollectionFactory,
+        QuestionCollectionFactory $questionCollectionFactory,
         Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
@@ -113,7 +112,7 @@ class QuestionManagement implements QuestionManagementInterface
     ) {
         $this->resource = $resource;
         $this->questionFactory = $questionFactory;
-        $this->questionCollectionFactory = $QuestionCollectionFactory;
+        $this->questionCollectionFactory = $questionCollectionFactory;
         $this->searchResultsFactory = $searchResultsFactory;
         $this->dataObjectHelper = $dataObjectHelper;
         $this->dataQuestionFactory = $dataQuestionFactory;
@@ -124,6 +123,12 @@ class QuestionManagement implements QuestionManagementInterface
         $this->questionRepository = $questionRepository;
     }
 
+    /**
+     * @inheritDoc
+     *
+     * @param integer $questionId
+     * @return Question
+     */
     public function enableQuestion(int $questionId): Question
     {
         $question = $this->questionRepository->getById($questionId);
@@ -134,6 +139,12 @@ class QuestionManagement implements QuestionManagementInterface
         return $question;
     }
 
+    /**
+     * @inheritDoc
+     *
+     * @param integer $questionId
+     * @return Question
+     */
     public function disableQuestion(int $questionId): Question
     {
         $question = $this->questionRepository->getById($questionId);
@@ -164,7 +175,6 @@ class QuestionManagement implements QuestionManagementInterface
     /**
      * Retrieve collection processor
      *
-     * @deprecated 102.0.0
      * @return CollectionProcessorInterface
      */
     private function getCollectionProcessor()

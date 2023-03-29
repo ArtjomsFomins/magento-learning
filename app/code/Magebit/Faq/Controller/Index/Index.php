@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Index;
 
@@ -25,6 +25,10 @@ class Index implements \Magento\Framework\App\ActionInterface
 {
     private PageFactory $pageFactory;
 
+    /**
+     * @param Context $context
+     * @param PageFactory $rawFactory
+     */
     public function __construct(
         Context $context,
         PageFactory $rawFactory
@@ -33,7 +37,7 @@ class Index implements \Magento\Framework\App\ActionInterface
     }
 
     /**
-     * returns frontend page
+     * Returns frontend page
      *
      * @return Page
      */

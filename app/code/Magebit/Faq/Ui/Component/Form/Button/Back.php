@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Ui\Component\Form\Button;
 
@@ -30,21 +30,23 @@ class Back implements ButtonProviderInterface
     /**
      * @var QuestionRepositoryInterface
      */
-    protected $blockRepository;
+    protected $questionRepository;
 
     /**
      * @param Context $context
-     * @param QuestionRepositoryInterface $blockRepository
+     * @param QuestionRepositoryInterface $questionRepository
      */
     public function __construct(
         Context $context,
-        QuestionRepositoryInterface $blockRepository
+        QuestionRepositoryInterface $questionRepository
     ) {
         $this->context = $context;
-        $this->blockRepository = $blockRepository;
+        $this->questionRepository = $questionRepository;
     }
 
     /**
+     * Returns button data
+     *
      * @return array
      */
     public function getButtonData()

@@ -16,13 +16,13 @@ use Magebit\Faq\Block\QuestionList;
 ?>
 <h1>Frequently Asked Questions</h1>
 <div id="element">
-    <?php foreach($block->getQuestions() as $question): ?>
+    <?php foreach ($block->getQuestions() as $question): ?>
         <div data-role="collapsible" class="faq">
             <div data-role="trigger" class="faq-title">
-                <span><?= $question['title'] ?></span>
+                <span><?= $escaper->escapeHtml(__($question['title'])) ?></span>
             </div>
         </div>
-        <div data-role="content" class="faq-answer"><?= $question['answer'] ?></div>
+        <div data-role="content" class="faq-answer"><?= $escaper->escapeHtml(__($question['answer'])) ?></div>
     <?php endforeach ?>
 </div>
 

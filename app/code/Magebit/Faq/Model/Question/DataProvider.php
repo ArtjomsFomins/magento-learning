@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Model\Question;
 
@@ -18,7 +18,7 @@ use Magento\Framework\App\Request\DataPersistorInterface;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
 
 /**
- * Class DataProvider
+ * Class thar responsible for DataProvider
  */
 class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
 {
@@ -38,7 +38,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
-     * @param CollectionFactory $blockCollectionFactory
+     * @param CollectionFactory $questionCollectionFactory
      * @param DataPersistorInterface $dataPersistor
      * @param array $meta
      * @param array $data
@@ -48,13 +48,13 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
         $name,
         $primaryFieldName,
         $requestFieldName,
-        CollectionFactory $blockCollectionFactory,
+        CollectionFactory $questionCollectionFactory,
         DataPersistorInterface $dataPersistor,
         array $meta = [],
         array $data = [],
         PoolInterface $pool = null
     ) {
-        $this->collection = $blockCollectionFactory->create();
+        $this->collection = $questionCollectionFactory->create();
         $this->dataPersistor = $dataPersistor;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data, $pool);
     }

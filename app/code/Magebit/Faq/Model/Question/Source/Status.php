@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Model\Question\Source;
 
@@ -44,7 +44,7 @@ class Status implements \Magento\Framework\Data\OptionSourceInterface
     }
 
     /**
-     * function than return numbers and corresponding them text
+     * Function than return numbers and corresponding them text
      *
      * @return array
      */

@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -19,7 +19,7 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magebit\Faq\Api\Data\QuestionInterface;
 
 /**
- * InlineEdit class
+ * Class Controller that responsible for inline editing
  */
 class InlineEdit extends \Magento\Backend\App\Action
 {
@@ -28,9 +28,7 @@ class InlineEdit extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magento_Cms::Question';
-
-
+    public const ADMIN_RESOURCE = 'Magento_Cms::Question';
     protected \Magebit\Faq\Api\QuestionRepositoryInterface $questionRepository;
     protected \Magento\Framework\Controller\Result\JsonFactory $jsonFactory;
 
@@ -51,6 +49,7 @@ class InlineEdit extends \Magento\Backend\App\Action
 
     /**
      * Inline edit execution
+     *
      * @return \Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
@@ -67,14 +66,14 @@ class InlineEdit extends \Magento\Backend\App\Action
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
-                foreach (array_keys($postItems) as $blockId) {
-                    $block = $this->questionRepository->getById($blockId);
+                foreach (array_keys($postItems) as $questionId) {
+                    $question = $this->questionRepository->getById($questionId);
                     try {
-                        $block->setData(array_merge($block->getData(), $postItems[$blockId]));
-                        $this->questionRepository->save($block);
+                        $question->setData(array_merge($question->getData(), $postItems[$questionId]));
+                        $this->questionRepository->save($question);
                     } catch (\Exception $e) {
-                        $messages[] = $this->getErrorWithBlockId(
-                            $block,
+                        $messages[] = $this->getErrorWithquestionId(
+                            $question,
                             __($e->getMessage())
                         );
                         $error = true;
@@ -90,14 +89,14 @@ class InlineEdit extends \Magento\Backend\App\Action
     }
 
     /**
-     * Add block title to error message
+     * Add question title to error message
      *
-     * @param QuestionInterface $block
+     * @param QuestionInterface $question
      * @param string $errorText
      * @return string
      */
-    protected function getErrorWithBlockId(QuestionInterface $block, $errorText)
+    protected function getErrorWithquestionId(QuestionInterface $question, $errorText)
     {
-        return '[Block ID: ' . $block->getId() . '] ' . $errorText;
+        return '[question ID: ' . $question->getId() . '] ' . $errorText;
     }
 }

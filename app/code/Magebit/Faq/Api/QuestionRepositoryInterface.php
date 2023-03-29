@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Magebit_Faq
  *
@@ -8,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Api;
 
@@ -21,12 +22,11 @@ interface QuestionRepositoryInterface
     /**
      * Get info about question by question id
      *
-     * @param int $categoryId
-     * @param int $storeId
+     * @param int $questionId
      * @return \Magebit\Faq\Api\Data\QuestionInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function get($categoryId, $storeId = null);
+    public function get($questionId);
 
     /**
      * Save question.

@@ -9,7 +9,7 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
@@ -21,7 +21,7 @@ use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 use Magento\Framework\App\ObjectManager;
 
 /**
- * Class MassDelete
+ * Class that responsible for massDelete
  */
 class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
@@ -30,16 +30,15 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magento_Cms::block';
+    public const ADMIN_RESOURCE = 'Magento_Cms::block';
 
     protected Filter $filter;
-    protected CollectionFactory  $collectionFactory;
+    protected CollectionFactory $collectionFactory;
 
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
-     * @param QuestionRepositoryInterface|null $questionRepository
      */
     public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
     {
@@ -59,8 +58,8 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
         $collection = $this->filter->getCollection($this->collectionFactory->create());
         $collectionSize = $collection->getSize();
 
-        foreach ($collection as $block) {
-            $block->delete();
+        foreach ($collection as $question) {
+            $question->delete();
         }
 
         $this->messageManager->addSuccessMessage(__('A total of %1 record(s) have been deleted.', $collectionSize));

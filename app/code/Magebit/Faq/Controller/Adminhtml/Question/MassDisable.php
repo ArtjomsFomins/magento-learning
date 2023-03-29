@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Magebit_Faq
  *
@@ -10,11 +9,11 @@
  * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
-use Magebit\Faq\Model\QuestionManagement;
+use Magebit\Faq\Api\QuestionManagementInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
@@ -22,7 +21,7 @@ use Magento\Ui\Component\MassAction\Filter;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
 
 /**
- * Class MassDisable
+ * Class Controller that responsible for massDisable
  */
 class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
@@ -31,7 +30,7 @@ class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionI
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Magento_Cms::save';
+    public const ADMIN_RESOURCE = 'Magento_Cms::save';
 
     /**
      * @var Filter
@@ -43,17 +42,18 @@ class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionI
      */
     protected $collectionFactory;
 
-    protected QuestionManagement $questionManagement;
+    protected QuestionManagementInterface $questionManagement;
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
+     * @param QuestionManagementInterface $questionManagement
      */
     public function __construct(
         Context $context,
         Filter $filter,
         CollectionFactory $collectionFactory,
-        QuestionManagement $questionManagement
+        QuestionManagementInterface $questionManagement
     ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
