@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!--
+    Magebit_faq
+    @category     Magebit
+    @package      Magebit_faq
+    @author       Artjoms Fomins <info@magebit.com>
+    @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd"
+    >
+    <menu>
+        <add id="Magebit_Faq::home" title="Frequenlty Asked Questions" module="Magebit_Faq" sortOrder="1000"
+            parent="Magento_Backend::content_elements"
+            resource="Magento_Backend::elements"
+            action="faq/question/index"
+        />
+    </menu>
+</config>

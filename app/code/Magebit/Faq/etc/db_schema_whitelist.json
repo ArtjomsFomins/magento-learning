@@ -1,0 +1,18 @@
+{
+    "faq": {
+        "column": {
+            "id": true,
+            "question": true,
+            "answer": true,
+            "status": true,
+            "position": true,
+            "updated_at": true
+        },
+        "index": {
+            "FAQ_QUESTION_ANSWER": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

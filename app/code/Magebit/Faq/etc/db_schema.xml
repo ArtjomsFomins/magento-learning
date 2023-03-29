@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+    Magebit_Faq
+    @category     Learning
+    @package      Magebit_Faq
+    @author       Artjoms Fomins <info@magebit.com>
+    @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd"
+    >
+    <table name="faq" engine="innodb" resource="default" comment="Faq table" >
+        <column name="id" xsi:type="smallint" unsigned="true" nullable="false" identity="true" comment="Faq's id"/>
+        <column name="question" xsi:type="text" nullable="false" comment="Faq's question" />
+        <column name="answer" xsi:type="text" nullable="false" comment="Faq's answer" />
+        <column name="status" xsi:type="smallint" default="0" nullable="false" comment="Faq's status" />
+        <column name="position" xsi:type="int" default="0" nullable="false" comment="Faq's position" />
+        <column name="updated_at" xsi:type="timestamp" on_update="true" default="CURRENT_TIMESTAMP"
+            comment="Faq's updated at" />
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+
+        <index referenceId="FAQ_QUESTION_ANSWER" indexType="fulltext">
+            <column name="question"/>
+            <column name="answer"/>
+        </index>
+    </table>
+</schema>

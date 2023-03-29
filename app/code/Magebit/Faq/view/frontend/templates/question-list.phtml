@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+ */
+
+use Magebit\Faq\Block\QuestionList;
+
+/** @var QuestionList $block
+ */
+?>
+
+<h1><?= __('Frequently Asked Questions') ?></h1>
+<div id="element">
+    <?php foreach ($block->getQuestions() as $question): ?>
+        <div data-role="collapsible" class="faq">
+            <div data-role="trigger" class="faq-title">
+                <span><?= $escaper->escapeHtml($question->getQuestion()) ?></span>
+            </div>
+        </div>
+        <div data-role="content" class="faq-answer"><?= $escaper->escapeHtml($question->getAnswer()) ?></div>
+    <?php endforeach ?>
+</div>
+
+<script>
+    require([
+        'jquery',
+        'accordion'], function ($) {
+        $("#element").accordion();
+    });
+</script>
+

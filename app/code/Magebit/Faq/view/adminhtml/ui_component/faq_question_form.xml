@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Magebit_faq
+    @category     Magebit
+    @package      Magebit_faq
+    @author       Artjoms Fomins <info@magebit.com>
+    @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd"
+    >
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">faq_question_form.faq_question_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">General</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="back" class="Magebit\Faq\Ui\Component\Form\Button\Back"/>
+            <button name="save" class="Magebit\Faq\Ui\Component\Form\Button\Save"/>
+            <button name="delete" class="Magebit\Faq\Ui\Component\Form\Button\Delete"/>
+        </buttons>
+        <namespace>faq_question_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>faq_question_form.faq_question_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="faq_question_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="faq/question/save"/>
+        </settings>
+        <dataProvider class="Magebit\Faq\Model\Question\DataProvider" name="faq_question_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="status" sortOrder="10" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">status</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>boolean</dataType>
+                <label translate="true">Enable Question</label>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="question" formElement="input" sortOrder="20">
+            <settings>
+                <visible>true</visible>
+                <elementTmpl>ui/form/element/input</elementTmpl>
+                <label translate="true">Question</label>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+        <field name="answer" sortOrder="30">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="formElement" xsi:type="string">textarea</item>
+                    <item name="cols" xsi:type="number">15</item>
+                    <item name="rows" xsi:type="number">5</item>
+                    <item name="label" translate="true" xsi:type="string">Answer</item>
+                    <item name="dataType" translate="true" xsi:type="string">text</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <label translate="true">Answer</label>
+                <dataScope>answer</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+            </settings>
+        </field>
+    </fieldset>
+</form>

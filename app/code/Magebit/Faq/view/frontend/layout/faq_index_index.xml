@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+    Magebit_Faq
+    @category     Magebit
+    @package      Magebit_Faq
+    @author       Artjoms Fomins <info@magebit.com>
+    @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="div.sidebar.additional" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Magebit\Faq\Block\QuestionList"
+                name="question_list"
+                template="Magebit_Faq::question-list.phtml"
+            />
+        </referenceContainer>
+    </body>
+</page>
