@@ -1,8 +1,16 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -19,20 +27,9 @@ use Magento\Framework\Registry;
  */
 class Save extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
-    /**
-     * @var DataPersistorInterface
-     */
-    protected $dataPersistor;
-
-    /**
-     * @var QuestionFactory
-     */
-    private $blockFactory;
-
-    /**
-     * @var QuestionRepositoryInterface
-     */
-    private $blockRepository;
+    protected DataPersistorInterface $dataPersistor;
+    private QuestionFactory $blockFactory;
+    private QuestionRepositoryInterface $blockRepository;
 
     /**
      * @param Context $context

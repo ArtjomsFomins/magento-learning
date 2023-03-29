@@ -1,28 +1,35 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Api\Data;
 
 use Magento\Framework\Api\SearchResultsInterface;
 
 /**
- * Interface for cms block search results.
+ * Interface for question search results.
  * @api
- * @since 100.0.2
  */
 interface QuestionSearchResultsInterface extends SearchResultsInterface
 {
     /**
-     * Get blocks list.
+     * Get questions list.
      *
      * @return \Magebit\Faq\Api\Data\QuestionInterface[]
      */
     public function getItems();
 
     /**
-     * Set blocks list.
+     * Set questions list.
      *
      * @param \Magebit\Faq\Api\Data\QuestionInterface[] $items
      * @return $this

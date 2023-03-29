@@ -1,8 +1,16 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Backend\App\Action\Context;
@@ -10,6 +18,9 @@ use Magebit\Faq\Api\QuestionRepositoryInterface as QuestionRepository;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magebit\Faq\Api\Data\QuestionInterface;
 
+/**
+ * InlineEdit class
+ */
 class InlineEdit extends \Magento\Backend\App\Action
 {
     /**
@@ -19,15 +30,9 @@ class InlineEdit extends \Magento\Backend\App\Action
      */
     const ADMIN_RESOURCE = 'Magento_Cms::Question';
 
-    /**
-     * @var \Magebit\Faq\Api\QuestionRepositoryInterface
-     */
-    protected $questionRepository;
 
-    /**
-     * @var \Magento\Framework\Controller\Result\JsonFactory
-     */
-    protected $jsonFactory;
+    protected \Magebit\Faq\Api\QuestionRepositoryInterface $questionRepository;
+    protected \Magento\Framework\Controller\Result\JsonFactory $jsonFactory;
 
     /**
      * @param Context $context
@@ -45,6 +50,7 @@ class InlineEdit extends \Magento\Backend\App\Action
     }
 
     /**
+     * Inline edit execution
      * @return \Magento\Framework\Controller\ResultInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */

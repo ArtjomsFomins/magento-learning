@@ -16,14 +16,11 @@ namespace Magebit\Faq\Controller\Adminhtml\Question;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 
 /**
- * Create CMS block action.
+ * Create question action.
  */
 class NewAction extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
-    /**
-     * @var \Magento\Backend\Model\View\Result\ForwardFactory
-     */
-    protected $resultForwardFactory;
+    protected \Magento\Backend\Model\View\Result\ForwardFactory $resultForwardFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
@@ -40,7 +37,7 @@ class NewAction extends \Magento\Backend\App\Action implements HttpGetActionInte
     }
 
     /**
-     * Create new CMS block
+     * Execute redirect to edit controller
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */

@@ -33,62 +33,23 @@ use Magento\Framework\EntityManager\HydratorInterface;
  */
 class QuestionRepository implements QuestionRepositoryInterface
 {
-    /**
-     * @var ResourceQuestion
-     */
-    protected $resource;
-
-    /**
-     * @var QuestionFactory
-     */
-    protected $questionFactory;
-
-    /**
-     * @var QuestionCollectionFactory
-     */
-    protected $questionCollectionFactory;
-
-    /**
-     * @var Data\QuestionSearchResultInterfaceFactory
-     */
-    protected $searchResultsFactory;
-
-    /**
-     * @var DataObjectHelper
-     */
-    protected $dataObjectHelper;
-
-    /**
-     * @var DataObjectProcessor
-     */
-    protected $dataObjectProcessor;
-
-    /**
-     * @var \Magento\Cms\Api\Data\QuestionInterfaceFactory
-     */
-    protected $dataQuestionFactory;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private $collectionProcessor;
-
-    /**
-     * @var HydratorInterface
-     */
-    private $hydrator;
+    protected ResourceQuestion $resource;
+    protected QuestionFactory $questionFactory;
+    protected QuestionCollectionFactory $questionCollectionFactory;
+    protected Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory;
+    protected DataObjectHelper $dataObjectHelper;
+    protected DataObjectProcessor $dataObjectProcessor;
+    protected \Magebit\Faq\Api\Data\QuestionInterfaceFactory $dataQuestionFactory;
+    private \Magento\Store\Model\StoreManagerInterface $storeManager;
+    private CollectionProcessorInterface $collectionProcessor;
+    private HydratorInterface $hydrator;
 
     /**
      * @param ResourceQuestion $resource
      * @param QuestionFactory $questionFactory
      * @param Data\QuestionInterfaceFactory $dataQuestionFactory
      * @param QuestionCollectionFactory $questionCollectionFactory
-     * @param Data\QuestionSearchResultInterfaceFactory $searchResultsFactory
+     * @param Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory
      * @param DataObjectHelper $dataObjectHelper
      * @param DataObjectProcessor $dataObjectProcessor
      * @param StoreManagerInterface $storeManager
@@ -102,11 +63,11 @@ class QuestionRepository implements QuestionRepositoryInterface
         QuestionFactory $questionFactory,
         \Magebit\Faq\Api\Data\QuestionInterfaceFactory $dataQuestionFactory,
         QuestionCollectionFactory $QuestionCollectionFactory,
-        Data\QuestionSearchResultInterfaceFactory $searchResultsFactory,
+        Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
         StoreManagerInterface $storeManager,
-        CollectionProcessorInterface $collectionProcessor = null,
+        CollectionProcessorInterface $collectionProcessor,
         ?HydratorInterface $hydrator = null
     ) {
         $this->resource = $resource;
@@ -122,7 +83,7 @@ class QuestionRepository implements QuestionRepositoryInterface
     }
 
 
-/**
+    /**
      * @inheritdoc
      */
     public function get($categoryId, $storeId = null)
@@ -203,7 +164,7 @@ class QuestionRepository implements QuestionRepositoryInterface
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());
-        $searchResults->setTotalCount($collection->getSize());
+        // $searchResults->setTotalCount($collection->getSize());
         return $searchResults;
     }
 

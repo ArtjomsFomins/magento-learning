@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
+ */
+
 declare(strict_types = 1);
 
 namespace Magebit\Faq\Controller\Adminhtml\Question;
@@ -9,7 +18,7 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
-* @inheritDoc
+* Index question action
 *
 * @package Magebit\Faq\Controller\Adminhtml\Brand
 */
@@ -18,7 +27,6 @@ class Index extends Action
     protected $resultPageFactory;
 
     /**
-     * Constructor
      *
      * @param \Magento\Backend\App\Action\Context        $context
      * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
@@ -32,7 +40,7 @@ class Index extends Action
     }
 
     /**
-     * Index action
+     * return main page
      *
      * @return \Magento\Framework\Controller\ResultInterface
      */

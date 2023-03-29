@@ -1,8 +1,16 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Model\Question;
 
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
@@ -18,12 +26,7 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
      * @var \Magebit\Faq\Model\ResourceModel\Question\Collection
      */
     protected $collection;
-
-    /**
-     * @var DataPersistorInterface
-     */
-    protected $dataPersistor;
-
+    protected DataPersistorInterface $dataPersistor;
     /**
      * @var array
      */
@@ -67,16 +70,16 @@ class DataProvider extends \Magento\Ui\DataProvider\ModifierPoolDataProvider
             return $this->loadedData;
         }
         $items = $this->collection->getItems();
-        /** @var \Magento\Cms\Model\Block $block */
-        foreach ($items as $block) {
-            $this->loadedData[$block->getId()] = $block->getData();
+        /** @var \Magebit\Faq\Model\Question $question */
+        foreach ($items as $question) {
+            $this->loadedData[$question->getId()] = $question->getData();
         }
 
         $data = $this->dataPersistor->get('cms_block');
         if (!empty($data)) {
-            $block = $this->collection->getNewEmptyItem();
-            $block->setData($data);
-            $this->loadedData[$block->getId()] = $block->getData();
+            $question = $this->collection->getNewEmptyItem();
+            $question->setData($data);
+            $this->loadedData[$question->getId()] = $question->getData();
             $this->dataPersistor->clear('cms_block');
         }
 

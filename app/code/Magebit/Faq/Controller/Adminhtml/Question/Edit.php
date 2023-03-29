@@ -1,21 +1,26 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Framework\App\Action\HttpGetActionInterface;
 
 /**
- * Edit CMS block action.
+ * Edit question action.
  */
 class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
 {
-    /**
-     * @var \Magento\Framework\View\Result\PageFactory
-     */
-    protected $resultPageFactory;
+    protected \Magento\Framework\View\Result\PageFactory $resultPageFactory;
 
     /**
      * @param \Magento\Backend\App\Action\Context $context
@@ -38,9 +43,6 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
      */
     public function execute()
     {
-        // $resultPage = $this->resultPageFactory->create();
-        // return $resultPage;
-
         // 1. Get ID and create model
         $id = $this->getRequest()->getParam('id');
         $model = $this->_objectManager->create(\Magebit\Faq\Model\Question::class);
@@ -55,8 +57,6 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
                 return $resultRedirect->setPath('*/*/');
             }
         }
-
-        // $this->_coreRegistry->register('question_block', $model);
 
         // 5. Build edit form
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */

@@ -1,8 +1,16 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Ui\Component\Form\Button;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
@@ -15,15 +23,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
  */
 class Delete implements ButtonProviderInterface
 {
-    /**
-     * @var Context
-     */
-    protected $context;
-
-    /**
-     * @var QuestionRepositoryInterface
-     */
-    protected $blockRepository;
+    protected Context $context;
+    protected QuestionRepositoryInterface $blockRepository;
 
     /**
      * @param Context $context

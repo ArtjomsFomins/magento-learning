@@ -1,31 +1,34 @@
 <?php
+
 /**
+ * Magebit_Faq
  *
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
 
+/**
+ * Class that implement delete logic
+ */
 class Delete extends \Magento\Backend\App\Action implements HttpPostActionInterface
 {
     /**
-     * @var \Magebit\Faq\Model\QuestionFactory
-     */
-    protected $resultPageFactory;
-
-    /**
      * @param \Magento\Backend\App\Action\Context $context
      * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magebit\Faq\Model\QuestionFactory $resultPageFactory
      */
     public function __construct(
         \Magento\Backend\App\Action\Context $context,
         \Magento\Framework\Registry $coreRegistry,
         \Magebit\Faq\Model\QuestionFactory $resultPageFactory
     ) {
-        // $this->questionFactory = $questionFactory;
         parent::__construct($context);
     }
 

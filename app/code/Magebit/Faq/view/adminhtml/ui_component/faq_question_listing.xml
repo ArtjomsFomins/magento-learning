@@ -97,11 +97,15 @@
                 </param>
                 <param name="indexField" xsi:type="string">id</param>
                 <param name="enabled" xsi:type="boolean">true</param>
-                <param name="selectProvider" xsi:type="string">faq_question_listing.faq_question_listing.faq_question_listing_columns.ids</param>
+                <param name="selectProvider" xsi:type="string">
+                    faq_question_listing.faq_question_listing.faq_question_listing_columns.ids
+                </param>
             </editorConfig>
             <childDefaults>
                 <param name="fieldAction" xsi:type="array">
-                    <item name="provider" xsi:type="string">faq_question_listing.faq_question_listing.faq_question_listing_columns_editor</item>
+                    <item name="provider" xsi:type="string">
+                        faq_question_listing.faq_question_listing.faq_question_listing_columns_editor
+                    </item>
                     <item name="target" xsi:type="string">startEdit</item>
                     <item name="params" xsi:type="array">
                         <item name="0" xsi:type="string">${ $.$data.rowIndex }</item>

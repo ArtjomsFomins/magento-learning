@@ -30,30 +30,11 @@ class QuestionActions extends Column
     const CMS_URL_PATH_EDIT = 'faq/question/edit';
     const CMS_URL_PATH_DELETE = 'faq/question/delete';
 
-    /**
-     * @var \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder
-     */
-    protected $actionUrlBuilder;
-
-    /**
-     * @var \Magento\Cms\ViewModel\Page\Grid\UrlBuilder
-     */
-    private $scopeUrlBuilder;
-
-    /**
-     * @var \Magento\Framework\UrlInterface
-     */
-    protected $urlBuilder;
-
-    /**
-     * @var string
-     */
-    private $editUrl;
-
-    /**
-     * @var Escaper
-     */
-    private $escaper;
+    protected \Magento\Cms\Block\Adminhtml\Page\Grid\Renderer\Action\UrlBuilder $actionUrlBuilder;
+    private \Magento\Cms\ViewModel\Page\Grid\UrlBuilder $scopeUrlBuilder;
+    protected \Magento\Framework\UrlInterface $urlBuilder;
+    private string $editUrl;
+    private Escaper $escaper;
 
     /**
      * @param ContextInterface $context

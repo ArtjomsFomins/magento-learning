@@ -33,24 +33,20 @@ class MassEnable extends \Magento\Backend\App\Action implements HttpPostActionIn
      */
     const ADMIN_RESOURCE = 'Magento_Cms::save';
 
-    /**
-     * @var Filter
-     */
-    protected $filter;
-
-    /**
-     * @var CollectionFactory
-     */
-    protected $collectionFactory;
-
+    protected Filter $filter;
+    protected CollectionFactory $collectionFactory;
     protected QuestionManagement $questionManagemnt;
     /**
      * @param Context $context
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, QuestionManagement $questionManagemnt)
-    {
+    public function __construct(
+        Context $context,
+        Filter $filter,
+        CollectionFactory $collectionFactory,
+        QuestionManagement $questionManagemnt
+    ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         $this->questionManagemnt = $questionManagemnt;

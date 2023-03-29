@@ -1,9 +1,16 @@
 <?php
+
 /**
+ * Magebit_Faq
  *
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
+
 namespace Magebit\Faq\Controller\Adminhtml\Question;
 
 use Magento\Framework\App\Action\HttpPostActionInterface;
@@ -11,7 +18,6 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Ui\Component\MassAction\Filter;
 use Magebit\Faq\Model\ResourceModel\Question\CollectionFactory;
-use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magento\Framework\App\ObjectManager;
 
 /**
@@ -26,21 +32,8 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
      */
     const ADMIN_RESOURCE = 'Magento_Cms::block';
 
-    /**
-     * @var Filter
-     */
-    protected $filter;
-
-    /**
-     * @var CollectionFactory
-     */
-    protected $collectionFactory;
-
-
-    /**
-     * @var QuestionRepositoryInterface
-     */
-    private $questionRepository;
+    protected Filter $filter;
+    protected CollectionFactory  $collectionFactory;
 
     /**
      * @param Context $context
@@ -48,11 +41,10 @@ class MassDelete extends \Magento\Backend\App\Action implements HttpPostActionIn
      * @param CollectionFactory $collectionFactory
      * @param QuestionRepositoryInterface|null $questionRepository
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, questionRepositoryInterface $questionRepository = null)
+    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory)
     {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
-        $this->questionRepository = $questionRepository;
         parent::__construct($context);
     }
 

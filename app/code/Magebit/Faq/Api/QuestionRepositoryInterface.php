@@ -15,7 +15,6 @@ namespace Magebit\Faq\Api;
 /**
  * Question CRUD interface.
  * @api
- * @since 100.0.2
  */
 interface QuestionRepositoryInterface
 {

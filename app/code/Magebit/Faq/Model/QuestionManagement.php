@@ -103,7 +103,7 @@ class QuestionManagement implements QuestionManagementInterface
         QuestionFactory $questionFactory,
         \Magebit\Faq\Api\Data\QuestionInterfaceFactory $dataQuestionFactory,
         QuestionCollectionFactory $QuestionCollectionFactory,
-        Data\QuestionSearchResultInterfaceFactory $searchResultsFactory,
+        Data\QuestionSearchResultsInterfaceFactory $searchResultsFactory,
         DataObjectHelper $dataObjectHelper,
         DataObjectProcessor $dataObjectProcessor,
         StoreManagerInterface $storeManager,

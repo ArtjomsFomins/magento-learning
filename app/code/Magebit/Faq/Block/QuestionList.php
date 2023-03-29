@@ -1,12 +1,18 @@
 <?php
+
 /**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
+ * Magebit_Faq
+ *
+ * @category     Magebit
+ * @package      Magebit_Faq
+ * @author       Artjoms Fomins <info@magebit.com>
+ * @copyright    Copyright (c) 2023 Magebit, Ltd.(https://www.magebit.com/)
  */
+
+declare(strict_types = 1);
 
 namespace Magebit\Faq\Block;
 
-use Magento\Framework\View\Element\AbstractBlock;
 use Magento\Widget\Block\BlockInterface;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 
@@ -14,53 +20,64 @@ use Magento\Framework\View\Element\Template\Context;
 use Magebit\Faq\Model\QuestionRepository;
 
 use Magento\Framework\Api\FilterBuilder;
+use Magento\Framework\Api\SortOrderBuilder;
 
 /**
- * Cms block content block
- * @deprecated This class introduces caching issues and should no longer be used
- * @see \Magebit\Faq\Block\BlockByIdentifier
+ * Question content block
  */
 class QuestionList extends \Magento\Framework\View\Element\Template implements BlockInterface
 {
     private QuestionRepository $questionRepository;
     private SearchCriteriaBuilder $searchCriteriaBuilder;
-    // private FilterBuilder $filterBuilder;
+    private FilterBuilder $filterBuilder;
+    private SortOrderBuilder $sortOrder;
 
     /**
-     * Cms constructor
+     * Question constructor
      *
-     *
+     * @param FilterBuilder $filterBuilder
      * @param QuestionRepository $questionRepository
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param Context $context
      * @param array $data
      */
     public function __construct(
-        // FilterBuilder $filterBuilder,
+        FilterBuilder $filterBuilder,
+        SortOrderBuilder $sortOrder,
         QuestionRepository $questionRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         Context $context,
         array $data = []
     ) {
-        // $this->filterBuilder = $filterBuilder;
+        $this->filterBuilder = $filterBuilder;
+        $this->sortOrder = $sortOrder;
         $this->questionRepository = $questionRepository;
         $this->searchCriteriaBuilder = $searchCriteriaBuilder;
         parent::__construct($context, $data);
     }
 
-    public function getQuestions()
+    /**
+     * function for that returns all enabled questions
+     *
+     * @return array
+     */
+    public function getQuestions():array
     {
-        // $filter = $this->filterBuilder->setField('status')->setValue('1')->setConditionType('where');
-        // $this->searchCriteriaBuilder->addFilters([$filter]);
-        try {
-            //code...
-            $searchCriteria = $this->searchCriteriaBuilder->create();
-            $questions = $this->questionRepository->getList($searchCriteria);
-        } catch (\Throwable $th) {
-            //throw $th;
-            return $th;
+        $status = $this->filterBuilder->setField('status')->setValue('1')->setConditionType('eq')->create();
+        $sortOrder = $this->sortOrder->setField('position')->setDirection('ASC')->create();
+
+        $this->searchCriteriaBuilder->addFilters([$status])->setSortOrders([$sortOrder]);
+
+        $searchCriteria = $this->searchCriteriaBuilder->create();
+        $searchQuestions =  $this->questionRepository->getList($searchCriteria);
+        $questions = [];
+        foreach ($searchQuestions->getItems() as $question) {
+            array_push($questions, [
+                'title' => $question->getQuestion(),
+                'answer' => $question->getAnswer(),
+            ]);
         }
-        return 'hello!';
+        return $questions;
     }
     public function _prepareLayout()
     {

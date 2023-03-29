@@ -49,8 +49,12 @@ class MassDisable extends \Magento\Backend\App\Action implements HttpPostActionI
      * @param Filter $filter
      * @param CollectionFactory $collectionFactory
      */
-    public function __construct(Context $context, Filter $filter, CollectionFactory $collectionFactory, QuestionManagement $questionManagement)
-    {
+    public function __construct(
+        Context $context,
+        Filter $filter,
+        CollectionFactory $collectionFactory,
+        QuestionManagement $questionManagement
+    ) {
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         $this->questionManagement = $questionManagement;
