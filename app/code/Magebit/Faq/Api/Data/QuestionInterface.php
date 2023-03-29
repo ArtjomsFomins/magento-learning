@@ -34,44 +34,44 @@ interface QuestionInterface
     /**
      * Get ID
      *
-     * @return int|null
+     * @return string
      */
-    public function getId();
+    public function getId(): string;
 
     /**
      * Get question title
      *
      * @return string
      */
-    public function getQuestion();
+    public function getQuestion(): string;
 
     /**
      * Get question's answer
      *
      * @return string
      */
-    public function getAnswer();
+    public function getAnswer(): string;
 
     /**
      * Get question status
      *
      * @return string
      */
-    public function getStatus();
+    public function getStatus(): string;
 
     /**
      * Get question position
      *
      * @return int
      */
-    public function getPosition();
+    public function getPosition(): int;
 
     /**
      * Get question last time modified
      *
      * @return string
      */
-    public function getUpdateAt();
+    public function getUpdateAt(): string;
 
     /**
      * Set question title
@@ -79,7 +79,7 @@ interface QuestionInterface
      * @param string $title
      * @return QuestionInterface
      */
-    public function setQuestion($title);
+    public function setQuestion($title): QuestionInterface;
 
     /**
      * Set question's answer
@@ -87,7 +87,7 @@ interface QuestionInterface
      * @param string $answer
      * @return QuestionInterface
      */
-    public function setAnswer($answer);
+    public function setAnswer($answer): QuestionInterface;
 
     /**
      * Set question status
@@ -95,7 +95,7 @@ interface QuestionInterface
      * @param int $status
      * @return QuestionInterface
      */
-    public function setStatus($status);
+    public function setStatus($status): QuestionInterface;
 
     /**
      * Set question position
@@ -103,5 +103,5 @@ interface QuestionInterface
      * @param int $id
      * @return QuestionInterface
      */
-    public function setPosition($id);
+    public function setPosition($id): QuestionInterface;
 }

@@ -13,6 +13,10 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Api;
 
+use Magebit\Faq\Api\Data\QuestionInterface;
+use Magebit\Faq\Api\Data\QuestionSearchResultsInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
+
 /**
  * Question CRUD interface.
  * @api
@@ -23,37 +27,37 @@ interface QuestionRepositoryInterface
      * Get info about question by question id
      *
      * @param int $questionId
-     * @return \Magebit\Faq\Api\Data\QuestionInterface
+     * @return QuestionInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function get($questionId);
+    public function get($questionId): QuestionInterface;
 
     /**
      * Save question.
      *
-     * @param \Magebit\Faq\Api\Data\QuestionInterface $question
-     * @return \Magebit\Faq\Api\Data\QuestionInterface
+     * @param QuestionInterface $question
+     * @return QuestionInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function save(Data\QuestionInterface $question);
+    public function save(Data\QuestionInterface $question): QuestionInterface;
 
     /**
      * Retrieve questions matching the specified criteria.
      *
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
+     * @param SearchCriteriaInterface $searchCriteria
      * @return \Magebit\Faq\Api\Data\QuestionSearchResultsInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+    public function getList(SearchCriteriaInterface $searchCriteria): QuestionSearchResultsInterface;
 
     /**
      * Delete question.
      *
-     * @param \Magebit\Faq\Api\Data\QuestionInterface $question
+     * @param QuestionInterface $question
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function delete(Data\QuestionInterface $question);
+    public function delete(Data\QuestionInterface $question): bool;
 
     /**
      * Delete question by ID.
@@ -63,5 +67,5 @@ interface QuestionRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function deleteById($questionId);
+    public function deleteById($questionId): bool;
 }

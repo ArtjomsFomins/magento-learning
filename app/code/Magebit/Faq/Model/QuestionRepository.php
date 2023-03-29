@@ -26,6 +26,8 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Reflection\DataObjectProcessor;
 use Magento\Store\Model\StoreManagerInterface;
 use Magento\Framework\EntityManager\HydratorInterface;
+use Magebit\Faq\Api\Data\QuestionInterface;
+use Magebit\Faq\Api\Data\QuestionSearchResultsInterface;
 
 /**
  * Default Question repo impl.
@@ -88,15 +90,14 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @param int $questionId
      * @return void
      */
-    public function get($questionId)
+    public function get($questionId): QuestionInterface
     {
-        /** @var Question $category */
         $question = $this->questionFactory->create();
         $question->load($questionId);
         if (!$question->getId()) {
             throw NoSuchEntityException::singleField('id', $questionId);
         }
-        return $category;
+        return $question;
     }
 
     /**
@@ -106,7 +107,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @return Question
      * @throws CouldNotSaveException
      */
-    public function save(Data\QuestionInterface $question)
+    public function save(Data\QuestionInterface $question): Question
     {
         if (empty($question->getStoreId())) {
             $question->setStoreId($this->storeManager->getStore()->getId());
@@ -150,9 +151,9 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @SuppressWarnings(PHPMD.CyclomaticComplexity)
      * @SuppressWarnings(PHPMD.NPathComplexity)
      * @param \Magento\Framework\Api\SearchCriteriaInterface $criteria
-     * @return \Magebit\Faq\Api\Data\QuestionSearchResultsInterface
+     * @return QuestionSearchResultsInterface
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
+    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria): QuestionSearchResultsInterface
     {
         $collection = $this->questionCollectionFactory->create();
 
@@ -172,7 +173,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @return bool
      * @throws CouldNotDeleteException
      */
-    public function delete(Data\QuestionInterface $question)
+    public function delete(Data\QuestionInterface $question): bool
     {
         try {
             $this->resource->delete($question);
@@ -190,7 +191,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      */
-    public function deleteById($questionId)
+    public function deleteById($questionId): bool
     {
         return $this->delete($this->getById($questionId));
     }

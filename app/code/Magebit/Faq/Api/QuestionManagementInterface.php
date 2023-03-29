@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Api;
 
+use Magebit\Faq\Model\Question;
+
 /**
  * Interface for question management status
  * @api
@@ -23,15 +25,15 @@ interface QuestionManagementInterface
      * Enable question
      *
      * @param integer $questionId
-     * @return void
+     * @return Question
      */
-    public function enableQuestion(int $questionId);
+    public function enableQuestion(int $questionId): Question;
 
     /**
      * Disable question
      *
      * @param integer $questionId
-     * @return void
+     * @return Question
      */
-    public function disableQuestion(int $questionId);
+    public function disableQuestion(int $questionId): Question;
 }

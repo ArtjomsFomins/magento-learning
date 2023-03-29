@@ -26,7 +26,7 @@ interface QuestionSearchResultsInterface extends SearchResultsInterface
      *
      * @return \Magebit\Faq\Api\Data\QuestionInterface[]
      */
-    public function getItems();
+    public function getItems(): array;
 
     /**
      * Set questions list.
@@ -34,5 +34,5 @@ interface QuestionSearchResultsInterface extends SearchResultsInterface
      * @param \Magebit\Faq\Api\Data\QuestionInterface[] $items
      * @return $this
      */
-    public function setItems(array $items);
+    public function setItems(array $items): array;
 }

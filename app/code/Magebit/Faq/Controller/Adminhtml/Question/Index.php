@@ -18,8 +18,8 @@ use Magento\Backend\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
 /**
-*  Index question action
-*/
+ *  Index question action
+ */
 class Index extends Action
 {
     protected $resultPageFactory;
