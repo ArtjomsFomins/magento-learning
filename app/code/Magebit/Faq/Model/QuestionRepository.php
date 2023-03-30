@@ -86,11 +86,11 @@ class QuestionRepository implements QuestionRepositoryInterface
     /**
      * Get question
      *
-     * @param string $questionId
+     * @param ?string $questionId
      * @return Question
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function get($questionId): QuestionInterface
+    public function get(?string $questionId): QuestionInterface
     {
         $question = $this->questionFactory->create();
         $this->resource->load($question, $questionId);
@@ -174,7 +174,7 @@ class QuestionRepository implements QuestionRepositoryInterface
      * @throws CouldNotDeleteException
      * @throws NoSuchEntityException
      */
-    public function deleteById($questionId): bool
+    public function deleteById(string $questionId): bool
     {
         $question = $this->get($questionId);
         return $this->delete($question);

@@ -61,10 +61,12 @@ class InlineEdit extends \Magento\Backend\App\Action
                 $messages[] = __('Please correct the data sent.');
                 $error = true;
             } else {
-                foreach (array_keys($postItems) as $questionId) {
-                    $question = $this->questionRepository->get($questionId);
+                foreach($postItems as $item) {
                     try {
-                        $question->setData(array_merge($question->getData(), $postItems[$questionId]));
+                        $question = $this->questionRepository->get($item['id']);
+                        $question->setStatus((int)$item['status']);
+                        $question->setPosition((int)$item['position']);
+                        $question->setQuestion($item['question']);
                         $this->questionRepository->save($question);
                     } catch (\Exception $e) {
                         $messages[] = $this->getErrorWithquestionId(
@@ -90,7 +92,7 @@ class InlineEdit extends \Magento\Backend\App\Action
      * @param string $errorText
      * @return string
      */
-    protected function getErrorWithquestionId(QuestionInterface $question, $errorText): string
+    protected function getErrorWithquestionId(QuestionInterface $question, string $errorText): string
     {
         return '[question ID: ' . $question->getId() . '] ' . $errorText;
     }

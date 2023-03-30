@@ -76,7 +76,7 @@ class Edit extends \Magento\Backend\App\Action implements HttpGetActionInterface
      * @param Page $resultPage
      * @return Page
      */
-    protected function initPage($resultPage): Page
+    protected function initPage(Page $resultPage): Page
     {
         $resultPage->setActiveMenu('Magebit_Faq::question_block')
             ->addBreadcrumb(__('CMS'), __('CMS'))
