@@ -26,11 +26,11 @@ interface QuestionRepositoryInterface
     /**
      * Get info about question by question id
      *
-     * @param int $questionId
+     * @param ?string $questionId
      * @return QuestionInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
-    public function get($questionId): QuestionInterface;
+    public function get(?string $questionId): QuestionInterface;
 
     /**
      * Save question.
@@ -67,5 +67,5 @@ interface QuestionRepositoryInterface
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function deleteById($questionId): bool;
+    public function deleteById(string $questionId): bool;
 }

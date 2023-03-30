@@ -69,7 +69,7 @@ class Back implements ButtonProviderInterface
      * @param   array $params
      * @return  string
      */
-    public function getUrl($route = '', $params = []): string
+    public function getUrl(string $route = '', array $params = []): string
     {
         return $this->context->getUrlBuilder()->getUrl($route, $params);
     }

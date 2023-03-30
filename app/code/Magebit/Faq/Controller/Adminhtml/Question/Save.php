@@ -108,7 +108,7 @@ class Save extends \Magento\Backend\App\Action implements HttpPostActionInterfac
      * @param ResultInterface $resultRedirect
      * @return ResultInterface
      */
-    private function processBlockReturn($model, $data, $resultRedirect): ResultInterface
+    private function processBlockReturn(Question $model, array $data, ResultInterface $resultRedirect): ResultInterface
     {
         $redirect = $data['back'] ?? 'close';
 

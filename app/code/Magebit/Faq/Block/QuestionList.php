@@ -13,7 +13,7 @@ declare(strict_types=1);
 
 namespace Magebit\Faq\Block;
 
-use Magebit\Faq\Model\QuestionRepository;
+use Magebit\Faq\Api\QuestionRepositoryInterface;
 use Magento\Framework\Api\FilterBuilder;
 use Magento\Framework\Api\SearchCriteriaBuilder;
 use Magento\Framework\Api\SortOrderBuilder;
@@ -25,7 +25,7 @@ use Magento\Widget\Block\BlockInterface;
  */
 class QuestionList extends \Magento\Framework\View\Element\Template implements BlockInterface
 {
-    private QuestionRepository $questionRepository;
+    private QuestionRepositoryInterface $questionRepository;
     private SearchCriteriaBuilder $searchCriteriaBuilder;
     private FilterBuilder $filterBuilder;
     private SortOrderBuilder $sortOrder;
@@ -35,7 +35,7 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
      *
      * @param FilterBuilder $filterBuilder
      * @param SortOrderBuilder $sortOrder
-     * @param QuestionRepository $questionRepository
+     * @param QuestionRepositoryInterface $questionRepository
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      * @param Context $context
      * @param array $data
@@ -43,7 +43,7 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
     public function __construct(
         FilterBuilder $filterBuilder,
         SortOrderBuilder $sortOrder,
-        QuestionRepository $questionRepository,
+        QuestionRepositoryInterface $questionRepository,
         SearchCriteriaBuilder $searchCriteriaBuilder,
         Context $context,
         array $data = []
@@ -66,8 +66,8 @@ class QuestionList extends \Magento\Framework\View\Element\Template implements B
         $sortOrder = $this->sortOrder->setField('position')->setDirection('ASC')->create();
 
         $this->searchCriteriaBuilder->addFilters([$status])->setSortOrders([$sortOrder]);
-
         $searchCriteria = $this->searchCriteriaBuilder->create();
+
         return  $this->questionRepository->getList($searchCriteria)->getItems();
     }
 }

@@ -14,6 +14,7 @@ xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_config
             <block class="Magebit\Faq\Block\QuestionList"
                 name="question_list"
                 template="Magebit_Faq::question-list.phtml"
+                cacheable="false"
             />
         </referenceContainer>
     </body>
